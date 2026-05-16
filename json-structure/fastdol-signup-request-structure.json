@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-structure/fastdol-signup-request-structure.json",
+  "name": "SignupRequest",
+  "type": "object",
+  "description": "SignupRequest structure from FastDOL API",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "email",
+    "password"
+  ]
+}

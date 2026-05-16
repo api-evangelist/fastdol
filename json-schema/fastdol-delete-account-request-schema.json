@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-schema/fastdol-delete-account-request-schema.json",
+  "title": "DeleteAccountRequest",
+  "description": "DeleteAccountRequest schema from FastDOL API",
+  "type": "object",
+  "properties": {
+    "password": {
+      "type": "string",
+      "title": "Password",
+      "example": "CorrectHorseBatteryStaple1!"
+    },
+    "confirm": {
+      "type": "string",
+      "title": "Confirm",
+      "example": "string"
+    }
+  },
+  "required": [
+    "password",
+    "confirm"
+  ]
+}

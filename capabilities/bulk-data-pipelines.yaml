@@ -1,0 +1,279 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "FastDOL Bulk Data Pipelines"
+  description: "Operational workflow for data engineers and platform teams: batch employer lookups, CSV upload matching, async bulk export jobs, usage telemetry, and API-key lifecycle management — including key rotation with 48-hour grace."
+  tags:
+    - FastDOL
+    - Bulk Data
+    - Data Pipelines
+    - Batch
+    - Export
+    - API Key Management
+    - DevOps
+  created: "2026-05-16"
+  modified: "2026-05-16"
+
+binds:
+  - namespace: env
+    keys:
+      FASTDOL_API_KEY: FASTDOL_API_KEY
+
+capability:
+  consumes:
+    - import: fastdol
+      location: ./shared/fastdol.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: bulk-data-pipelines-api
+      description: "Unified REST API for batch lookup, async export, usage telemetry, and API-key management."
+      resources:
+        - path: /v1/batch-lookups
+          name: batch-lookups
+          description: "Batch employer lookups."
+          operations:
+            - method: POST
+              name: batch-lookup
+              description: "Submit up to 100 employer queries in one batch."
+              call: "fastdol.batch-lookup"
+              with:
+                items: "rest.items"
+              outputParameters: [ { type: object, mapping: "$." } ]
+
+        - path: /v1/csv-uploads
+          name: csv-uploads
+          description: "Bulk CSV upload."
+          operations:
+            - method: POST
+              name: upload-csv
+              description: "Upload a CSV (up to 500 rows / 5MB) for matching."
+              call: "fastdol.upload-csv"
+              outputParameters: [ { type: object, mapping: "$." } ]
+
+        - path: /v1/exports
+          name: exports
+          description: "Async bulk export jobs (Enterprise)."
+          operations:
+            - method: POST
+              name: create-export
+              description: "Create an async bulk export job (up to 100,000 rows)."
+              call: "fastdol.create-export"
+              with:
+                filters: "rest.filters"
+                format: "rest.format"
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: GET
+              name: get-export
+              description: "Get an export job's status."
+              call: "fastdol.get-export"
+              with: { job_id: "rest.job_id" }
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: GET
+              name: download-export
+              description: "Download a completed export."
+              call: "fastdol.download-export"
+              with: { job_id: "rest.job_id" }
+              outputParameters: [ { type: object, mapping: "$." } ]
+
+        - path: /v1/usage
+          name: usage
+          description: "Usage telemetry and PDF report claim."
+          operations:
+            - method: POST
+              name: log-lookup
+              description: "Log a downstream lookup event."
+              call: "fastdol.log-lookup"
+              with:
+                employer_id: "rest.employer_id"
+                context: "rest.context"
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: POST
+              name: claim-pdf-report
+              description: "Claim a PDF compliance report."
+              call: "fastdol.claim-pdf-report"
+              with: { employer_id: "rest.employer_id" }
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: GET
+              name: get-usage
+              description: "Per-key quota and usage state."
+              call: "fastdol.get-usage"
+              outputParameters: [ { type: object, mapping: "$." } ]
+
+        - path: /v1/api-keys
+          name: api-keys
+          description: "API key lifecycle."
+          operations:
+            - method: GET
+              name: list-keys
+              description: "List API keys."
+              call: "fastdol.list-keys"
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: POST
+              name: create-key
+              description: "Create a new API key."
+              call: "fastdol.create-key"
+              with: { label: "rest.label" }
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: POST
+              name: rotate-key
+              description: "Rotate a key with a 48-hour grace period."
+              call: "fastdol.rotate-key"
+              with: { key_id: "rest.key_id" }
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: DELETE
+              name: revoke-key
+              description: "Revoke an API key."
+              call: "fastdol.revoke-key"
+              with: { key_id: "rest.key_id" }
+              outputParameters: [ { type: object, mapping: "$." } ]
+
+        - path: /v1/account
+          name: account
+          description: "Account plan and lifecycle."
+          operations:
+            - method: GET
+              name: get-plan
+              description: "Get the current account plan."
+              call: "fastdol.get-plan"
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: DELETE
+              name: delete-account
+              description: "Delete the FastDOL account."
+              call: "fastdol.delete-account"
+              outputParameters: [ { type: object, mapping: "$." } ]
+
+        - path: /v1/sitemaps
+          name: sitemaps
+          description: "SEO sitemap feeds."
+          operations:
+            - method: GET
+              name: sitemap-employers
+              description: "Employer sitemap."
+              call: "fastdol.sitemap-employers"
+              outputParameters: [ { type: object, mapping: "$." } ]
+
+        - path: /v1/health
+          name: health
+          description: "Service health."
+          operations:
+            - method: GET
+              name: health
+              description: "Liveness check."
+              call: "fastdol.health"
+              outputParameters: [ { type: object, mapping: "$." } ]
+            - method: GET
+              name: health-detail
+              description: "Detailed health and dependency status."
+              call: "fastdol.health-detail"
+              outputParameters: [ { type: object, mapping: "$." } ]
+
+    - type: mcp
+      port: 9091
+      namespace: bulk-data-pipelines-mcp
+      transport: http
+      description: "MCP server for AI-assisted batch, export, and key-management workflows."
+      tools:
+        - name: batch-lookup
+          description: "Submit up to 100 employer queries in a single batch."
+          hints: { readOnly: true, openWorld: true }
+          call: "fastdol.batch-lookup"
+          with: { items: "tools.items" }
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: upload-csv
+          description: "Upload a CSV (up to 500 rows) for bulk match."
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: "fastdol.upload-csv"
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: create-export
+          description: "Create an async bulk export job."
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: "fastdol.create-export"
+          with:
+            filters: "tools.filters"
+            format: "tools.format"
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: get-export
+          description: "Get an export job's status."
+          hints: { readOnly: true, openWorld: true }
+          call: "fastdol.get-export"
+          with: { job_id: "tools.job_id" }
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: download-export
+          description: "Download a completed export."
+          hints: { readOnly: true, openWorld: true }
+          call: "fastdol.download-export"
+          with: { job_id: "tools.job_id" }
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: log-lookup
+          description: "Log a downstream lookup for attribution."
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: "fastdol.log-lookup"
+          with:
+            employer_id: "tools.employer_id"
+            context: "tools.context"
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: claim-pdf-report
+          description: "Claim a PDF compliance report."
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: "fastdol.claim-pdf-report"
+          with: { employer_id: "tools.employer_id" }
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: get-usage
+          description: "Get current per-key quota and usage."
+          hints: { readOnly: true, openWorld: true }
+          call: "fastdol.get-usage"
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: list-keys
+          description: "List API keys."
+          hints: { readOnly: true, openWorld: true }
+          call: "fastdol.list-keys"
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: create-key
+          description: "Create a new API key."
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: "fastdol.create-key"
+          with: { label: "tools.label" }
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: rotate-key
+          description: "Rotate an API key with 48-hour grace."
+          hints: { readOnly: false, destructive: false, idempotent: true }
+          call: "fastdol.rotate-key"
+          with: { key_id: "tools.key_id" }
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: revoke-key
+          description: "Revoke an API key."
+          hints: { readOnly: false, destructive: true, idempotent: true }
+          call: "fastdol.revoke-key"
+          with: { key_id: "tools.key_id" }
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: get-plan
+          description: "Get the current account plan and quota."
+          hints: { readOnly: true, openWorld: true }
+          call: "fastdol.get-plan"
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: sitemap-employers
+          description: "Crawler-friendly employer sitemap."
+          hints: { readOnly: true, openWorld: true }
+          call: "fastdol.sitemap-employers"
+          outputParameters: [ { type: object, mapping: "$." } ]
+
+        - name: health-detail
+          description: "Detailed service health and dependencies."
+          hints: { readOnly: true, openWorld: true }
+          call: "fastdol.health-detail"
+          outputParameters: [ { type: object, mapping: "$." } ]

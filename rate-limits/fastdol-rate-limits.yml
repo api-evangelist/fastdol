@@ -1,0 +1,113 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: FastDOL
+providerId: fastdol
+created: '2026-05-16'
+modified: '2026-05-16'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Federal Enforcement
+  - Workplace Safety
+  - Public Records
+description: >
+  FastDOL enforces two overlapping restrictions. A per-key monthly lookup quota (50 lookups
+  on the free tier, custom on Enterprise) tracked through standard `X-RateLimit-*` response
+  headers. Layered on top is per-IP request-rate throttling that varies by endpoint family —
+  60 req/min on the main search endpoints, 30 req/min on inspection detail endpoints, and
+  10 req/min on industry metadata. Exceeding either trigger returns HTTP 429. Batch
+  requests count as 1 lookup per item submitted toward the monthly quota.
+sources:
+  - https://fastdol.com/docs
+  - https://api.fastdol.com/v1/openapi.json
+headers:
+  rateLimitLimit: X-RateLimit-Limit
+  rateLimitRemaining: X-RateLimit-Remaining
+  rateLimitReset: X-RateLimit-Reset
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  validationError: 422
+  unauthorized: 401
+  forbidden: 403
+  notFound: 404
+  serviceDegraded: 503
+limits:
+  - name: Monthly quota — Free tier
+    scope: key
+    metric: requests_per_month
+    limit: 50
+    timeFrame: month
+    notes: 50 lookups per API key per month on the Free tier. Batch requests count as 1 lookup per submitted item.
+  - name: Monthly quota — Enterprise
+    scope: key
+    metric: requests_per_month
+    limit: 'custom (contact ben@fastdol.com)'
+    notes: Custom quotas issued under enterprise / data-licensing contracts.
+  - name: Per-IP request rate — main search endpoints
+    scope: IP
+    metric: requests_per_minute
+    limit: 60
+    timeFrame: minute
+    notes: Applies to /v1/employers search and per-employer profile endpoints.
+  - name: Per-IP request rate — inspection detail endpoints
+    scope: IP
+    metric: requests_per_minute
+    limit: 30
+    timeFrame: minute
+    notes: Applies to /v1/inspections/{activity_nr}/violations and related detail endpoints.
+  - name: Per-IP request rate — industry metadata endpoints
+    scope: IP
+    metric: requests_per_minute
+    limit: 10
+    timeFrame: minute
+    notes: Applies to /v1/industries and NAICS metadata endpoints.
+  - name: Batch lookup batch size
+    scope: request
+    metric: items_per_request
+    limit: 100
+    timeFrame: usage
+    notes: Maximum number of items in a single POST /v1/employers/batch request.
+  - name: CSV upload rows per request
+    scope: request
+    metric: rows_per_request
+    limit: 500
+    timeFrame: usage
+    notes: Maximum CSV rows accepted by POST /v1/employers/upload-csv.
+  - name: CSV upload size cap
+    scope: request
+    metric: megabytes_per_request
+    limit: 5
+    timeFrame: usage
+    notes: Maximum upload size for POST /v1/employers/upload-csv.
+  - name: Async export rows per job
+    scope: account
+    metric: rows_per_job
+    limit: 100000
+    timeFrame: usage
+    notes: Enterprise-only — maximum rows in a single POST /v1/export job.
+  - name: Pagination page size
+    scope: request
+    metric: items_per_page
+    limit: 100
+    timeFrame: usage
+    notes: limit query parameter accepts 1–100 (default 20). Offset paginates the rest.
+policies:
+  - name: Per-key quota
+    description: Monthly lookup quota is bound to the API key, not the IP. Use one key per workload to isolate budgets.
+  - name: Per-IP throttle
+    description: Burst protection enforced at the IP level independently of plan tier; raise via support if you have legitimate higher-throughput need.
+  - name: Batch counts per item
+    description: Each item in a /v1/employers/batch request consumes one lookup against the monthly quota — size batches to your budget, not to the 100-item ceiling.
+  - name: Empty results are still 200
+    description: Zero-result searches return HTTP 200 with an empty results array, so a 200 does not imply data was returned — inspect the response payload.
+  - name: 503 on degraded dependencies
+    description: When upstream federal-data ingestion is degraded, FastDOL returns 503 on affected resources. Retry with exponential backoff.
+  - name: Key rotation grace
+    description: Rotating an API key keeps the previous key valid for a 48-hour grace window — rotate proactively without breaking running pipelines.
+  - name: Exponential backoff on 429
+    description: Honor the Retry-After header and back off exponentially when a 429 is returned; avoid hammering retries against per-IP throttles.
+  - name: Idempotent reads
+    description: All GET endpoints are safe to retry. Mutating endpoints (/auth/*, /dashboard/keys, /v1/employers/*/feedback, /v1/usage/*) should be retried with idempotency guards on the caller.

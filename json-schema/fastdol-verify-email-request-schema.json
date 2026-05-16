@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-schema/fastdol-verify-email-request-schema.json",
+  "title": "VerifyEmailRequest",
+  "description": "VerifyEmailRequest schema from FastDOL API",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "title": "Token",
+      "example": "tok_9d2e1c4b7a6f3e5d"
+    }
+  },
+  "required": [
+    "token"
+  ]
+}

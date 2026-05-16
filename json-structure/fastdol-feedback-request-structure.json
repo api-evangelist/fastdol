@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-structure/fastdol-feedback-request-structure.json",
+  "name": "FeedbackRequest",
+  "type": "object",
+  "description": "FeedbackRequest structure from FastDOL API",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "contact_email": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

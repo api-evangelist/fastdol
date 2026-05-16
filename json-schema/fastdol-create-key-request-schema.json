@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-schema/fastdol-create-key-request-schema.json",
+  "title": "CreateKeyRequest",
+  "description": "CreateKeyRequest schema from FastDOL API",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "title": "Label",
+      "default": "default",
+      "example": "string"
+    },
+    "scopes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "title": "Scopes",
+      "default": [
+        "employer:read"
+      ]
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-structure/fastdol-export-filters-structure.json",
+  "name": "ExportFilters",
+  "type": "object",
+  "description": "Filter surface for bulk exports \u2014 richer than the interactive\nsearch endpoint because enterprise analysts need structured queries\n(e.g. \"top 50K employers by fatality rate with OSHA penalties >\n$100K in construction NAICS\").",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "ein": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "states": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "naics": {
+      "type": "string",
+      "description": "Single NAICS prefix, 2-6 digits"
+    },
+    "naics_codes": {
+      "type": "string",
+      "description": "Multiple NAICS prefixes (OR)"
+    },
+    "parent_only": {
+      "type": "boolean"
+    },
+    "parent_name": {
+      "type": "string"
+    },
+    "has_fatalities": {
+      "type": "boolean"
+    },
+    "svep": {
+      "type": "boolean"
+    },
+    "min_inspections": {
+      "type": "string"
+    },
+    "min_violations": {
+      "type": "string"
+    },
+    "min_penalties": {
+      "type": "string"
+    },
+    "min_fatalities": {
+      "type": "string"
+    },
+    "min_whd_cases": {
+      "type": "string"
+    },
+    "min_whd_backwages": {
+      "type": "string"
+    }
+  }
+}

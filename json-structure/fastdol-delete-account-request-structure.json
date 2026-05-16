@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-structure/fastdol-delete-account-request-structure.json",
+  "name": "DeleteAccountRequest",
+  "type": "object",
+  "description": "DeleteAccountRequest structure from FastDOL API",
+  "properties": {
+    "password": {
+      "type": "string"
+    },
+    "confirm": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "password",
+    "confirm"
+  ]
+}

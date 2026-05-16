@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-schema/fastdol-export-filters-schema.json",
+  "title": "ExportFilters",
+  "description": "Filter surface for bulk exports \u2014 richer than the interactive\nsearch endpoint because enterprise analysts need structured queries\n(e.g. \"top 50K employers by fatality rate with OSHA penalties >\n$100K in construction NAICS\").",
+  "type": "object",
+  "properties": {
+    "name": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Name"
+    },
+    "ein": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Ein"
+    },
+    "state": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "State"
+    },
+    "states": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "maxItems": 60
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "States"
+    },
+    "zip": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 5
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Zip"
+    },
+    "naics": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 6
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Naics",
+      "description": "Single NAICS prefix, 2-6 digits"
+    },
+    "naics_codes": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "maxItems": 50
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Naics Codes",
+      "description": "Multiple NAICS prefixes (OR)"
+    },
+    "parent_only": {
+      "type": "boolean",
+      "title": "Parent Only",
+      "default": false,
+      "example": false
+    },
+    "parent_name": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parent Name"
+    },
+    "has_fatalities": {
+      "type": "boolean",
+      "title": "Has Fatalities",
+      "default": false,
+      "example": false
+    },
+    "svep": {
+      "type": "boolean",
+      "title": "Svep",
+      "default": false,
+      "example": false
+    },
+    "min_inspections": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0.0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Min Inspections"
+    },
+    "min_violations": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0.0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Min Violations"
+    },
+    "min_penalties": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0.0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Min Penalties"
+    },
+    "min_fatalities": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0.0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Min Fatalities"
+    },
+    "min_whd_cases": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0.0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Min Whd Cases"
+    },
+    "min_whd_backwages": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0.0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Min Whd Backwages"
+    }
+  }
+}

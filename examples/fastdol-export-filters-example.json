@@ -1,0 +1,19 @@
+{
+  "name": "Acme Construction Inc",
+  "ein": "12-3456789",
+  "state": "CA",
+  "states": "string",
+  "zip": "94105",
+  "naics": "2362",
+  "naics_codes": "string",
+  "parent_only": false,
+  "parent_name": "walmart-inc",
+  "has_fatalities": false,
+  "svep": false,
+  "min_inspections": "string",
+  "min_violations": "string",
+  "min_penalties": "string",
+  "min_fatalities": "string",
+  "min_whd_cases": "string",
+  "min_whd_backwages": "string"
+}

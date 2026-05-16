@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-schema/fastdol-export-request-schema.json",
+  "title": "ExportRequest",
+  "description": "ExportRequest schema from FastDOL API",
+  "type": "object",
+  "properties": {
+    "format": {
+      "type": "string",
+      "pattern": "^(csv|json)$",
+      "title": "Format",
+      "default": "csv",
+      "example": "string"
+    },
+    "filters": {
+      "$ref": "#/components/schemas/ExportFilters"
+    },
+    "max_rows": {
+      "type": "integer",
+      "maximum": 100000.0,
+      "minimum": 1.0,
+      "title": "Max Rows",
+      "default": 50000,
+      "example": 1
+    },
+    "sort_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Sort By",
+      "description": "One of: contracts_value, employer_id, fatalities, inspections, penalties, risk_score, violations, whd_backwages, whd_cases"
+    },
+    "sort_dir": {
+      "type": "string",
+      "pattern": "^(asc|desc)$",
+      "title": "Sort Dir",
+      "default": "desc",
+      "example": "string"
+    }
+  }
+}

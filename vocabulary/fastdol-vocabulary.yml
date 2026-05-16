@@ -1,0 +1,387 @@
+vocabulary: 1.0.0
+info:
+  provider: FastDOL
+  description: Vocabulary mapping the operational dimension (OpenAPI) and the capability dimension (Naftiko workflows) of the FastDOL federal workplace enforcement API.
+  created: '2026-05-16'
+  modified: '2026-05-16'
+operational:
+  apis:
+    - name: FastDOL API
+      namespace: fastdol
+      version: '1.0'
+      baseUrl: https://api.fastdol.com
+      status: active
+      operations: 47
+  resources:
+    - name: auth
+      api: fastdol
+      operations:
+        - method: POST
+          path: /auth/signup
+          operation_id: signup_auth_signup_post
+        - method: POST
+          path: /auth/verify
+          operation_id: verify_email_auth_verify_post
+        - method: POST
+          path: /auth/login
+          operation_id: login_auth_login_post
+        - method: POST
+          path: /auth/logout
+          operation_id: logout_auth_logout_post
+        - method: GET
+          path: /auth/me
+          operation_id: get_me_auth_me_get
+        - method: POST
+          path: /auth/forgot-password
+          operation_id: forgot_password_auth_forgot_password_post
+        - method: POST
+          path: /auth/reset-password
+          operation_id: reset_password_auth_reset_password_post
+    - name: dashboard
+      api: fastdol
+      operations:
+        - method: GET
+          path: /dashboard/plan
+          operation_id: get_plan_dashboard_plan_get
+        - method: GET
+          path: /dashboard/keys
+          operation_id: list_keys_dashboard_keys_get
+        - method: POST
+          path: /dashboard/keys
+          operation_id: create_key_dashboard_keys_post
+        - method: POST
+          path: /dashboard/keys/{key_id}/rotate
+          operation_id: rotate_key_dashboard_keys__key_id__rotate_post
+        - method: DELETE
+          path: /dashboard/keys/{key_id}
+          operation_id: revoke_key_dashboard_keys__key_id__delete
+        - method: DELETE
+          path: /dashboard/account
+          operation_id: delete_account_dashboard_account_delete
+    - name: employers
+      api: fastdol
+      operations:
+        - method: GET
+          path: /v1/employers
+          operation_id: search_employers_v1_employers_get
+        - method: GET
+          path: /v1/employers/parent
+          operation_id: get_parent_company_v1_employers_parent_get
+        - method: GET
+          path: /v1/employers/ein/{ein}
+          operation_id: get_employer_by_ein_v1_employers_ein__ein__get
+        - method: GET
+          path: /v1/employers/{employer_id}
+          operation_id: get_employer_v1_employers__employer_id__get
+        - method: GET
+          path: /v1/employers/{employer_id}/inspections
+          operation_id: get_inspections_v1_employers__employer_id__inspections_get
+        - method: GET
+          path: /v1/employers/{employer_id}/severe-injuries
+          operation_id: get_severe_injuries_v1_employers__employer_id__severe_injuries_get
+        - method: GET
+          path: /v1/employers/{employer_id}/whd-cases
+          operation_id: get_whd_cases_v1_employers__employer_id__whd_cases_get
+        - method: GET
+          path: /v1/employers/{employer_id}/osha-accidents
+          operation_id: get_osha_accidents_v1_employers__employer_id__osha_accidents_get
+        - method: GET
+          path: /v1/employers/{employer_id}/sec-enforcement
+          operation_id: get_sec_enforcement_v1_employers__employer_id__sec_enforcement_get
+        - method: GET
+          path: /v1/employers/{employer_id}/peers
+          operation_id: get_peers_v1_employers__employer_id__peers_get
+        - method: POST
+          path: /v1/employers/batch
+          operation_id: batch_lookup_v1_employers_batch_post
+        - method: GET
+          path: /v1/employers/{employer_id}/risk-history
+          operation_id: get_risk_history_v1_employers__employer_id__risk_history_get
+        - method: POST
+          path: /v1/employers/{employer_id}/feedback
+          operation_id: submit_feedback_v1_employers__employer_id__feedback_post
+        - method: POST
+          path: /v1/employers/upload-csv
+          operation_id: upload_csv_v1_employers_upload_csv_post
+    - name: export
+      api: fastdol
+      operations:
+        - method: POST
+          path: /v1/export
+          operation_id: create_export_v1_export_post
+        - method: GET
+          path: /v1/export/{job_id}
+          operation_id: get_export_v1_export__job_id__get
+        - method: GET
+          path: /v1/export/{job_id}/download
+          operation_id: download_export_v1_export__job_id__download_get
+    - name: health
+      api: fastdol
+      operations:
+        - method: GET
+          path: /v1/health
+          operation_id: health_v1_health_head
+        - method: GET
+          path: /v1/health/detail
+          operation_id: health_detail_v1_health_detail_get
+    - name: industries
+      api: fastdol
+      operations:
+        - method: GET
+          path: /v1/industries/naics-codes
+          operation_id: list_naics_codes_v1_industries_naics_codes_get
+        - method: GET
+          path: /v1/industries/{naics4}
+          operation_id: get_industry_v1_industries__naics4__get
+    - name: inspections
+      api: fastdol
+      operations:
+        - method: GET
+          path: /v1/inspections/{activity_nr}/violations
+          operation_id: get_violations_v1_inspections__activity_nr__violations_get
+    - name: sitemap
+      api: fastdol
+      operations:
+        - method: GET
+          path: /v1/sitemap/employers
+          operation_id: sitemap_employers_v1_sitemap_employers_get
+    - name: stats
+      api: fastdol
+      operations:
+        - method: GET
+          path: /v1/stats/state/{code}
+          operation_id: state_stats_v1_stats_state__code__get
+        - method: GET
+          path: /v1/stats/industry/{naics}
+          operation_id: industry_stats_v1_stats_industry__naics__get
+        - method: GET
+          path: /v1/stats/industries
+          operation_id: industries_index_v1_stats_industries_get
+        - method: GET
+          path: /v1/stats/nursing-home/{ccn}
+          operation_id: nursing_home_detail_v1_stats_nursing_home__ccn__get
+        - method: GET
+          path: /v1/stats/nursing-homes/{state_code}
+          operation_id: nursing_homes_by_state_v1_stats_nursing_homes__state_code__get
+        - method: GET
+          path: /v1/stats/nursing-homes
+          operation_id: nursing_homes_index_v1_stats_nursing_homes_get
+        - method: GET
+          path: /v1/stats/states
+          operation_id: states_index_v1_stats_states_get
+    - name: usage
+      api: fastdol
+      operations:
+        - method: POST
+          path: /v1/usage/lookup
+          operation_id: log_lookup_v1_usage_lookup_post
+        - method: POST
+          path: /v1/usage/pdf-report-claim
+          operation_id: claim_pdf_report_v1_usage_pdf_report_claim_post
+        - method: GET
+          path: /v1/usage
+          operation_id: get_usage_v1_usage_get
+    - name: webhooks
+      api: fastdol
+      operations:
+        - method: POST
+          path: /webhooks/stripe
+          operation_id: stripe_webhook_tombstone_webhooks_stripe_post
+  actions:
+    - batch
+    - claim
+    - create
+    - delete
+    - download
+    - forgot
+    - get
+    - health
+    - industries
+    - industry
+    - list
+    - log
+    - login
+    - logout
+    - nursing
+    - reset
+    - revoke
+    - rotate
+    - search
+    - signup
+    - sitemap
+    - state
+    - states
+    - stripe
+    - submit
+    - upload
+    - verify
+  schemas:
+    core:
+      - BatchLookupItem
+      - BatchLookupRequest
+      - ExportRequest
+      - ExportFilters
+      - FeedbackRequest
+    auth:
+      - SignupRequest
+      - LoginRequest
+      - VerifyEmailRequest
+      - ForgotPasswordRequest
+      - ResetPasswordRequest
+      - DeleteAccountRequest
+      - CreateKeyRequest
+    upload:
+      - Body_upload_csv_v1_employers_upload_csv_post
+    errors:
+      - HTTPValidationError
+      - ValidationError
+  parameters:
+    pagination:
+      - limit
+      - offset
+    identifiers:
+      - activity_nr
+      - ccn
+      - ein
+      - employer_id
+      - job_id
+      - key_id
+    filters:
+      - X-Api-Key
+      - code
+      - has_fatalities
+      - indexable_only
+      - naics
+      - naics4
+      - name
+      - parent_name
+      - parent_only
+      - sort_by
+      - sort_dir
+      - state
+      - state_code
+      - svep
+      - zip
+  enums:
+    agency:
+      - OSHA
+      - WHD
+      - MSHA
+      - EPA
+      - NLRB
+      - FMCSA
+      - OFLC
+      - BLS
+      - SAMGov
+      - CMS
+      - USAspending
+      - CPSC
+      - NHTSA
+      - SEC
+      - UVA
+    risk_level:
+      - low
+      - medium
+      - high
+      - critical
+    export_format:
+      - csv
+      - json
+  authentication:
+    scheme: apiKey
+    in: header
+    name: X-Api-Key
+    description: X-Api-Key header carrying a FastDOL key. Up to 5 active keys per account; rotation provides 48-hour grace.
+capability:
+  workflows:
+    - name: Employer Compliance Research
+      file: capabilities/employer-compliance-research.yaml
+      description: Interactive cross-agency research across OSHA, WHD, EPA, MSHA, NLRB, SEC, SAM.gov, etc.
+      apis_combined:
+        - fastdol
+      tool_count: 21
+      personas:
+        - journalist
+        - esg-analyst
+        - underwriter
+        - compliance-officer
+        - researcher
+      domains:
+        - employer-search
+        - enforcement
+        - risk
+        - industry-benchmarks
+        - state-stats
+    - name: Bulk Data Pipelines
+      file: capabilities/bulk-data-pipelines.yaml
+      description: Batch lookups, CSV upload, async export jobs, usage telemetry, and API-key lifecycle for platform teams.
+      apis_combined:
+        - fastdol
+      tool_count: 15
+      personas:
+        - data-engineer
+        - platform-admin
+        - devops
+      domains:
+        - batch-lookup
+        - csv-upload
+        - export-jobs
+        - usage
+        - api-key-management
+  personas:
+    - id: journalist
+      name: Investigative Journalist
+      description: Reporters investigating workplace safety, wage theft, or environmental violations.
+    - id: esg-analyst
+      name: ESG Analyst
+      description: Investment analyst screening portfolios for labor and compliance risk.
+    - id: underwriter
+      name: Insurance Underwriter
+      description: Workers comp / commercial casualty underwriting risk pricing.
+    - id: compliance-officer
+      name: Compliance Officer
+      description: Corporate compliance benchmarking against industry peers.
+    - id: researcher
+      name: Academic Researcher
+      description: Labor economists and public health researchers studying enforcement.
+    - id: data-engineer
+      name: Data Engineer
+      description: Engineer running bulk enrichment pipelines.
+    - id: platform-admin
+      name: Platform Administrator
+      description: Administrator managing accounts, keys, and quotas.
+    - id: devops
+      name: DevOps Engineer
+      description: Engineer wiring API-key rotation, usage monitoring, and exports into CI/CD.
+  domains:
+    - employer-search
+    - enforcement
+    - risk
+    - industry-benchmarks
+    - state-stats
+    - batch-lookup
+    - csv-upload
+    - export-jobs
+    - usage
+    - api-key-management
+  namespaces:
+    - kind: consumed
+      name: fastdol
+      baseUri: https://api.fastdol.com
+    - kind: rest
+      name: employer-compliance-research-api
+      port: 8080
+    - kind: mcp
+      name: employer-compliance-research-mcp
+      port: 9090
+    - kind: rest
+      name: bulk-data-pipelines-api
+      port: 8081
+    - kind: mcp
+      name: bulk-data-pipelines-mcp
+      port: 9091
+  binds:
+    - env: FASTDOL_API_KEY
+      workflows:
+        - employer-compliance-research
+        - bulk-data-pipelines

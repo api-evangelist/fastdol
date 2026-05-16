@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-schema/fastdol-signup-request-schema.json",
+  "title": "SignupRequest",
+  "description": "SignupRequest schema from FastDOL API",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email",
+      "example": "analyst@example.com"
+    },
+    "password": {
+      "type": "string",
+      "title": "Password",
+      "example": "CorrectHorseBatteryStaple1!"
+    },
+    "company_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Company Name"
+    }
+  },
+  "required": [
+    "email",
+    "password"
+  ]
+}

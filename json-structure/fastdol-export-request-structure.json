@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-structure/fastdol-export-request-structure.json",
+  "name": "ExportRequest",
+  "type": "object",
+  "description": "ExportRequest structure from FastDOL API",
+  "properties": {
+    "format": {
+      "type": "string"
+    },
+    "filters": {
+      "type": "object",
+      "$ref": "ExportFilters"
+    },
+    "max_rows": {
+      "type": "integer"
+    },
+    "sort_by": {
+      "type": "string",
+      "description": "One of: contracts_value, employer_id, fatalities, inspections, penalties, risk_score, violations, whd_backwages, whd_cases"
+    },
+    "sort_dir": {
+      "type": "string"
+    }
+  }
+}

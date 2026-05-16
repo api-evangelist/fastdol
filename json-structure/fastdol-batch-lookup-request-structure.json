@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-structure/fastdol-batch-lookup-request-structure.json",
+  "name": "BatchLookupRequest",
+  "type": "object",
+  "description": "BatchLookupRequest structure from FastDOL API",
+  "properties": {
+    "lookups": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "lookups"
+  ]
+}

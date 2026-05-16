@@ -1,0 +1,132 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: FastDOL
+providerId: fastdol
+created: '2026-05-16'
+modified: '2026-05-16'
+reconciled: false
+tags:
+  - Federal Enforcement
+  - Workplace Safety
+  - Compliance
+  - Public Records
+  - OSHA
+  - Data Licensing
+description: >
+  FastDOL exposes a free tier with a published 50-lookup monthly quota per API key plus an
+  enterprise / data-licensing motion handled directly with ben@fastdol.com — pricing,
+  per-request rates, dataset licensing fees, and bulk-export tiers are not published on a
+  public pricing page, so the enterprise plan is captured as `custom`. Reconciled: false
+  because the provider gates commercial pricing behind direct sales contact.
+sources:
+  - https://fastdol.com/docs
+  - https://fastdol.com/enterprise
+  - https://fastdol.com/signup
+  - https://fastdol.com/datasets
+plans:
+  - id: fastdol-free
+    name: Free
+    type: freemium
+    description: Free programmatic access with a published 50 lookups/month per API key, no credit card required, ideal for evaluation and light research.
+    entries:
+      - label: Included monthly lookups
+        name: monthly_lookups
+        type: quota
+        metric: request
+        limit: 50
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$0.00'
+      - label: Active API keys
+        name: active_api_keys
+        type: quota
+        metric: key
+        limit: 5
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+      - label: Batch lookup items per request
+        name: batch_items_per_request
+        type: quota
+        metric: item
+        limit: 100
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+      - label: CSV upload rows per request
+        name: csv_rows_per_request
+        type: quota
+        metric: row
+        limit: 500
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+      - label: CSV upload size cap
+        name: csv_max_size_mb
+        type: quota
+        metric: megabyte
+        limit: 5
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+    elements:
+      - { name: Employer search and profile lookup }
+      - { name: Cross-agency enforcement profile (OSHA, WHD, EPA, MSHA, NLRB, SEC, etc.) }
+      - { name: Risk scoring and risk-history }
+      - { name: Industry and state aggregate stats }
+      - { name: Self-service API key management with 48-hour rotation grace }
+      - { name: API playground }
+  - id: fastdol-enterprise
+    name: Enterprise
+    type: enterprise
+    description: Custom-quota API access, bulk export, dataset licensing, and custom integrations contracted directly with FastDOL via ben@fastdol.com.
+    entries:
+      - label: Custom monthly lookup quota
+        name: monthly_lookups
+        type: quota
+        metric: request
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+      - label: Async bulk export rows per job
+        name: export_rows_per_job
+        type: quota
+        metric: row
+        limit: 100000
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: contact sales
+      - label: Dataset license (e.g. OSHA construction enforcement, cross-agency violations, WHD wage theft)
+        name: dataset_license
+        type: flat
+        metric: dataset
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+      - label: Custom integration / SLA / on-prem mirroring
+        name: custom_integration
+        type: flat
+        metric: contract
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+    elements:
+      - { name: Everything in Free }
+      - { name: Custom monthly quota }
+      - { name: Async bulk export jobs }
+      - { name: Bulk dataset licensing (CSV, Parquet, JSON) }
+      - { name: Custom integrations and SLAs }
+      - { name: Direct support from FastDOL }

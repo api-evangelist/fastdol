@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-structure/fastdol-body-upload-csv-v1-employers-upload-csv-post-structure.json",
+  "name": "Body_upload_csv_v1_employers_upload_csv_post",
+  "type": "object",
+  "description": "Body_upload_csv_v1_employers_upload_csv_post structure from FastDOL API",
+  "properties": {
+    "file": {
+      "type": "string",
+      "description": "CSV file with employer names and optional location fields"
+    }
+  },
+  "required": [
+    "file"
+  ]
+}

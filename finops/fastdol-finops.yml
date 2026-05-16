@@ -1,0 +1,109 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: FastDOL
+providerId: fastdol
+created: '2026-05-16'
+modified: '2026-05-16'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Federal Enforcement
+  - Public Records
+  - Data Licensing
+description: >
+  FOCUS-aligned FinOps shape for FastDOL: a free per-key monthly lookup quota plus an
+  enterprise / data-licensing motion priced through direct sales. Public unit pricing is not
+  posted on the website, so the commercial line items are captured as contracted values and
+  `reconciled` is `false` until the provider publishes a unit-priced surface.
+sources:
+  - https://fastdol.com/docs
+  - https://fastdol.com/enterprise
+  - https://fastdol.com/datasets
+  - https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: FastDOL
+serviceCategory: Public Records / Compliance Data
+billingModel:
+  pricingCategory: Freemium + Custom Enterprise
+  billingFrequency: Monthly (Free) / Custom (Enterprise contract)
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+focusColumns:
+  ServiceName: FastDOL API
+  ServiceCategory: Public Records / Compliance Data
+  ServiceSubcategory: Federal Workplace Enforcement
+  ProviderName: FastDOL
+  PublisherName: FastDOL
+  InvoiceIssuerName: FastDOL
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  RegionId: US
+meters:
+  - name: api_lookups
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api_key_id
+      - endpoint_family
+    description: Each successful API lookup, counted against the per-key monthly quota. Batch items count individually.
+  - name: batch_items
+    unit: item
+    aggregation: sum
+    dimensions:
+      - api_key_id
+    description: Number of items submitted across POST /v1/employers/batch requests.
+  - name: csv_upload_rows
+    unit: row
+    aggregation: sum
+    dimensions:
+      - api_key_id
+    description: CSV upload rows processed via POST /v1/employers/upload-csv.
+  - name: export_rows
+    unit: row
+    aggregation: sum
+    dimensions:
+      - account_id
+      - export_job_id
+      - format
+    description: Rows materialized by enterprise async export jobs.
+  - name: pdf_report_claims
+    unit: report
+    aggregation: sum
+    dimensions:
+      - account_id
+      - employer_id
+    description: PDF compliance reports claimed through /v1/usage/pdf-report-claim.
+  - name: dataset_licenses
+    unit: dataset-year
+    aggregation: sum
+    dimensions:
+      - dataset_id
+    description: Bulk dataset licenses (e.g. OSHA construction enforcement, WHD wage theft, cross-agency violations) priced under enterprise contracts.
+principles:
+  - name: Visibility
+    description: GET /v1/usage and the dashboard expose per-key consumption; `X-RateLimit-*` response headers surface real-time quota state on every request.
+  - name: Allocation
+    description: Issue one API key per workload (up to 5 active per account) so quota and 429 events can be attributed cleanly to a team or pipeline.
+  - name: Optimization
+    description: Use POST /v1/employers/batch (up to 100 items per request) and CSV upload (up to 500 rows) to amortize HTTP overhead; cache hot employer profiles client-side; move large backfills to async /v1/export.
+  - name: Operation
+    description: Run automated key rotation taking advantage of the 48-hour grace window; alert when X-RateLimit-Remaining falls below a threshold; back off on 429 with the Retry-After header.
+practices:
+  - name: Inform
+    description: Use GET /v1/usage and X-RateLimit-* headers to publish per-key spend and quota dashboards.
+  - name: Optimize
+    description: Prefer batch and CSV-upload endpoints over loops of single GETs; downscope research workloads to specific NAICS / states.
+  - name: Operate
+    description: Wire async export downloads to S3/GCS sinks; monitor 5xx and 429 rates and auto-rotate compromised keys.
+notes:
+  - Reconciled is false because FastDOL has not published a unit-priced rate card; commercial pricing is negotiated through ben@fastdol.com.
+  - Update this artifact once FastDOL exposes a public pricing page with per-call, per-row, or per-dataset rates.

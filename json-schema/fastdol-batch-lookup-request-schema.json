@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-schema/fastdol-batch-lookup-request-schema.json",
+  "title": "BatchLookupRequest",
+  "description": "BatchLookupRequest schema from FastDOL API",
+  "type": "object",
+  "properties": {
+    "lookups": {
+      "items": {
+        "$ref": "#/components/schemas/BatchLookupItem"
+      },
+      "type": "array",
+      "title": "Lookups"
+    }
+  },
+  "required": [
+    "lookups"
+  ]
+}

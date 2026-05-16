@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-schema/fastdol-body-upload-csv-v1-employers-upload-csv-post-schema.json",
+  "title": "Body_upload_csv_v1_employers_upload_csv_post",
+  "description": "Body_upload_csv_v1_employers_upload_csv_post schema from FastDOL API",
+  "type": "object",
+  "properties": {
+    "file": {
+      "type": "string",
+      "format": "binary",
+      "title": "File",
+      "description": "CSV file with employer names and optional location fields",
+      "example": "string"
+    }
+  },
+  "required": [
+    "file"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fastdol": "https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/json-ld/fastdol-context.jsonld#",
+    "schema": "https://schema.org/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "org": "http://www.w3.org/ns/org#",
+    "gleif": "https://www.gleif.org/ontology/Base/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Employer": "schema:Organization",
+    "ParentCompany": "schema:Corporation",
+    "Establishment": "schema:LocalBusiness",
+    "Inspection": "fastdol:Inspection",
+    "Violation": "fastdol:Violation",
+    "WhdCase": "fastdol:WhdCase",
+    "SevereInjury": "fastdol:SevereInjury",
+    "OshaAccident": "fastdol:OshaAccident",
+    "SecEnforcement": "fastdol:SecEnforcement",
+    "IndustryCode": "fastdol:IndustryCode",
+    "Address": "schema:PostalAddress",
+    "name": "schema:name",
+    "description": "schema:description",
+    "employer_id": "fastdol:employerId",
+    "ein": {
+      "@id": "fastdol:ein",
+      "@type": "xsd:string"
+    },
+    "duns": "fastdol:duns",
+    "address": {
+      "@id": "schema:address",
+      "@type": "@id"
+    },
+    "state": "schema:addressRegion",
+    "zip": "schema:postalCode",
+    "naics": {
+      "@id": "fastdol:naicsCode",
+      "@type": "xsd:string"
+    },
+    "naics4": {
+      "@id": "fastdol:naics4Code",
+      "@type": "xsd:string"
+    },
+    "parent_name": "schema:parentOrganization",
+    "risk_score": {
+      "@id": "fastdol:riskScore",
+      "@type": "xsd:decimal"
+    },
+    "risk_level": "fastdol:riskLevel",
+    "activity_nr": "fastdol:activityNumber",
+    "inspection_date": {
+      "@id": "fastdol:inspectionDate",
+      "@type": "xsd:date"
+    },
+    "penalty": {
+      "@id": "fastdol:penaltyAmount",
+      "@type": "xsd:decimal"
+    },
+    "back_wages": {
+      "@id": "fastdol:backWages",
+      "@type": "xsd:decimal"
+    },
+    "employees_affected": {
+      "@id": "fastdol:employeesAffected",
+      "@type": "xsd:integer"
+    },
+    "agency": "fastdol:agency",
+    "inspections": {
+      "@id": "fastdol:hasInspection",
+      "@container": "@set"
+    },
+    "violations": {
+      "@id": "fastdol:hasViolation",
+      "@container": "@set"
+    },
+    "whd_cases": {
+      "@id": "fastdol:hasWhdCase",
+      "@container": "@set"
+    },
+    "severe_injuries": {
+      "@id": "fastdol:hasSevereInjury",
+      "@container": "@set"
+    },
+    "osha_accidents": {
+      "@id": "fastdol:hasOshaAccident",
+      "@container": "@set"
+    },
+    "sec_enforcement": {
+      "@id": "fastdol:hasSecEnforcement",
+      "@container": "@set"
+    },
+    "peers": {
+      "@id": "fastdol:peer",
+      "@container": "@set"
+    },
+    "related_locations_count": {
+      "@id": "fastdol:relatedLocationsCount",
+      "@type": "xsd:integer"
+    }
+  }
+}

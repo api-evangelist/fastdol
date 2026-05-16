@@ -1,0 +1,340 @@
+# FastDOL Spectral Ruleset
+# Enforces the conventions observed in the FastDOL OpenAPI specification
+# (FastAPI-generated, snake_case paths and properties, X-Api-Key header auth, /v1 prefix).
+# Apply with: spectral lint -r rules/fastdol-rules.yml openapi/fastdol-openapi.yml
+
+extends: spectral:oas
+
+rules:
+  # ============================================================
+  # INFO / METADATA
+  # ============================================================
+  info-title-fastdol-prefix:
+    description: API title must start with "FastDOL".
+    message: '{{property}} must start with "FastDOL".'
+    severity: error
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: '^FastDOL'
+
+  info-description-required:
+    description: info.description is required and must be at least 40 characters.
+    message: '{{property}} must be present and meaningful.'
+    severity: warn
+    given: $.info
+    then:
+      - field: description
+        function: truthy
+      - field: description
+        function: length
+        functionOptions:
+          min: 40
+
+  info-version-required:
+    description: info.version is required.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-contact-email:
+    description: info.contact.email should be present.
+    severity: warn
+    given: $.info
+    then:
+      field: contact.email
+      function: truthy
+
+  info-terms-of-service:
+    description: info.termsOfService should be present.
+    severity: info
+    given: $.info
+    then:
+      field: termsOfService
+      function: truthy
+
+  # ============================================================
+  # OPENAPI VERSION
+  # ============================================================
+  openapi-version-3:
+    description: OpenAPI version must be 3.0.x or 3.1.x.
+    severity: error
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: '^3\.[01]\.\d+$'
+
+  # ============================================================
+  # SERVERS
+  # ============================================================
+  servers-required:
+    description: At least one server must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https-only:
+    description: All server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  servers-fastdol-host:
+    description: Production server URL should be api.fastdol.com.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: 'fastdol\.com'
+
+  # ============================================================
+  # PATHS — NAMING CONVENTIONS
+  # ============================================================
+  paths-version-prefix:
+    description: 'Public data paths must be prefixed with /v1/ (auth, dashboard, webhooks excepted).'
+    severity: warn
+    given: $.paths[?(!@property.match(/^\/(auth|dashboard|webhooks)\b/))]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/v1/'
+
+  paths-kebab-case:
+    description: Path segments must be lower-case kebab-case (snake_case forbidden).
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(/[a-z0-9-]+|/\{[a-z_][a-z0-9_]*\})+$'
+
+  paths-no-trailing-slash:
+    description: Path must not end with a trailing slash.
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '.+/$'
+
+  # ============================================================
+  # OPERATIONS
+  # ============================================================
+  operation-operationid-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationid-snake-case:
+    description: operationId must be snake_case (FastAPI default).
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  operation-summary-required:
+    description: Every operation must declare a summary.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-fastdol-prefix:
+    description: Operation summary must be Title Case and prefixed with "FastDOL".
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^FastDOL\s'
+
+  operation-tags-required:
+    description: Every operation should be tagged.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: tags
+      function: truthy
+
+  operation-microcks-extension:
+    description: Operation should declare x-microcks-operation for mock-server compatibility.
+    severity: info
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ============================================================
+  # PARAMETERS
+  # ============================================================
+  parameter-description-required:
+    description: Every parameter must declare a description.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-snake-case:
+    description: Parameter names must be snake_case.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].parameters[?(@.in!='header')]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  parameter-pagination-offset-limit:
+    description: Pagination must use the offset/limit pair (no page/per_page).
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].parameters[*].name
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '^(page|per_page|page_size|pageSize|cursor)$'
+
+  # ============================================================
+  # REQUEST BODIES
+  # ============================================================
+  request-body-json-content:
+    description: Request bodies must offer application/json (multipart for upload only).
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['application/json']
+            - required: ['multipart/form-data']
+
+  # ============================================================
+  # RESPONSES
+  # ============================================================
+  response-success-required:
+    description: Every operation must declare a 2xx success response.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['200']
+            - required: ['201']
+            - required: ['202']
+            - required: ['204']
+
+  response-401-on-protected:
+    description: Operations behind auth (X-Api-Key) should declare a 401 response.
+    severity: warn
+    given: "$.paths[?(!@property.match(/^\\/(auth|webhooks|v1\\/health|v1\\/sitemap)\\b/))][get,post,put,delete,patch].responses"
+    then:
+      field: '401'
+      function: truthy
+
+  response-429-rate-limit:
+    description: Data endpoints should declare a 429 rate-limit response.
+    severity: info
+    given: $.paths[?(@property.match(/^\/v1\//))][get,post].responses
+    then:
+      field: '429'
+      function: truthy
+
+  response-422-validation:
+    description: Operations with parameters should declare a 422 validation response.
+    severity: info
+    given: $.paths[*][get,post,put,delete,patch].responses
+    then:
+      field: '422'
+      function: truthy
+
+  response-json-content:
+    description: Responses must use application/json.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].responses[*].content
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['application/json']
+            - required: ['text/csv']
+            - required: ['application/pdf']
+
+  # ============================================================
+  # SCHEMAS — PROPERTY NAMING
+  # ============================================================
+  schema-property-snake-case:
+    description: Schema properties must be snake_case.
+    severity: warn
+    given: $.components.schemas[*].properties[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  schema-id-property-naming:
+    description: Identifier properties must end in _id (e.g. employer_id, job_id, key_id).
+    severity: info
+    given: "$.components.schemas[*].properties[?(@property.match(/(Id|ID|^id)$/))]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: '_id$'
+
+  # ============================================================
+  # SECURITY
+  # ============================================================
+  security-x-api-key-header:
+    description: Auth must be the X-Api-Key header (FastDOL convention).
+    severity: warn
+    given: $.components.securitySchemes[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type: { const: 'apiKey' }
+            in: { const: 'header' }
+            name: { const: 'X-Api-Key' }
+
+  # ============================================================
+  # GENERAL QUALITY
+  # ============================================================
+  no-empty-description:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: "$..description"
+    then:
+      function: truthy
+
+  operation-examples-encouraged:
+    description: Responses are encouraged to include named examples (Microcks-compatible).
+    severity: info
+    given: $.paths[*][get,post,put,delete,patch].responses[*].content[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['example']
+            - required: ['examples']
