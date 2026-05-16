@@ -1,0 +1,26 @@
+aid: fastdol
+url: https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/apis.yml
+name: FastDOL
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+description: 'Federal workplace enforcement records on 2.3M US employers across 16 agencies — OSHA, WHD, EPA, and more.'
+created: '2026-05-16'
+modified: '2026-05-16'
+specificationVersion: '0.19'
+tags:
+  - OSHA
+  - Compliance
+  - Workplace Safety
+  - Public Records
+  - Federal Enforcement
+  - Labor
+
+common:
+  - url: https://api.fastdol.com/
+    type: Website
+  - url: https://api.fastdol.com/
+    type: Documentation
+  - url: https://api.fastdol.com/v1/openapi.json
+    type: APIsJSON
+url-source: https://api.fastdol.com/
+apis: []
