@@ -59,7 +59,7 @@ apis:
         url: json-schema/
       - type: JSONStructure
         url: json-structure/
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/fastdol-context.jsonld
       - type: Example
         url: examples/
