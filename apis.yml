@@ -3,220 +3,224 @@ url: https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/ap
 name: FastDOL
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-description: Federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry — exposed as a single normalized JSON API. Query inspections, violations, penalties, wage theft cases, severe injury reports, federal contract awards, and recalls.
+description: Federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA
+  ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry
+  — exposed as a single normalized JSON API. Query inspections, violations, penalties, wage theft cases, severe injury reports,
+  federal contract awards, and recalls.
 created: '2026-05-16'
-modified: '2026-05-16'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 tags:
+- OSHA
+- Compliance
+- Workplace Safety
+- Public Records
+- Federal Enforcement
+- Labor
+apis:
+- name: FastDOL API
+  description: Unified REST API for federal workplace enforcement records — employer search and profile lookup, OSHA inspections
+    and violations, WHD wage theft cases, severe injury reports, SEC enforcement, batch lookup, CSV upload, async export jobs,
+    NAICS industry metadata, state and industry statistics, API key management, and account dashboard.
+  humanURL: https://fastdol.com/docs
+  baseURL: https://api.fastdol.com
+  tags:
   - OSHA
+  - WHD
+  - EPA
+  - MSHA
+  - NLRB
+  - FMCSA
   - Compliance
   - Workplace Safety
-  - Public Records
   - Federal Enforcement
-  - Labor
-
-apis:
-  - name: FastDOL API
-    description: Unified REST API for federal workplace enforcement records — employer search and profile lookup, OSHA inspections and violations, WHD wage theft cases, severe injury reports, SEC enforcement, batch lookup, CSV upload, async export jobs, NAICS industry metadata, state and industry statistics, API key management, and account dashboard.
-    humanURL: https://fastdol.com/docs
-    baseURL: https://api.fastdol.com
-    tags:
-      - OSHA
-      - WHD
-      - EPA
-      - MSHA
-      - NLRB
-      - FMCSA
-      - Compliance
-      - Workplace Safety
-      - Federal Enforcement
-      - Public Records
-      - Employers
-      - Inspections
-      - Violations
-      - Wage Theft
-      - Severe Injuries
-      - Risk Scoring
-      - NAICS
-    properties:
-      - type: Documentation
-        url: https://fastdol.com/docs
-      - type: APIReference
-        url: https://fastdol.com/docs
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/fastdol/main/openapi/fastdol-openapi.yml
-      - type: Sandbox
-        url: https://fastdol.com/playground
-      - type: Console
-        url: https://fastdol.com/playground
-      - type: Authentication
-        url: https://fastdol.com/docs
-      - type: SignUp
-        url: https://fastdol.com/signup
-      - type: RateLimits
-        url: rate-limits/fastdol-rate-limits.yml
-      - type: JSONSchema
-        url: json-schema/
-      - type: JSONStructure
-        url: json-structure/
-      - type: JSONLD
-        url: json-ld/fastdol-context.jsonld
-      - type: Example
-        url: examples/
-
-common:
-  - type: Website
-    url: https://fastdol.com/
+  - Public Records
+  - Employers
+  - Inspections
+  - Violations
+  - Wage Theft
+  - Severe Injuries
+  - Risk Scoring
+  - NAICS
+  properties:
   - type: Documentation
     url: https://fastdol.com/docs
   - type: APIReference
     url: https://fastdol.com/docs
+  - type: OpenAPI
+    url: https://raw.githubusercontent.com/api-evangelist/fastdol/main/openapi/fastdol-openapi.yml
   - type: Sandbox
     url: https://fastdol.com/playground
-  - type: SignUp
-    url: https://fastdol.com/signup
-  - type: Login
-    url: https://fastdol.com/login
-  - type: Pricing
-    url: https://fastdol.com/enterprise
-  - type: Plans
-    url: plans/fastdol-plans-pricing.yml
-  - type: PricingPage
-    url: https://fastdol.com/enterprise
-  - type: RateLimits
-    url: rate-limits/fastdol-rate-limits.yml
-  - type: FinOps
-    url: finops/fastdol-finops.yml
-  - type: SpectralRules
-    url: rules/fastdol-rules.yml
-  - type: Vocabulary
-    url: vocabulary/fastdol-vocabulary.yml
-  - type: NaftikoCapability
-    url: capabilities/employer-compliance-research.yaml
-  - type: NaftikoCapability
-    url: capabilities/bulk-data-pipelines.yaml
-  - type: NaftikoCapability
-    url: capabilities/shared/fastdol.yaml
-  - type: Blog
-    url: https://fastdol.com/blog
-  - type: TermsOfService
-    url: https://fastdol.com/terms
-  - type: PrivacyPolicy
-    url: https://fastdol.com/privacy
-  - type: Contact
-    url: https://fastdol.com/enterprise
-  - type: Support
-    url: mailto:ben@fastdol.com
+  - type: Console
+    url: https://fastdol.com/playground
   - type: Authentication
     url: https://fastdol.com/docs
-  - type: Methodology
-    url: https://fastdol.com/methodology
-  - type: Datasets
-    url: https://fastdol.com/datasets
-  - type: HuggingFace
-    url: https://huggingface.co/FastDOLz
-  - type: APIsJSON
-    url: https://api.fastdol.com/v1/openapi.json
-  - type: Features
-    data:
-      - name: Unified Employer Search
-        description: Fuzzy search across 2.3M US employers by name, EIN, ZIP, state, or NAICS code with risk-ranked results.
-      - name: Cross-Agency Enforcement Profile
-        description: Single employer profile aggregating OSHA inspections and violations, WHD wage theft, MSHA mine safety, EPA ECHO, NLRB labor practice, FMCSA, OFLC, BLS SOII, SAM.gov debarment, CMS, USAspending, CPSC, NHTSA, SEC enforcement, and federal prosecutions.
-      - name: Risk Scoring
-        description: Composite per-employer risk score with risk-history endpoint exposing month-over-month changes.
-      - name: Parent Company Rollup
-        description: Aggregate enforcement across all locations of a parent company via parent-name lookup.
-      - name: Peer Comparison
-        description: Compare an employer against industry peers within the same NAICS code and state.
-      - name: Batch Lookup
-        description: Submit up to 100 employer queries in one POST for high-throughput backfills.
-      - name: CSV Upload
-        description: Upload up to 500 rows / 5MB for bulk match against the employer index.
-      - name: Async Bulk Export
-        description: Enterprise-only export job pipeline returning downloadable CSV/JSON of up to 100,000 rows.
-      - name: Inspection Violations Detail
-        description: Drill into individual OSHA inspection activity numbers for citation-level violations.
-      - name: Severe Injuries Reporting
-        description: OSHA Form 300A and severe-injury report data per employer.
-      - name: SEC Enforcement Linkage
-        description: SEC enforcement actions joined to publicly traded parent companies.
-      - name: NAICS Industry Metadata
-        description: Lookup NAICS-4 industry codes and BLS SOII industry injury rate benchmarks.
-      - name: State and Industry Statistics
-        description: Pre-aggregated stats by US state and NAICS code, plus a dedicated nursing-home (CMS CCN) statistics index.
-      - name: API Key Self-Service
-        description: Dashboard endpoints to create, list, rotate (48-hour grace), and revoke API keys (up to 5 active per account).
-      - name: Usage Telemetry
-        description: Self-reported lookup logging and PDF report claim endpoints with retrievable usage history.
-      - name: Sitemap Feed
-        description: Crawler-friendly employer sitemap endpoint for SEO and search-index ingestion.
-      - name: Feedback Submission
-        description: Per-employer feedback submission for data corrections.
-  - type: UseCases
-    data:
-      - name: Journalism and Investigations
-        description: Reporters investigating workplace safety, wage theft, or environmental violations at specific employers or industries.
-      - name: ESG and Responsible Investment
-        description: Investment funds screening portfolio companies for material labor, safety, and compliance liabilities.
-      - name: Insurance Underwriting
-        description: Workers compensation and commercial casualty underwriters pricing risk based on federal enforcement history.
-      - name: Procurement and Vendor Risk
-        description: Procurement teams vetting suppliers and contractors against federal debarment, OSHA, and EPA records.
-      - name: Labor Organizing and Worker Advocacy
-        description: Unions and worker advocates identifying chronic violators and industry-wide enforcement patterns.
-      - name: Academic Research
-        description: Labor economists, public health researchers, and policy analysts studying enforcement effectiveness and worker safety outcomes.
-      - name: Legal Discovery and Litigation Support
-        description: Plaintiffs counsel and defense firms researching defendant enforcement history.
-      - name: Compliance and Audit Functions
-        description: Corporate compliance teams benchmarking their own facilities against industry peers.
-  - type: Integrations
-    data:
-      - name: OSHA Enforcement Data
-        description: Inspections, violations, penalties, fatalities, and severity classifications.
-      - name: OSHA ITA Form 300A
-        description: Self-reported DART and TRIR injury rates by establishment.
-      - name: WHD (Wage and Hour Division)
-        description: Wage violations, back wages, and affected-employee counts.
-      - name: MSHA
-        description: Mine safety violations and penalties.
-      - name: EPA ECHO
-        description: Environmental compliance covering air, water, waste, and drinking water.
-      - name: NLRB
-        description: Labor practice charges and union representation cases.
-      - name: FMCSA
-        description: Motor carrier safety data.
-      - name: OFLC
-        description: Foreign labor certifications including H-1B, H-2A, and H-2B.
-      - name: BLS SOII
-        description: Bureau of Labor Statistics industry injury rate benchmarks.
-      - name: SAM.gov
-        description: Federal debarment and suspension exclusions.
-      - name: CMS
-        description: Nursing home ratings and deficiencies indexed by CCN.
-      - name: USAspending.gov
-        description: 25-year history of federal contract awards.
-      - name: CPSC
-        description: Product recall data.
-      - name: NHTSA
-        description: Vehicle recall and defect complaint data.
-      - name: SEC EDGAR
-        description: SEC enforcement actions and public-company filings.
-      - name: UVA Corporate Prosecution Registry
-        description: Federal prosecutions and plea agreement records.
-      - name: Stripe
-        description: Billing webhook intake is wired into the API for subscription lifecycle events.
-      - name: Hugging Face Datasets
-        description: Several FastDOL datasets are mirrored on the FastDOLz Hugging Face organization for ML and bulk research workflows.
-  - type: Solutions
-    data:
-      - name: Free Tier
-        description: 50 monthly API lookups per key, no credit card required, for evaluation and light research use.
-      - name: Enterprise Data Licensing
-        description: Custom-quota API access, bulk export, dataset licensing, and custom integrations contracted directly with FastDOL.
-
+  - type: SignUp
+    url: https://fastdol.com/signup
+  - type: RateLimits
+    url: rate-limits/fastdol-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/fastdol-context.jsonld
+  - type: Example
+    url: examples/
+  - type: NaftikoCapability
+    url: capabilities/fastdol.yaml
+common:
+- type: Website
+  url: https://fastdol.com/
+- type: Documentation
+  url: https://fastdol.com/docs
+- type: APIReference
+  url: https://fastdol.com/docs
+- type: Sandbox
+  url: https://fastdol.com/playground
+- type: SignUp
+  url: https://fastdol.com/signup
+- type: Login
+  url: https://fastdol.com/login
+- type: Pricing
+  url: https://fastdol.com/enterprise
+- type: Plans
+  url: plans/fastdol-plans-pricing.yml
+- type: PricingPage
+  url: https://fastdol.com/enterprise
+- type: RateLimits
+  url: rate-limits/fastdol-rate-limits.yml
+- type: FinOps
+  url: finops/fastdol-finops.yml
+- type: SpectralRules
+  url: rules/fastdol-rules.yml
+- type: Vocabulary
+  url: vocabulary/fastdol-vocabulary.yml
+- type: Blog
+  url: https://fastdol.com/blog
+- type: TermsOfService
+  url: https://fastdol.com/terms
+- type: PrivacyPolicy
+  url: https://fastdol.com/privacy
+- type: Contact
+  url: https://fastdol.com/enterprise
+- type: Support
+  url: mailto:ben@fastdol.com
+- type: Authentication
+  url: https://fastdol.com/docs
+- type: Methodology
+  url: https://fastdol.com/methodology
+- type: Datasets
+  url: https://fastdol.com/datasets
+- type: HuggingFace
+  url: https://huggingface.co/FastDOLz
+- type: APIsJSON
+  url: https://api.fastdol.com/v1/openapi.json
+- type: Features
+  data:
+  - name: Unified Employer Search
+    description: Fuzzy search across 2.3M US employers by name, EIN, ZIP, state, or NAICS code with risk-ranked results.
+  - name: Cross-Agency Enforcement Profile
+    description: Single employer profile aggregating OSHA inspections and violations, WHD wage theft, MSHA mine safety, EPA
+      ECHO, NLRB labor practice, FMCSA, OFLC, BLS SOII, SAM.gov debarment, CMS, USAspending, CPSC, NHTSA, SEC enforcement,
+      and federal prosecutions.
+  - name: Risk Scoring
+    description: Composite per-employer risk score with risk-history endpoint exposing month-over-month changes.
+  - name: Parent Company Rollup
+    description: Aggregate enforcement across all locations of a parent company via parent-name lookup.
+  - name: Peer Comparison
+    description: Compare an employer against industry peers within the same NAICS code and state.
+  - name: Batch Lookup
+    description: Submit up to 100 employer queries in one POST for high-throughput backfills.
+  - name: CSV Upload
+    description: Upload up to 500 rows / 5MB for bulk match against the employer index.
+  - name: Async Bulk Export
+    description: Enterprise-only export job pipeline returning downloadable CSV/JSON of up to 100,000 rows.
+  - name: Inspection Violations Detail
+    description: Drill into individual OSHA inspection activity numbers for citation-level violations.
+  - name: Severe Injuries Reporting
+    description: OSHA Form 300A and severe-injury report data per employer.
+  - name: SEC Enforcement Linkage
+    description: SEC enforcement actions joined to publicly traded parent companies.
+  - name: NAICS Industry Metadata
+    description: Lookup NAICS-4 industry codes and BLS SOII industry injury rate benchmarks.
+  - name: State and Industry Statistics
+    description: Pre-aggregated stats by US state and NAICS code, plus a dedicated nursing-home (CMS CCN) statistics index.
+  - name: API Key Self-Service
+    description: Dashboard endpoints to create, list, rotate (48-hour grace), and revoke API keys (up to 5 active per account).
+  - name: Usage Telemetry
+    description: Self-reported lookup logging and PDF report claim endpoints with retrievable usage history.
+  - name: Sitemap Feed
+    description: Crawler-friendly employer sitemap endpoint for SEO and search-index ingestion.
+  - name: Feedback Submission
+    description: Per-employer feedback submission for data corrections.
+- type: UseCases
+  data:
+  - name: Journalism and Investigations
+    description: Reporters investigating workplace safety, wage theft, or environmental violations at specific employers or
+      industries.
+  - name: ESG and Responsible Investment
+    description: Investment funds screening portfolio companies for material labor, safety, and compliance liabilities.
+  - name: Insurance Underwriting
+    description: Workers compensation and commercial casualty underwriters pricing risk based on federal enforcement history.
+  - name: Procurement and Vendor Risk
+    description: Procurement teams vetting suppliers and contractors against federal debarment, OSHA, and EPA records.
+  - name: Labor Organizing and Worker Advocacy
+    description: Unions and worker advocates identifying chronic violators and industry-wide enforcement patterns.
+  - name: Academic Research
+    description: Labor economists, public health researchers, and policy analysts studying enforcement effectiveness and worker
+      safety outcomes.
+  - name: Legal Discovery and Litigation Support
+    description: Plaintiffs counsel and defense firms researching defendant enforcement history.
+  - name: Compliance and Audit Functions
+    description: Corporate compliance teams benchmarking their own facilities against industry peers.
+- type: Integrations
+  data:
+  - name: OSHA Enforcement Data
+    description: Inspections, violations, penalties, fatalities, and severity classifications.
+  - name: OSHA ITA Form 300A
+    description: Self-reported DART and TRIR injury rates by establishment.
+  - name: WHD (Wage and Hour Division)
+    description: Wage violations, back wages, and affected-employee counts.
+  - name: MSHA
+    description: Mine safety violations and penalties.
+  - name: EPA ECHO
+    description: Environmental compliance covering air, water, waste, and drinking water.
+  - name: NLRB
+    description: Labor practice charges and union representation cases.
+  - name: FMCSA
+    description: Motor carrier safety data.
+  - name: OFLC
+    description: Foreign labor certifications including H-1B, H-2A, and H-2B.
+  - name: BLS SOII
+    description: Bureau of Labor Statistics industry injury rate benchmarks.
+  - name: SAM.gov
+    description: Federal debarment and suspension exclusions.
+  - name: CMS
+    description: Nursing home ratings and deficiencies indexed by CCN.
+  - name: USAspending.gov
+    description: 25-year history of federal contract awards.
+  - name: CPSC
+    description: Product recall data.
+  - name: NHTSA
+    description: Vehicle recall and defect complaint data.
+  - name: SEC EDGAR
+    description: SEC enforcement actions and public-company filings.
+  - name: UVA Corporate Prosecution Registry
+    description: Federal prosecutions and plea agreement records.
+  - name: Stripe
+    description: Billing webhook intake is wired into the API for subscription lifecycle events.
+  - name: Hugging Face Datasets
+    description: Several FastDOL datasets are mirrored on the FastDOLz Hugging Face organization for ML and bulk research
+      workflows.
+- type: Solutions
+  data:
+  - name: Free Tier
+    description: 50 monthly API lookups per key, no credit card required, for evaluation and light research use.
+  - name: Enterprise Data Licensing
+    description: Custom-quota API access, bulk export, dataset licensing, and custom integrations contracted directly with
+      FastDOL.
 maintainers:
-  - FN: API Evangelist
-    email: info@apievangelist.com
-    url: https://apievangelist.com
+- FN: API Evangelist
+  email: info@apievangelist.com
+  url: https://apievangelist.com
