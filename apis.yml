@@ -2,7 +2,7 @@ aid: fastdol
 url: https://raw.githubusercontent.com/api-evangelist/fastdol/refs/heads/main/apis.yml
 name: FastDOL
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 description: >-
   Federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO,
   NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry —
