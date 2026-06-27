@@ -57,7 +57,7 @@ apis:
         url: https://fastdol.com/playground
       - type: Authentication
         url: https://fastdol.com/docs
-      - type: SignUp
+      - type: Signup
         url: https://fastdol.com/signup
       - type: RateLimits
         url: rate-limits/fastdol-rate-limits.yml
@@ -67,7 +67,7 @@ apis:
         url: json-structure/
       - type: JSONLD
         url: json-ld/fastdol-context.jsonld
-      - type: Example
+      - type: Examples
         url: examples/
 common:
   - type: Website
@@ -78,7 +78,7 @@ common:
     url: https://fastdol.com/docs
   - type: Sandbox
     url: https://fastdol.com/playground
-  - type: SignUp
+  - type: Signup
     url: https://fastdol.com/signup
   - type: Login
     url: https://fastdol.com/login

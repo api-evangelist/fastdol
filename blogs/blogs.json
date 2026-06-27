@@ -5,11 +5,11 @@
       "source": "https://fastdol.com/blog",
       "feed_url": "https://thefastdolreport.substack.com/feed",
       "title": "The FastDOL Report",
-      "saved": 0,
+      "saved": 1,
       "method": "feed",
-      "note": "Blog is hosted on Substack at thefastdolreport.substack.com; most recent post dated May 29 2026, before cutoff"
+      "note": "Blog hosted on Substack at thefastdolreport.substack.com; resolved from https://fastdol.com/blog"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-07T00:00:00Z"
+  "post_count": 1,
+  "fetched": "2026-06-21T17:00:00Z"
 }
