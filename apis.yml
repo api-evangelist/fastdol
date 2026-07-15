@@ -70,6 +70,8 @@ apis:
       - type: Examples
         url: examples/
 common:
+  - type: AgenticAccess
+    url: agentic-access/fastdol-agentic-access.yml
   - type: DomainSecurity
     url: security/fastdol-domain-security.yml
   - type: Website
