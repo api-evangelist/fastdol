@@ -1,0 +1,107 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Inspections API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Inspections
+paths:
+  /v1/inspections/{activity_nr}/violations:
+    get:
+      summary: FastDOL GET Violations
+      description: 'Get violation detail for a specific inspection.
+
+
+        Metered: one lookup per call. See get_inspections for rationale.'
+      operationId: get_violations_v1_inspections__activity_nr__violations_get
+      parameters:
+      - name: activity_nr
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Activity Nr
+        example: '316254783'
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetViolationsV1InspectionsActivityNrViolationsGet200Example:
+                  summary: Default GetViolationsV1InspectionsActivityNrViolationsGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetViolationsV1InspectionsActivityNrViolationsGet422Example:
+                  summary: Default GetViolationsV1InspectionsActivityNrViolationsGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Inspections
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

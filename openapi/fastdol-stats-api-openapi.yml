@@ -1,0 +1,320 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Stats API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Stats
+paths:
+  /v1/stats/state/{code}:
+    get:
+      summary: FastDOL State Stats
+      description: "State-level aggregates + top employers + top industries.\n\nPowers the /state/[slug] SEO landing pages. Returns:\n  - `state`: 2-letter code and full name\n  - `totals`: inspections, violations, penalties, fatalities, WHD backwages,\n    employer count in one pass\n  - `top_by_violations`: top 50 employers ordered by osha_violations\n  - `top_by_penalties`: top 50 by osha_total_penalties\n  - `top_by_fatalities`: top 20 by osha_fatalities (only non-zero)\n  - `top_naics`: top 10 industries by violation volume in this state\n  - `top_contractors`: top 10 federal contractors by 5yr obligations (only\n    populated once USAspending has landed; empty list otherwise)"
+      operationId: state_stats_v1_stats_state__code__get
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Code
+        example: CA
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                StateStatsV1StatsStateCodeGet200Example:
+                  summary: Default StateStatsV1StatsStateCodeGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                StateStatsV1StatsStateCodeGet422Example:
+                  summary: Default StateStatsV1StatsStateCodeGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Stats
+  /v1/stats/industry/{naics}:
+    get:
+      summary: FastDOL Industry Stats
+      description: 'Industry aggregates + top employers + state breakdown.
+
+
+        Accepts 2-, 3-, or 4-digit NAICS prefixes. Matches against the 6-digit
+
+        naics_code on employer_profile_latest via LIKE ''{prefix}%''. 3-digit is
+
+        the sweet spot for SEO — broad enough to have volume, specific enough
+
+        to rank ("Motor Vehicle Manufacturing OSHA Violations").'
+      operationId: industry_stats_v1_stats_industry__naics__get
+      parameters:
+      - name: naics
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Naics
+        example: '2362'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                IndustryStatsV1StatsIndustryNaicsGet200Example:
+                  summary: Default IndustryStatsV1StatsIndustryNaicsGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                IndustryStatsV1StatsIndustryNaicsGet422Example:
+                  summary: Default IndustryStatsV1StatsIndustryNaicsGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Stats
+  /v1/stats/industries:
+    get:
+      summary: FastDOL Industries Index
+      description: '3-digit NAICS subsectors that have any employer on file, with volumes.
+
+        Powers the /industries landing page.'
+      operationId: industries_index_v1_stats_industries_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                IndustriesIndexV1StatsIndustriesGet200Example:
+                  summary: Default IndustriesIndexV1StatsIndustriesGet 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Stats
+  /v1/stats/nursing-home/{ccn}:
+    get:
+      summary: FastDOL Nursing Home Detail
+      description: 'Detailed view for a single nursing home facility.
+
+
+        Returns the facility''s full CMS payload (ratings, deficiencies,
+
+        penalties, ownership) plus a pointer to the matching employer_id so
+
+        the frontend can link to the federal-enforcement profile.'
+      operationId: nursing_home_detail_v1_stats_nursing_home__ccn__get
+      parameters:
+      - name: ccn
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ccn
+        example: '055123'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                NursingHomeDetailV1StatsNursingHomeCcnGet200Example:
+                  summary: Default NursingHomeDetailV1StatsNursingHomeCcnGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                NursingHomeDetailV1StatsNursingHomeCcnGet422Example:
+                  summary: Default NursingHomeDetailV1StatsNursingHomeCcnGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Stats
+  /v1/stats/nursing-homes/{state_code}:
+    get:
+      summary: FastDOL Nursing Homes by State
+      description: State-level nursing home aggregates + top/bottom facilities.
+      operationId: nursing_homes_by_state_v1_stats_nursing_homes__state_code__get
+      parameters:
+      - name: state_code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: State Code
+        example: CA
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                NursingHomesByStateV1StatsNursingHomesStateCodeGet200Example:
+                  summary: Default NursingHomesByStateV1StatsNursingHomesStateCodeGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                NursingHomesByStateV1StatsNursingHomesStateCodeGet422Example:
+                  summary: Default NursingHomesByStateV1StatsNursingHomesStateCodeGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Stats
+  /v1/stats/nursing-homes:
+    get:
+      summary: FastDOL Nursing Homes Index
+      description: 'Per-state counts of nursing homes for the /nursing-homes index page.
+
+
+        Returns an empty state list (rather than 500) when the CMS columns
+
+        haven''t yet been projected into the employer_profile_latest
+
+        materialized view — this happens between the migration apply and
+
+        the first nightly sync.'
+      operationId: nursing_homes_index_v1_stats_nursing_homes_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                NursingHomesIndexV1StatsNursingHomesGet200Example:
+                  summary: Default NursingHomesIndexV1StatsNursingHomesGet 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Stats
+  /v1/stats/states:
+    get:
+      summary: FastDOL States Index
+      description: List of all supported state codes + employer counts for the /states page.
+      operationId: states_index_v1_stats_states_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                StatesIndexV1StatsStatesGet200Example:
+                  summary: Default StatesIndexV1StatsStatesGet 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Stats
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

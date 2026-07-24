@@ -1,0 +1,392 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Export API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Export
+paths:
+  /v1/export:
+    post:
+      summary: FastDOL Create Export
+      description: 'Start a bulk export job. Returns 202 with a job_id to poll.
+
+
+        At least one filter field must be set — unfiltered exports would
+
+        scan the entire employer table and are refused.'
+      operationId: create_export_v1_export_post
+      parameters:
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportRequest'
+            examples:
+              CreateExportV1ExportPostRequestExample:
+                summary: Default CreateExportV1ExportPost request
+                x-microcks-default: true
+                value:
+                  format: string
+                  filters:
+                    name: Acme Construction Inc
+                    ein: 12-3456789
+                    state: CA
+                    states: string
+                    zip: '94105'
+                    naics: '2362'
+                    naics_codes: string
+                    parent_only: false
+                    parent_name: walmart-inc
+                    has_fatalities: false
+                    svep: false
+                    min_inspections: string
+                    min_violations: string
+                    min_penalties: string
+                    min_fatalities: string
+                    min_whd_cases: string
+                    min_whd_backwages: string
+                  max_rows: 1
+                  sort_by: string
+                  sort_dir: string
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                CreateExportV1ExportPost202Example:
+                  summary: Default CreateExportV1ExportPost 202 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                CreateExportV1ExportPost422Example:
+                  summary: Default CreateExportV1ExportPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Export
+  /v1/export/{job_id}:
+    get:
+      summary: FastDOL GET Export
+      description: 'Poll an export job. Returns status and — once finished — a
+
+        download URL valid until the job expires (24h after creation).'
+      operationId: get_export_v1_export__job_id__get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+        example: job_2c5d7a93b1f0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetExportV1ExportJobIdGet200Example:
+                  summary: Default GetExportV1ExportJobIdGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetExportV1ExportJobIdGet422Example:
+                  summary: Default GetExportV1ExportJobIdGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Export
+  /v1/export/{job_id}/download:
+    get:
+      summary: FastDOL Download Export
+      description: Stream the generated export file. 404 if not finished or expired.
+      operationId: download_export_v1_export__job_id__download_get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+        example: job_2c5d7a93b1f0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                DownloadExportV1ExportJobIdDownloadGet200Example:
+                  summary: Default DownloadExportV1ExportJobIdDownloadGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                DownloadExportV1ExportJobIdDownloadGet422Example:
+                  summary: Default DownloadExportV1ExportJobIdDownloadGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Export
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ExportFilters:
+      properties:
+        name:
+          anyOf:
+          - type: string
+            maxLength: 200
+          - type: 'null'
+          title: Name
+        ein:
+          anyOf:
+          - type: string
+            maxLength: 20
+          - type: 'null'
+          title: Ein
+        state:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          title: State
+        states:
+          anyOf:
+          - items:
+              type: string
+            type: array
+            maxItems: 60
+          - type: 'null'
+          title: States
+        zip:
+          anyOf:
+          - type: string
+            maxLength: 5
+          - type: 'null'
+          title: Zip
+        naics:
+          anyOf:
+          - type: string
+            maxLength: 6
+          - type: 'null'
+          title: Naics
+          description: Single NAICS prefix, 2-6 digits
+        naics_codes:
+          anyOf:
+          - items:
+              type: string
+            type: array
+            maxItems: 50
+          - type: 'null'
+          title: Naics Codes
+          description: Multiple NAICS prefixes (OR)
+        parent_only:
+          type: boolean
+          title: Parent Only
+          default: false
+          example: false
+        parent_name:
+          anyOf:
+          - type: string
+            maxLength: 200
+          - type: 'null'
+          title: Parent Name
+        has_fatalities:
+          type: boolean
+          title: Has Fatalities
+          default: false
+          example: false
+        svep:
+          type: boolean
+          title: Svep
+          default: false
+          example: false
+        min_inspections:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Min Inspections
+        min_violations:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Min Violations
+        min_penalties:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Min Penalties
+        min_fatalities:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Min Fatalities
+        min_whd_cases:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Min Whd Cases
+        min_whd_backwages:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Min Whd Backwages
+      type: object
+      title: ExportFilters
+      description: 'Filter surface for bulk exports — richer than the interactive
+
+        search endpoint because enterprise analysts need structured queries
+
+        (e.g. "top 50K employers by fatality rate with OSHA penalties >
+
+        $100K in construction NAICS").'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ExportRequest:
+      properties:
+        format:
+          type: string
+          pattern: ^(csv|json)$
+          title: Format
+          default: csv
+          example: string
+        filters:
+          $ref: '#/components/schemas/ExportFilters'
+        max_rows:
+          type: integer
+          maximum: 100000.0
+          minimum: 1.0
+          title: Max Rows
+          default: 50000
+          example: 1
+        sort_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sort By
+          description: 'One of: contracts_value, employer_id, fatalities, inspections, penalties, risk_score, violations, whd_backwages, whd_cases'
+        sort_dir:
+          type: string
+          pattern: ^(asc|desc)$
+          title: Sort Dir
+          default: desc
+          example: string
+      type: object
+      title: ExportRequest

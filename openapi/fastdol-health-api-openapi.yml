@@ -1,0 +1,103 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Health API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Health
+paths:
+  /v1/health:
+    get:
+      summary: FastDOL Health
+      description: 'Public health endpoint — returns ok/unhealthy only.
+
+
+        Used by UptimeRobot and status-page builders. Intentionally minimal
+
+        to avoid leaking internal operational detail. Only DB + data-loaded
+
+        checks trigger 503 — pipeline freshness is not customer-facing and
+
+        is exposed on /v1/health/detail for admin monitoring.'
+      operationId: health_v1_health_head
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                HealthV1HealthHead200Example:
+                  summary: Default HealthV1HealthHead 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Health
+    head:
+      summary: FastDOL Health
+      description: 'Public health endpoint — returns ok/unhealthy only.
+
+
+        Used by UptimeRobot and status-page builders. Intentionally minimal
+
+        to avoid leaking internal operational detail. Only DB + data-loaded
+
+        checks trigger 503 — pipeline freshness is not customer-facing and
+
+        is exposed on /v1/health/detail for admin monitoring.'
+      operationId: health_v1_health_head
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                HealthV1HealthHead200Example:
+                  summary: Default HealthV1HealthHead 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Health
+  /v1/health/detail:
+    get:
+      summary: FastDOL Health Detail
+      description: 'Admin-only detailed health — requires admin JWT.
+
+
+        Full diagnostics: DB, pipeline recency, pipeline status, profile
+
+        count, data age, failing checks. Behind auth so customers can''t see
+
+        internal operational state or fingerprint pipeline schedules.'
+      operationId: health_detail_v1_health_detail_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                HealthDetailV1HealthDetailGet200Example:
+                  summary: Default HealthDetailV1HealthDetailGet 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Health

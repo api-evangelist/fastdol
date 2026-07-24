@@ -1,0 +1,447 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Auth
+paths:
+  /auth/signup:
+    post:
+      summary: FastDOL Signup
+      description: Create account with email + password. Sends verification email.
+      operationId: signup_auth_signup_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+            examples:
+              SignupAuthSignupPostRequestExample:
+                summary: Default SignupAuthSignupPost request
+                x-microcks-default: true
+                value:
+                  email: analyst@example.com
+                  password: CorrectHorseBatteryStaple1!
+                  company_name: string
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                SignupAuthSignupPost200Example:
+                  summary: Default SignupAuthSignupPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                SignupAuthSignupPost422Example:
+                  summary: Default SignupAuthSignupPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Auth
+  /auth/verify:
+    post:
+      summary: FastDOL Verify Email
+      description: "Verify email address.\n\nAccepts the token in the JSON body (POST) rather than the URL\n(GET) so it doesn't leak via:\n  * server access logs (nginx, application-level request logs)\n  * exception tracebacks that include request URLs\n  * Referer headers when the verify page links anywhere\n  * browser history shared from a kiosk / shared screen\nThe Next.js verify page reads the token from the URL once,\nimmediately replaceState's it out of the address bar, then POSTs\nthe value here.\n\nBehavior change (was: auto-issued an API key + set the\naccess_token cookie on the first POST): now the endpoint only\nflips customers.email_verified to TRUE. The user must explicitly\nlog in afterwards and create their first API key from the\n/account dashboard. This closes the email-link-prefetch attack\nwhere a corporate gateway, AV scanner, or IT admin reading a\nforwarded message could auto-claim the account."
+      operationId: verify_email_auth_verify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmailRequest'
+            examples:
+              VerifyEmailAuthVerifyPostRequestExample:
+                summary: Default VerifyEmailAuthVerifyPost request
+                x-microcks-default: true
+                value:
+                  token: tok_9d2e1c4b7a6f3e5d
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                VerifyEmailAuthVerifyPost200Example:
+                  summary: Default VerifyEmailAuthVerifyPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                VerifyEmailAuthVerifyPost422Example:
+                  summary: Default VerifyEmailAuthVerifyPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Auth
+  /auth/login:
+    post:
+      summary: FastDOL Login
+      description: Login with email + password. Returns JWT as HttpOnly cookie.
+      operationId: login_auth_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              LoginAuthLoginPostRequestExample:
+                summary: Default LoginAuthLoginPost request
+                x-microcks-default: true
+                value:
+                  email: analyst@example.com
+                  password: CorrectHorseBatteryStaple1!
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                LoginAuthLoginPost200Example:
+                  summary: Default LoginAuthLoginPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                LoginAuthLoginPost422Example:
+                  summary: Default LoginAuthLoginPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Auth
+  /auth/logout:
+    post:
+      summary: FastDOL Logout
+      description: 'End the current session. Records the JWT''s jti in revoked_tokens so
+
+        the token cannot be reused even if the cookie was copied elsewhere
+
+        (DevTools, proxy log, shared machine) before the browser cleared it.
+
+
+        Best-effort: a request without a valid JWT still returns 200 so the
+
+        frontend can always clear its local state, and a DB failure during
+
+        revocation still clears the cookie (logging server-side) — we never
+
+        want logout to fail in a way that leaves the user logged in.'
+      operationId: logout_auth_logout_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                LogoutAuthLogoutPost200Example:
+                  summary: Default LogoutAuthLogoutPost 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Auth
+  /auth/me:
+    get:
+      summary: FastDOL GET Me
+      description: 'Return the authenticated customer''s public identity.
+
+
+        Used by the frontend header + account pages to show the logged-in
+
+        email without trusting client-side pathname heuristics. 401s when
+
+        the access_token cookie is missing/expired/invalid so the frontend
+
+        can reliably fall back to logged-out rendering.'
+      operationId: get_me_auth_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetMeAuthMeGet200Example:
+                  summary: Default GetMeAuthMeGet 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Auth
+  /auth/forgot-password:
+    post:
+      summary: FastDOL Forgot Password
+      description: 'Request password reset. Always returns 202 (don''t leak if email exists).
+
+
+        All real work runs in a background task so request-thread timing
+
+        can''t distinguish the "email exists" path (DB write + Resend
+
+        call: tens to hundreds of ms) from "email unknown" (immediate
+
+        return) from "rate-limited" (immediate return). Closes the
+
+        timing-enumeration vector flagged in the re-audit.'
+      operationId: forgot_password_auth_forgot_password_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPasswordRequest'
+            examples:
+              ForgotPasswordAuthForgotPasswordPostRequestExample:
+                summary: Default ForgotPasswordAuthForgotPasswordPost request
+                x-microcks-default: true
+                value:
+                  email: analyst@example.com
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                ForgotPasswordAuthForgotPasswordPost200Example:
+                  summary: Default ForgotPasswordAuthForgotPasswordPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                ForgotPasswordAuthForgotPasswordPost422Example:
+                  summary: Default ForgotPasswordAuthForgotPasswordPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Auth
+  /auth/reset-password:
+    post:
+      summary: FastDOL Reset Password
+      description: Reset password using token from email.
+      operationId: reset_password_auth_reset_password_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+            examples:
+              ResetPasswordAuthResetPasswordPostRequestExample:
+                summary: Default ResetPasswordAuthResetPasswordPost request
+                x-microcks-default: true
+                value:
+                  token: tok_9d2e1c4b7a6f3e5d
+                  new_password: CorrectHorseBatteryStaple1!
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                ResetPasswordAuthResetPasswordPost200Example:
+                  summary: Default ResetPasswordAuthResetPasswordPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                ResetPasswordAuthResetPasswordPost422Example:
+                  summary: Default ResetPasswordAuthResetPasswordPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Auth
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ForgotPasswordRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+          example: analyst@example.com
+      type: object
+      required:
+      - email
+      title: ForgotPasswordRequest
+    ResetPasswordRequest:
+      properties:
+        token:
+          type: string
+          title: Token
+          example: tok_9d2e1c4b7a6f3e5d
+        new_password:
+          type: string
+          title: New Password
+          example: CorrectHorseBatteryStaple1!
+      type: object
+      required:
+      - token
+      - new_password
+      title: ResetPasswordRequest
+    VerifyEmailRequest:
+      properties:
+        token:
+          type: string
+          title: Token
+          example: tok_9d2e1c4b7a6f3e5d
+      type: object
+      required:
+      - token
+      title: VerifyEmailRequest
+    SignupRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+          example: analyst@example.com
+        password:
+          type: string
+          title: Password
+          example: CorrectHorseBatteryStaple1!
+        company_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Company Name
+      type: object
+      required:
+      - email
+      - password
+      title: SignupRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LoginRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+          example: analyst@example.com
+        password:
+          type: string
+          title: Password
+          example: CorrectHorseBatteryStaple1!
+      type: object
+      required:
+      - email
+      - password
+      title: LoginRequest

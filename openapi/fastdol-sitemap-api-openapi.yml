@@ -1,0 +1,144 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Sitemap API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Sitemap
+paths:
+  /v1/sitemap/employers:
+    get:
+      summary: FastDOL Sitemap Employers
+      description: 'Return employer IDs for sitemap generation with pagination. Not metered.
+
+
+        Requires the dedicated ``sitemap:read`` scope — intentionally NOT in the
+
+        free-tier default scopes. The only legitimate caller is the Next.js
+
+        server generating sitemap shards for SEO; that route uses DEMO_API_KEY
+
+        whose scopes must include ''sitemap:read''. Free customer keys cannot
+
+        enumerate the entire dataset via this endpoint.
+
+
+        Pagination: use offset/limit to page through all employers.
+
+        Returns total_count so the caller knows how many pages to request —
+
+        the count reflects the indexable_only filter when set.'
+      operationId: sitemap_employers_v1_sitemap_employers_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 50000
+          minimum: 1
+          default: 50000
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: indexable_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: When true, return only employers with at least one enforcement signal across any aggregated source. Used by the Next.js sitemap generator so Google isn't asked to crawl thin templated profiles that the page itself noindex's anyway.
+          default: false
+          title: Indexable Only
+        description: When true, return only employers with at least one enforcement signal across any aggregated source. Used by the Next.js sitemap generator so Google isn't asked to crawl thin templated profiles that the page itself noindex's anyway.
+        example: false
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                SitemapEmployersV1SitemapEmployersGet200Example:
+                  summary: Default SitemapEmployersV1SitemapEmployersGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                SitemapEmployersV1SitemapEmployersGet422Example:
+                  summary: Default SitemapEmployersV1SitemapEmployersGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sitemap
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

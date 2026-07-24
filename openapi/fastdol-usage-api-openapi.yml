@@ -1,0 +1,101 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Usage API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Usage
+paths:
+  /v1/usage/lookup:
+    post:
+      summary: FastDOL Log Lookup
+      description: 'Increment lookups_used. Soft cap — return 200 with `over_quota`
+
+        flag rather than 429, so the page render that triggered this isn''t
+
+        interrupted. The UI uses the flag to render an upgrade banner.'
+      operationId: log_lookup_v1_usage_lookup_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                LogLookupV1UsageLookupPost200Example:
+                  summary: Default LogLookupV1UsageLookupPost 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Usage
+  /v1/usage/pdf-report-claim:
+    post:
+      summary: FastDOL Claim PDF Report
+      description: 'Hard-cap claim for one PDF report. Returns 429 if the customer is
+
+        at quota. Caller (the report page) refuses to render on 429 and
+
+        shows an upgrade prompt instead.
+
+
+        Atomic check-and-increment via SELECT ... FOR UPDATE inside a
+
+        transaction. If the limit is 0 (Free tier), the customer never gets
+
+        past the comparison — no slot is consumed and the upgrade response
+
+        is consistent.'
+      operationId: claim_pdf_report_v1_usage_pdf_report_claim_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                ClaimPdfReportV1UsagePdfReportClaimPost200Example:
+                  summary: Default ClaimPdfReportV1UsagePdfReportClaimPost 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Usage
+  /v1/usage:
+    get:
+      summary: FastDOL GET Usage
+      description: 'Return all three usage counters + their limits for the dashboard.
+
+
+        Read-only convenience endpoint so the account page doesn''t have to
+
+        join across customers + api_keys + the live api_usage row count.'
+      operationId: get_usage_v1_usage_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetUsageV1UsageGet200Example:
+                  summary: Default GetUsageV1UsageGet 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Usage

@@ -1,0 +1,313 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Dashboard API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Dashboard
+paths:
+  /dashboard/plan:
+    get:
+      summary: FastDOL GET Plan
+      description: Return current plan info including pending cancellation status.
+      operationId: get_plan_dashboard_plan_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetPlanDashboardPlanGet200Example:
+                  summary: Default GetPlanDashboardPlanGet 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Dashboard
+  /dashboard/keys:
+    get:
+      summary: FastDOL List Keys
+      description: List all API keys for the current customer.
+      operationId: list_keys_dashboard_keys_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                ListKeysDashboardKeysGet200Example:
+                  summary: Default ListKeysDashboardKeysGet 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Dashboard
+    post:
+      summary: FastDOL Create Key
+      description: Generate a new API key. Raw key shown ONCE in response.
+      operationId: create_key_dashboard_keys_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyRequest'
+            examples:
+              CreateKeyDashboardKeysPostRequestExample:
+                summary: Default CreateKeyDashboardKeysPost request
+                x-microcks-default: true
+                value:
+                  label: string
+                  scopes:
+                  - string
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                CreateKeyDashboardKeysPost200Example:
+                  summary: Default CreateKeyDashboardKeysPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                CreateKeyDashboardKeysPost422Example:
+                  summary: Default CreateKeyDashboardKeysPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Dashboard
+  /dashboard/keys/{key_id}/rotate:
+    post:
+      summary: FastDOL Rotate Key
+      description: Rotate a key. Old key works for 48h, new key is immediately active.
+      operationId: rotate_key_dashboard_keys__key_id__rotate_post
+      parameters:
+      - name: key_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Key Id
+        example: key_5f8c3a2d1e4b
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                RotateKeyDashboardKeysKeyIdRotatePost200Example:
+                  summary: Default RotateKeyDashboardKeysKeyIdRotatePost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                RotateKeyDashboardKeysKeyIdRotatePost422Example:
+                  summary: Default RotateKeyDashboardKeysKeyIdRotatePost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Dashboard
+  /dashboard/keys/{key_id}:
+    delete:
+      summary: FastDOL Revoke Key
+      description: Immediately revoke an API key.
+      operationId: revoke_key_dashboard_keys__key_id__delete
+      parameters:
+      - name: key_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Key Id
+        example: key_5f8c3a2d1e4b
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                RevokeKeyDashboardKeysKeyIdDelete200Example:
+                  summary: Default RevokeKeyDashboardKeysKeyIdDelete 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                RevokeKeyDashboardKeysKeyIdDelete422Example:
+                  summary: Default RevokeKeyDashboardKeysKeyIdDelete 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Dashboard
+  /dashboard/account:
+    delete:
+      summary: FastDOL Delete Account
+      description: "Delete the authenticated customer's account and all associated data.\n\nImplements GDPR Article 17 (\"right to erasure\") and CCPA equivalents.\nRequires password re-authentication to prevent XSS / CSRF / session-theft\nescalating into full account wipe, plus an explicit \"DELETE\" confirmation\nstring to defeat accidental or malicious one-click destruction.\n\nCascades (via existing FKs in migrations/001_init + 002_add_constraints):\n  - api_keys, email_verifications, password_reset_tokens, subscriptions,\n    batch_jobs — ON DELETE CASCADE\n  - api_key_audit_log, api_usage — customer_id set to NULL (we keep the\n    audit/usage trail; the PII linkage is severed)\n  - audit_log — customer_id set to NULL (same rationale)\n\nNote: the customers table still carries a vestigial `stripe_customer_id`\ncolumn from when paid tiers were self-serve via Stripe. The column is\nnot selected here — Stripe was retired in the May 2026 redesign and\ncommercial accounts are now handled out-of-band. If we ever need the\nhistorical mapping back, it's still in the DB row; we just don't surface\nit from this delete flow."
+      operationId: delete_account_dashboard_account_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAccountRequest'
+            examples:
+              DeleteAccountDashboardAccountDeleteRequestExample:
+                summary: Default DeleteAccountDashboardAccountDelete request
+                x-microcks-default: true
+                value:
+                  password: CorrectHorseBatteryStaple1!
+                  confirm: string
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                DeleteAccountDashboardAccountDelete200Example:
+                  summary: Default DeleteAccountDashboardAccountDelete 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                DeleteAccountDashboardAccountDelete422Example:
+                  summary: Default DeleteAccountDashboardAccountDelete 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Dashboard
+components:
+  schemas:
+    DeleteAccountRequest:
+      properties:
+        password:
+          type: string
+          title: Password
+          example: CorrectHorseBatteryStaple1!
+        confirm:
+          type: string
+          title: Confirm
+          example: string
+      type: object
+      required:
+      - password
+      - confirm
+      title: DeleteAccountRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CreateKeyRequest:
+      properties:
+        label:
+          type: string
+          title: Label
+          default: default
+          example: string
+        scopes:
+          items:
+            type: string
+          type: array
+          title: Scopes
+          default:
+          - employer:read
+      type: object
+      title: CreateKeyRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

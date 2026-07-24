@@ -1,0 +1,1369 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Employers API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Employers
+paths:
+  /v1/employers:
+    get:
+      summary: FastDOL Search Employers
+      description: 'Search employers by name, EIN, zip, state, or NAICS.
+
+
+        Returns a flat list of employer locations sorted by risk score (worst first).
+
+        Each result includes `related_locations_count` showing how many locations
+
+        share the same normalized employer name — useful for national chains.'
+      operationId: search_employers_v1_employers_get
+      parameters:
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            maxLength: 200
+          - type: 'null'
+          description: Fuzzy employer name search
+          title: Name
+        description: Fuzzy employer name search
+        example: Acme Construction Inc
+      - name: ein
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            maxLength: 12
+          - type: 'null'
+          description: Exact EIN match
+          title: Ein
+        description: Exact EIN match
+        example: 12-3456789
+      - name: state
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            maxLength: 2
+          - type: 'null'
+          description: State code filter (e.g., CA)
+          title: State
+        description: State code filter (e.g., CA)
+        example: CA
+      - name: zip
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            maxLength: 10
+          - type: 'null'
+          description: 5-digit zip code filter
+          title: Zip
+        description: 5-digit zip code filter
+        example: '94105'
+      - name: naics
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            maxLength: 6
+          - type: 'null'
+          description: 4-digit NAICS prefix filter
+          title: Naics
+        description: 4-digit NAICS prefix filter
+        example: '2362'
+      - name: parent_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Only return employers with a parent_name (known parent companies)
+          default: false
+          title: Parent Only
+        description: Only return employers with a parent_name (known parent companies)
+        example: false
+      - name: parent_name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            maxLength: 200
+          - type: 'null'
+          description: Filter to locations under a specific parent company (exact match)
+          title: Parent Name
+        description: Filter to locations under a specific parent company (exact match)
+        example: walmart-inc
+      - name: has_fatalities
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Filter to locations with fatality investigations
+          default: false
+          title: Has Fatalities
+        description: Filter to locations with fatality investigations
+        example: false
+      - name: svep
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Filter to locations on the Severe Violator Enforcement Program
+          default: false
+          title: Svep
+        description: Filter to locations on the Severe Violator Enforcement Program
+        example: false
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            maxLength: 20
+          - type: 'null'
+          description: 'Sort results by: risk_score (default), violations, penalties, inspections, fatalities'
+          title: Sort By
+        description: 'Sort results by: risk_score (default), violations, penalties, inspections, fatalities'
+        example: string
+      - name: sort_dir
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            maxLength: 4
+          - type: 'null'
+          description: 'Sort direction: desc (default) or asc'
+          title: Sort Dir
+        description: 'Sort direction: desc (default) or asc'
+        example: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                SearchEmployersV1EmployersGet200Example:
+                  summary: Default SearchEmployersV1EmployersGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                SearchEmployersV1EmployersGet422Example:
+                  summary: Default SearchEmployersV1EmployersGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/parent:
+    get:
+      summary: FastDOL GET Parent Company
+      description: 'Parent company risk rollup — aggregate risk across all locations.
+
+
+        Returns company-wide statistics (total inspections, violations, penalties,
+
+        risk distribution) plus a paginated list of individual locations sorted
+
+        by risk score (worst first).
+
+
+        Premium feature for enterprise customers evaluating national employers.'
+      operationId: get_parent_company_v1_employers_parent_get
+      parameters:
+      - name: name
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Parent company name (e.g., 'Amazon', 'Walmart')
+          title: Name
+        description: Parent company name (e.g., 'Amazon', 'Walmart')
+        example: Acme Construction Inc
+      - name: state
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter locations by state
+          title: State
+        description: Filter locations by state
+        example: CA
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetParentCompanyV1EmployersParentGet200Example:
+                  summary: Default GetParentCompanyV1EmployersParentGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetParentCompanyV1EmployersParentGet422Example:
+                  summary: Default GetParentCompanyV1EmployersParentGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/ein/{ein}:
+    get:
+      summary: FastDOL GET Employer by EIN
+      description: 'Lookup employers by FEIN (Federal Employer Identification Number).
+
+
+        Returns all locations matching the given EIN. Insurance professionals
+
+        identify employers by FEIN — this is the primary lookup for underwriting
+
+        integrations.
+
+
+        EIN format: 9 digits (e.g., ''943067788'' or ''94-3067788'').'
+      operationId: get_employer_by_ein_v1_employers_ein__ein__get
+      parameters:
+      - name: ein
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ein
+        example: 12-3456789
+      - name: state
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: State code filter
+          title: State
+        description: State code filter
+        example: CA
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetEmployerByEinV1EmployersEinEinGet200Example:
+                  summary: Default GetEmployerByEinV1EmployersEinEinGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetEmployerByEinV1EmployersEinEinGet422Example:
+                  summary: Default GetEmployerByEinV1EmployersEinEinGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}:
+    get:
+      summary: FastDOL GET Employer
+      description: Direct lookup by employer_id UUID.
+      operationId: get_employer_v1_employers__employer_id__get
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetEmployerV1EmployersEmployerIdGet200Example:
+                  summary: Default GetEmployerV1EmployersEmployerIdGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetEmployerV1EmployersEmployerIdGet422Example:
+                  summary: Default GetEmployerV1EmployersEmployerIdGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}/inspections:
+    get:
+      summary: FastDOL GET Inspections
+      description: 'Get inspection history with violation detail for an employer.
+
+
+        Metered: one lookup per call. Previously unmetered, which made it trivial
+
+        for a free-tier key to scrape the entire product by combining the sitemap
+
+        endpoint (employer IDs) with this one (full inspection history per id).'
+      operationId: get_inspections_v1_employers__employer_id__inspections_get
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetInspectionsV1EmployersEmployerIdInspectionsGet200Example:
+                  summary: Default GetInspectionsV1EmployersEmployerIdInspectionsGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetInspectionsV1EmployersEmployerIdInspectionsGet422Example:
+                  summary: Default GetInspectionsV1EmployersEmployerIdInspectionsGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}/severe-injuries:
+    get:
+      summary: FastDOL GET Severe Injuries
+      description: 'Per-event OSHA Severe Injury Reports (29 CFR 1904.39) for an employer.
+
+
+        Each row is an injury the employer self-reported within 24 hours
+
+        -- in-patient hospitalization, amputation, or loss of an eye.
+
+        Distinct from /employers/{id}/inspections (inspection-triggered):
+
+        SIR is injury-triggered, so the same event may or may not have a
+
+        related inspection (see inspection_activity_nr -- often NULL).
+
+
+        Metered: one lookup per call, same as inspections / SEC enforcement.
+
+        Newest event first.'
+      operationId: get_severe_injuries_v1_employers__employer_id__severe_injuries_get
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetSevereInjuriesV1EmployersEmployerIdSevereInjuriesGet200Example:
+                  summary: Default GetSevereInjuriesV1EmployersEmployerIdSevereInjuriesGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetSevereInjuriesV1EmployersEmployerIdSevereInjuriesGet422Example:
+                  summary: Default GetSevereInjuriesV1EmployersEmployerIdSevereInjuriesGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}/whd-cases:
+    get:
+      summary: FastDOL GET WHD Cases
+      description: 'Per-case WHD (Wage & Hour Division) enforcement records for an
+
+        employer.
+
+
+        Each row is one closed case carrying backwages assessed
+
+        (`bw_amt`) and the count of underpaid employees
+
+        (`ee_violtd_cnt`). Covers FLSA, FMLA, MSPA, H-1B/H-2A/H-2B, CCPA,
+
+        and any other DOL WHD-administered statute.
+
+
+        Metered: one lookup per call, same pattern as the other detail
+
+        endpoints. Most-recent case first.'
+      operationId: get_whd_cases_v1_employers__employer_id__whd_cases_get
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetWhdCasesV1EmployersEmployerIdWhdCasesGet200Example:
+                  summary: Default GetWhdCasesV1EmployersEmployerIdWhdCasesGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetWhdCasesV1EmployersEmployerIdWhdCasesGet422Example:
+                  summary: Default GetWhdCasesV1EmployersEmployerIdWhdCasesGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}/osha-accidents:
+    get:
+      summary: FastDOL GET OSHA Accidents
+      description: 'Per-event OSHA accident records (inspection-triggered).
+
+
+        Each row is an accident/fatality/catastrophe OSHA documented while
+
+        investigating an inspection at this employer. Distinct from
+
+        /employers/{id}/severe-injuries (SIR is injury-triggered and
+
+        self-reported under 29 CFR 1904.39); accidents only surface through
+
+        an OSHA-opened inspection.
+
+
+        The narrative `abstract_text` is truncated at 4000 chars upstream
+
+        (silver/osha_accident_detail) to keep row size bounded.
+
+
+        Metered: one lookup per call, same as inspections / SIR.
+
+        Newest event first.'
+      operationId: get_osha_accidents_v1_employers__employer_id__osha_accidents_get
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetOshaAccidentsV1EmployersEmployerIdOshaAccidentsGet200Example:
+                  summary: Default GetOshaAccidentsV1EmployersEmployerIdOshaAccidentsGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetOshaAccidentsV1EmployersEmployerIdOshaAccidentsGet422Example:
+                  summary: Default GetOshaAccidentsV1EmployersEmployerIdOshaAccidentsGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}/sec-enforcement:
+    get:
+      summary: FastDOL GET SEC Enforcement
+      description: 'Get SEC enforcement actions filed against an employer''s parent
+
+        company.
+
+
+        Joined via employer_profile.parent_name → sec_enforcement_detail
+
+        .parent_name. Returns empty results for non-public-parent employers
+
+        (~99% of employers — most aren''t SEC registrants).
+
+
+        Metered: one lookup per call. Same justification as get_inspections
+
+        — un-metered would let a free-tier key scrape the entire SEC
+
+        enforcement-history dataset for free by walking the sitemap.'
+      operationId: get_sec_enforcement_v1_employers__employer_id__sec_enforcement_get
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+        example: 20
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+        example: 0
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetSecEnforcementV1EmployersEmployerIdSecEnforcementGet200Example:
+                  summary: Default GetSecEnforcementV1EmployersEmployerIdSecEnforcementGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetSecEnforcementV1EmployersEmployerIdSecEnforcementGet422Example:
+                  summary: Default GetSecEnforcementV1EmployersEmployerIdSecEnforcementGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}/peers:
+    get:
+      summary: FastDOL GET Peers
+      description: 'Peer establishments — same NAICS+state cohort, plus same-parent
+
+        siblings.
+
+
+        Powers the "Other employers in this industry" and "Other
+
+        establishments under this parent" sections of the profile page.
+
+        These sections double as internal-link targets that pass authority
+
+        to long-tail leaf URLs (otherwise SEO dead-ends since most thin
+
+        profiles have no inbound links).
+
+
+        Returns up to `limit` rows per cohort, ordered by
+
+        agency_violation_count DESC so the most-active peers surface first
+
+        — better signal for the human reader and stronger anchor-text
+
+        diversity in the per-page link set.
+
+
+        Metered same as get_inspections. The endpoint is heavy enough
+
+        (two indexed lookups + N projections) that an unmetered version
+
+        would invite scraping.'
+      operationId: get_peers_v1_employers__employer_id__peers_get
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 20
+          minimum: 1
+          default: 10
+          title: Limit
+        example: 20
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetPeersV1EmployersEmployerIdPeersGet200Example:
+                  summary: Default GetPeersV1EmployersEmployerIdPeersGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetPeersV1EmployersEmployerIdPeersGet422Example:
+                  summary: Default GetPeersV1EmployersEmployerIdPeersGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/batch:
+    post:
+      summary: FastDOL Batch Lookup
+      description: 'Batch employer lookup — designed for spreadsheet-style bulk searches.
+
+
+        Each item can include name, ein, employer_id, plus optional location
+
+        filters (state, zip, city) to narrow to a specific site.
+
+
+        Up to 100 items processed synchronously. 101-500 returns a job_id
+
+        for async polling (coming soon). Max 500 items per request.
+
+
+        Typical usage: underwriter uploads a spreadsheet with company name +
+
+        address for each policy they''re quoting.'
+      operationId: batch_lookup_v1_employers_batch_post
+      parameters:
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchLookupRequest'
+            examples:
+              BatchLookupV1EmployersBatchPostRequestExample:
+                summary: Default BatchLookupV1EmployersBatchPost request
+                x-microcks-default: true
+                value:
+                  lookups:
+                  - name: Acme Construction Inc
+                    ein: 12-3456789
+                    employer_id: emp_8a3b9c2d1e4f
+                    state: CA
+                    zip: '94105'
+                    city: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                BatchLookupV1EmployersBatchPost200Example:
+                  summary: Default BatchLookupV1EmployersBatchPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                BatchLookupV1EmployersBatchPost422Example:
+                  summary: Default BatchLookupV1EmployersBatchPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}/risk-history:
+    get:
+      summary: FastDOL GET Risk History
+      description: Risk tier history for an employer over time. Shows nightly snapshots.
+      operationId: get_risk_history_v1_employers__employer_id__risk_history_get
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 365
+          minimum: 1
+          default: 90
+          title: Limit
+        example: 20
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetRiskHistoryV1EmployersEmployerIdRiskHistoryGet200Example:
+                  summary: Default GetRiskHistoryV1EmployersEmployerIdRiskHistoryGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetRiskHistoryV1EmployersEmployerIdRiskHistoryGet422Example:
+                  summary: Default GetRiskHistoryV1EmployersEmployerIdRiskHistoryGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/{employer_id}/feedback:
+    post:
+      summary: FastDOL Submit Feedback
+      description: Submit feedback about an employer match. Not metered.
+      operationId: submit_feedback_v1_employers__employer_id__feedback_post
+      parameters:
+      - name: employer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Employer Id
+        example: emp_8a3b9c2d1e4f
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackRequest'
+            examples:
+              SubmitFeedbackV1EmployersEmployerIdFeedbackPostRequestExample:
+                summary: Default SubmitFeedbackV1EmployersEmployerIdFeedbackPost request
+                x-microcks-default: true
+                value:
+                  type: string
+                  description: string
+                  contact_email: analyst@example.com
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                SubmitFeedbackV1EmployersEmployerIdFeedbackPost200Example:
+                  summary: Default SubmitFeedbackV1EmployersEmployerIdFeedbackPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                SubmitFeedbackV1EmployersEmployerIdFeedbackPost422Example:
+                  summary: Default SubmitFeedbackV1EmployersEmployerIdFeedbackPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+  /v1/employers/upload-csv:
+    post:
+      summary: FastDOL Upload CSV
+      description: "Upload a CSV of employers, get back a CSV with risk profiles.\n\nExpected CSV columns (flexible — matches by header name):\n    Required: name OR company_name OR employer_name\n    Optional: state, zip, city, ein\n\nExtra columns in the input are preserved in the output.\nOutput adds: employer_id, match_confidence, risk_tier, risk_score,\nosha_inspections, osha_violations, osha_total_penalties,\nlocation_count, trend_signal"
+      operationId: upload_csv_v1_employers_upload_csv_post
+      parameters:
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_csv_v1_employers_upload_csv_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                UploadCsvV1EmployersUploadCsvPost200Example:
+                  summary: Default UploadCsvV1EmployersUploadCsvPost 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                UploadCsvV1EmployersUploadCsvPost422Example:
+                  summary: Default UploadCsvV1EmployersUploadCsvPost 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Employers
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BatchLookupItem:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        ein:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ein
+        employer_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Employer Id
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Zip
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+      type: object
+      title: BatchLookupItem
+    Body_upload_csv_v1_employers_upload_csv_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+          description: CSV file with employer names and optional location fields
+          example: string
+      type: object
+      required:
+      - file
+      title: Body_upload_csv_v1_employers_upload_csv_post
+    FeedbackRequest:
+      properties:
+        type:
+          type: string
+          title: Type
+          example: string
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        contact_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Email
+      type: object
+      required:
+      - type
+      title: FeedbackRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BatchLookupRequest:
+      properties:
+        lookups:
+          items:
+            $ref: '#/components/schemas/BatchLookupItem'
+          type: array
+          title: Lookups
+      type: object
+      required:
+      - lookups
+      title: BatchLookupRequest

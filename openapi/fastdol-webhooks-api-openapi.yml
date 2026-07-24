@@ -1,0 +1,51 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Webhooks API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Webhooks
+paths:
+  /webhooks/stripe:
+    post:
+      summary: FastDOL Stripe Webhook Tombstone
+      description: 'No-op accept for Stripe webhook deliveries post-redesign.
+
+
+        Returns 200 immediately so Stripe''s retry loop doesn''t keep
+
+        re-queuing events. We don''t read the body, don''t verify the
+
+        signature, don''t log anything sensitive.
+
+
+        Per-IP throttle keeps a non-Stripe attacker from using this
+
+        unauthenticated endpoint as cheap bandwidth — legitimate Stripe
+
+        deliveries come from many edge IPs and won''t hit the cap.'
+      operationId: stripe_webhook_tombstone_webhooks_stripe_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                StripeWebhookTombstoneWebhooksStripePost200Example:
+                  summary: Default StripeWebhookTombstoneWebhooksStripePost 200 response
+                  x-microcks-default: true
+                  value: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Webhooks

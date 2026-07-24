@@ -1,0 +1,151 @@
+openapi: 3.0.2
+info:
+  title: FastDOL Auth Industries API
+  version: '1.0'
+  description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
+  contact:
+    name: FastDOL Support
+    email: ben@fastdol.com
+    url: https://fastdol.com/enterprise
+  termsOfService: https://fastdol.com/terms
+servers:
+- url: https://api.fastdol.com
+  description: FastDOL production API
+tags:
+- name: Industries
+paths:
+  /v1/industries/naics-codes:
+    get:
+      summary: FastDOL List NAICS Codes
+      description: List all 4-digit NAICS codes with employer counts.
+      operationId: list_naics_codes_v1_industries_naics_codes_get
+      parameters:
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                ListNaicsCodesV1IndustriesNaicsCodesGet200Example:
+                  summary: Default ListNaicsCodesV1IndustriesNaicsCodesGet 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                ListNaicsCodesV1IndustriesNaicsCodesGet422Example:
+                  summary: Default ListNaicsCodesV1IndustriesNaicsCodesGet 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Industries
+  /v1/industries/{naics4}:
+    get:
+      summary: FastDOL GET Industry
+      description: Industry-level risk benchmarks for a 4-digit NAICS code.
+      operationId: get_industry_v1_industries__naics4__get
+      parameters:
+      - name: naics4
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Naics4
+        example: '2362'
+      - name: X-Api-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Api-Key
+        example: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              examples:
+                GetIndustryV1IndustriesNaics4Get200Example:
+                  summary: Default GetIndustryV1IndustriesNaics4Get 200 response
+                  x-microcks-default: true
+                  value: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+              examples:
+                GetIndustryV1IndustriesNaics4Get422Example:
+                  summary: Default GetIndustryV1IndustriesNaics4Get 422 response
+                  x-microcks-default: true
+                  value:
+                    detail:
+                    - loc:
+                      - string
+                      msg: string
+                      type: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Industries
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
