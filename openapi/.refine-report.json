@@ -1,0 +1,34 @@
+{
+  "provider": "fastdol",
+  "sources": [
+    "fastdol-auth-api-openapi.yml",
+    "fastdol-dashboard-api-openapi.yml",
+    "fastdol-employers-api-openapi.yml",
+    "fastdol-export-api-openapi.yml",
+    "fastdol-health-api-openapi.yml",
+    "fastdol-industries-api-openapi.yml",
+    "fastdol-inspections-api-openapi.yml",
+    "fastdol-sitemap-api-openapi.yml",
+    "fastdol-stats-api-openapi.yml",
+    "fastdol-usage-api-openapi.yml",
+    "fastdol-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "fastdol-auth-api-openapi.yml",
+    "fastdol-dashboard-api-openapi.yml",
+    "fastdol-employers-api-openapi.yml",
+    "fastdol-export-api-openapi.yml",
+    "fastdol-health-api-openapi.yml",
+    "fastdol-industries-api-openapi.yml",
+    "fastdol-inspections-api-openapi.yml",
+    "fastdol-sitemap-api-openapi.yml",
+    "fastdol-stats-api-openapi.yml",
+    "fastdol-usage-api-openapi.yml",
+    "fastdol-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

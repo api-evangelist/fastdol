@@ -1,0 +1,200 @@
+{
+  "info": {
+    "_postman_id": "45f51b63-ffc1-474a-b016-e5f463411e96",
+    "name": "FastDOL Auth Inspections API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:52.000Z",
+    "updatedAt": "2026-07-28T01:36:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-45f51b63-ffc1-474a-b016-e5f463411e96"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "inspections",
+          "item": [
+            {
+              "name": "{activity_nr}",
+              "item": [
+                {
+                  "name": "violations",
+                  "item": [
+                    {
+                      "name": "FastDOL GET Violations",
+                      "id": "d0076a3e-3f12-4284-9f04-45abf6c666d6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/inspections/:activity_nr/violations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "inspections",
+                            ":activity_nr",
+                            "violations"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7e82c270-f194-48fc-ae7f-9ea0c05744e6",
+                              "key": "activity_nr",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get violation detail for a specific inspection.\n\nMetered: one lookup per call. See get_inspections for rationale."
+                      },
+                      "response": [
+                        {
+                          "id": "e1a0758e-68fb-4b85-9bfb-d769ca9b0924",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/inspections/:activity_nr/violations",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "inspections",
+                                ":activity_nr",
+                                "violations"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "activity_nr"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:52.000Z",
+                          "updatedAt": "2026-07-28T01:36:52.000Z",
+                          "uid": "35240-e1a0758e-68fb-4b85-9bfb-d769ca9b0924"
+                        },
+                        {
+                          "id": "87c6eb43-38ee-40f7-b8ef-77f8aed0c89b",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/inspections/:activity_nr/violations",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "inspections",
+                                ":activity_nr",
+                                "violations"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "activity_nr"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:52.000Z",
+                          "updatedAt": "2026-07-28T01:36:52.000Z",
+                          "uid": "35240-87c6eb43-38ee-40f7-b8ef-77f8aed0c89b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:52.000Z",
+                      "updatedAt": "2026-07-28T01:36:52.000Z",
+                      "uid": "35240-d0076a3e-3f12-4284-9f04-45abf6c666d6"
+                    }
+                  ],
+                  "id": "777bc3c2-0ee1-4083-891b-12d168a708d1",
+                  "createdAt": "2026-07-28T01:36:52.000Z",
+                  "updatedAt": "2026-07-28T01:36:52.000Z",
+                  "uid": "35240-777bc3c2-0ee1-4083-891b-12d168a708d1"
+                }
+              ],
+              "id": "f7297974-4547-4ef8-81a6-def65ebe4884",
+              "createdAt": "2026-07-28T01:36:52.000Z",
+              "updatedAt": "2026-07-28T01:36:52.000Z",
+              "uid": "35240-f7297974-4547-4ef8-81a6-def65ebe4884"
+            }
+          ],
+          "id": "729ce7d5-f316-4387-93b1-6b09db157d63",
+          "createdAt": "2026-07-28T01:36:52.000Z",
+          "updatedAt": "2026-07-28T01:36:52.000Z",
+          "uid": "35240-729ce7d5-f316-4387-93b1-6b09db157d63"
+        }
+      ],
+      "id": "f225d6d7-c6e0-4f4e-8765-c1a8b3796399",
+      "createdAt": "2026-07-28T01:36:52.000Z",
+      "updatedAt": "2026-07-28T01:36:52.000Z",
+      "uid": "35240-f225d6d7-c6e0-4f4e-8765-c1a8b3796399"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}

@@ -1,0 +1,320 @@
+{
+  "info": {
+    "_postman_id": "c8b129b0-8245-43da-8114-2ab55b6660e9",
+    "name": "FastDOL Auth Industries API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:51.000Z",
+    "updatedAt": "2026-07-28T01:36:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c8b129b0-8245-43da-8114-2ab55b6660e9"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "industries",
+          "item": [
+            {
+              "name": "naics-codes",
+              "item": [
+                {
+                  "name": "FastDOL List NAICS Codes",
+                  "id": "5c14223e-aa1a-4bed-bf21-1c3620a68127",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/industries/naics-codes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "industries",
+                        "naics-codes"
+                      ]
+                    },
+                    "description": "List all 4-digit NAICS codes with employer counts."
+                  },
+                  "response": [
+                    {
+                      "id": "470a92b0-cb17-4dea-8f66-c0f4d7ba420c",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/industries/naics-codes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "industries",
+                            "naics-codes"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:52.000Z",
+                      "updatedAt": "2026-07-28T01:36:52.000Z",
+                      "uid": "35240-470a92b0-cb17-4dea-8f66-c0f4d7ba420c"
+                    },
+                    {
+                      "id": "b291278d-9c0e-4c36-ae20-735d2eb36a88",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/industries/naics-codes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "industries",
+                            "naics-codes"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:36:52.000Z",
+                      "updatedAt": "2026-07-28T01:36:52.000Z",
+                      "uid": "35240-b291278d-9c0e-4c36-ae20-735d2eb36a88"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:52.000Z",
+                  "updatedAt": "2026-07-28T01:36:52.000Z",
+                  "uid": "35240-5c14223e-aa1a-4bed-bf21-1c3620a68127"
+                }
+              ],
+              "id": "5b6744fa-b863-460e-b8e5-064fb9d6e812",
+              "createdAt": "2026-07-28T01:36:51.000Z",
+              "updatedAt": "2026-07-28T01:36:51.000Z",
+              "uid": "35240-5b6744fa-b863-460e-b8e5-064fb9d6e812"
+            },
+            {
+              "name": "{naics4}",
+              "item": [
+                {
+                  "name": "FastDOL GET Industry",
+                  "id": "ff40427b-258d-4160-9f46-a6cae558d35c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/industries/:naics4",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "industries",
+                        ":naics4"
+                      ],
+                      "variable": [
+                        {
+                          "id": "30103d69-0277-4ab9-84db-3991bca61f77",
+                          "key": "naics4",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Industry-level risk benchmarks for a 4-digit NAICS code."
+                  },
+                  "response": [
+                    {
+                      "id": "0e96b141-b1d0-4d66-8e0e-bb6499215781",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/industries/:naics4",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "industries",
+                            ":naics4"
+                          ],
+                          "variable": [
+                            {
+                              "key": "naics4"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:52.000Z",
+                      "updatedAt": "2026-07-28T01:36:52.000Z",
+                      "uid": "35240-0e96b141-b1d0-4d66-8e0e-bb6499215781"
+                    },
+                    {
+                      "id": "c3927c6a-d785-4b3e-8c92-cbe40887aeb2",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/industries/:naics4",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "industries",
+                            ":naics4"
+                          ],
+                          "variable": [
+                            {
+                              "key": "naics4"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:36:52.000Z",
+                      "updatedAt": "2026-07-28T01:36:52.000Z",
+                      "uid": "35240-c3927c6a-d785-4b3e-8c92-cbe40887aeb2"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:52.000Z",
+                  "updatedAt": "2026-07-28T01:36:52.000Z",
+                  "uid": "35240-ff40427b-258d-4160-9f46-a6cae558d35c"
+                }
+              ],
+              "id": "82dbe01f-b995-43df-abf3-2911b039034f",
+              "createdAt": "2026-07-28T01:36:51.000Z",
+              "updatedAt": "2026-07-28T01:36:51.000Z",
+              "uid": "35240-82dbe01f-b995-43df-abf3-2911b039034f"
+            }
+          ],
+          "id": "65856759-e4f9-4dbb-be91-29831a190c5a",
+          "createdAt": "2026-07-28T01:36:51.000Z",
+          "updatedAt": "2026-07-28T01:36:51.000Z",
+          "uid": "35240-65856759-e4f9-4dbb-be91-29831a190c5a"
+        }
+      ],
+      "id": "39b1b01c-ce0e-437b-b5da-6c29f3068a3a",
+      "createdAt": "2026-07-28T01:36:51.000Z",
+      "updatedAt": "2026-07-28T01:36:51.000Z",
+      "uid": "35240-39b1b01c-ce0e-437b-b5da-6c29f3068a3a"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}

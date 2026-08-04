@@ -1,0 +1,108 @@
+{
+  "info": {
+    "_postman_id": "9035f16a-5f6f-462d-a597-2f472c9b6182",
+    "name": "FastDOL Auth Webhooks API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:37:07.000Z",
+    "updatedAt": "2026-07-28T01:37:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9035f16a-5f6f-462d-a597-2f472c9b6182"
+  },
+  "item": [
+    {
+      "name": "webhooks",
+      "item": [
+        {
+          "name": "stripe",
+          "item": [
+            {
+              "name": "FastDOL Stripe Webhook Tombstone",
+              "id": "9c442856-99d4-43a4-a42d-aafb9613d520",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks/stripe",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "stripe"
+                  ]
+                },
+                "description": "No-op accept for Stripe webhook deliveries post-redesign.\n\nReturns 200 immediately so Stripe's retry loop doesn't keep\nre-queuing events. We don't read the body, don't verify the\nsignature, don't log anything sensitive.\n\nPer-IP throttle keeps a non-Stripe attacker from using this\nunauthenticated endpoint as cheap bandwidth \u2014 legitimate Stripe\ndeliveries come from many edge IPs and won't hit the cap."
+              },
+              "response": [
+                {
+                  "id": "0f991c56-cbbc-452b-b0a2-66e42a1ebd21",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/stripe",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        "stripe"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:37:08.000Z",
+                  "updatedAt": "2026-07-28T01:37:08.000Z",
+                  "uid": "35240-0f991c56-cbbc-452b-b0a2-66e42a1ebd21"
+                }
+              ],
+              "createdAt": "2026-07-28T01:37:08.000Z",
+              "updatedAt": "2026-07-28T01:37:08.000Z",
+              "uid": "35240-9c442856-99d4-43a4-a42d-aafb9613d520"
+            }
+          ],
+          "id": "127b0bc3-b573-4376-963c-0e7d7c77afec",
+          "createdAt": "2026-07-28T01:37:08.000Z",
+          "updatedAt": "2026-07-28T01:37:08.000Z",
+          "uid": "35240-127b0bc3-b573-4376-963c-0e7d7c77afec"
+        }
+      ],
+      "id": "def339a0-bdcc-458a-8e76-67c62ec048ae",
+      "createdAt": "2026-07-28T01:37:08.000Z",
+      "updatedAt": "2026-07-28T01:37:08.000Z",
+      "uid": "35240-def339a0-bdcc-458a-8e76-67c62ec048ae"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}

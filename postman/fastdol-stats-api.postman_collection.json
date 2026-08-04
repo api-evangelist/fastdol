@@ -1,0 +1,872 @@
+{
+  "info": {
+    "_postman_id": "3e40ad71-ead9-4525-a879-17639076f7df",
+    "name": "FastDOL Auth Stats API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:53.000Z",
+    "updatedAt": "2026-07-28T01:36:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3e40ad71-ead9-4525-a879-17639076f7df"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "stats",
+          "item": [
+            {
+              "name": "state",
+              "item": [
+                {
+                  "name": "{code}",
+                  "item": [
+                    {
+                      "name": "FastDOL State Stats",
+                      "id": "ef3ff09c-2c5f-4c9e-a260-3a8f5d84b5a9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/stats/state/:code",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "stats",
+                            "state",
+                            ":code"
+                          ],
+                          "variable": [
+                            {
+                              "id": "757f8268-ab12-47b0-8721-70b3ab399d23",
+                              "key": "code",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "State-level aggregates + top employers + top industries.\n\nPowers the /state/[slug] SEO landing pages. Returns:\n  - `state`: 2-letter code and full name\n  - `totals`: inspections, violations, penalties, fatalities, WHD backwages,\n    employer count in one pass\n  - `top_by_violations`: top 50 employers ordered by osha_violations\n  - `top_by_penalties`: top 50 by osha_total_penalties\n  - `top_by_fatalities`: top 20 by osha_fatalities (only non-zero)\n  - `top_naics`: top 10 industries by violation volume in this state\n  - `top_contractors`: top 10 federal contractors by 5yr obligations (only\n    populated once USAspending has landed; empty list otherwise)"
+                      },
+                      "response": [
+                        {
+                          "id": "53b6d9c8-d8b6-487a-8904-acef4e6350cc",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stats/state/:code",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stats",
+                                "state",
+                                ":code"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:54.000Z",
+                          "updatedAt": "2026-07-28T01:36:54.000Z",
+                          "uid": "35240-53b6d9c8-d8b6-487a-8904-acef4e6350cc"
+                        },
+                        {
+                          "id": "f09b5280-0cf3-4249-98a7-481a20e0fd63",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stats/state/:code",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stats",
+                                "state",
+                                ":code"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:54.000Z",
+                          "updatedAt": "2026-07-28T01:36:54.000Z",
+                          "uid": "35240-f09b5280-0cf3-4249-98a7-481a20e0fd63"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:54.000Z",
+                      "updatedAt": "2026-07-28T01:36:54.000Z",
+                      "uid": "35240-ef3ff09c-2c5f-4c9e-a260-3a8f5d84b5a9"
+                    }
+                  ],
+                  "id": "90f00537-15be-4a81-ae99-7667bfe87e36",
+                  "createdAt": "2026-07-28T01:36:54.000Z",
+                  "updatedAt": "2026-07-28T01:36:54.000Z",
+                  "uid": "35240-90f00537-15be-4a81-ae99-7667bfe87e36"
+                }
+              ],
+              "id": "9859913f-4f77-40ae-97a7-b1c0dd9e4ebf",
+              "createdAt": "2026-07-28T01:36:54.000Z",
+              "updatedAt": "2026-07-28T01:36:54.000Z",
+              "uid": "35240-9859913f-4f77-40ae-97a7-b1c0dd9e4ebf"
+            },
+            {
+              "name": "industry",
+              "item": [
+                {
+                  "name": "{naics}",
+                  "item": [
+                    {
+                      "name": "FastDOL Industry Stats",
+                      "id": "3fac3ec3-d678-43a8-b13c-c0ab8d908d18",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/stats/industry/:naics",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "stats",
+                            "industry",
+                            ":naics"
+                          ],
+                          "variable": [
+                            {
+                              "id": "35f1b63c-06d6-43b2-bb50-7962b35d023d",
+                              "key": "naics",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Industry aggregates + top employers + state breakdown.\n\nAccepts 2-, 3-, or 4-digit NAICS prefixes. Matches against the 6-digit\nnaics_code on employer_profile_latest via LIKE '{prefix}%'. 3-digit is\nthe sweet spot for SEO \u2014 broad enough to have volume, specific enough\nto rank (\"Motor Vehicle Manufacturing OSHA Violations\")."
+                      },
+                      "response": [
+                        {
+                          "id": "ad170955-0a8c-4679-b6a3-5ad6f433075b",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stats/industry/:naics",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stats",
+                                "industry",
+                                ":naics"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "naics"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:54.000Z",
+                          "updatedAt": "2026-07-28T01:36:54.000Z",
+                          "uid": "35240-ad170955-0a8c-4679-b6a3-5ad6f433075b"
+                        },
+                        {
+                          "id": "03f72628-77fe-439e-b42c-a500992eccba",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stats/industry/:naics",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stats",
+                                "industry",
+                                ":naics"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "naics"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:54.000Z",
+                          "updatedAt": "2026-07-28T01:36:54.000Z",
+                          "uid": "35240-03f72628-77fe-439e-b42c-a500992eccba"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:54.000Z",
+                      "updatedAt": "2026-07-28T01:36:54.000Z",
+                      "uid": "35240-3fac3ec3-d678-43a8-b13c-c0ab8d908d18"
+                    }
+                  ],
+                  "id": "a13920d0-efc8-40b2-b369-4187fee7f5e8",
+                  "createdAt": "2026-07-28T01:36:54.000Z",
+                  "updatedAt": "2026-07-28T01:36:54.000Z",
+                  "uid": "35240-a13920d0-efc8-40b2-b369-4187fee7f5e8"
+                }
+              ],
+              "id": "eab01253-ebc2-4bbb-ac55-3dc38f4d114b",
+              "createdAt": "2026-07-28T01:36:54.000Z",
+              "updatedAt": "2026-07-28T01:36:54.000Z",
+              "uid": "35240-eab01253-ebc2-4bbb-ac55-3dc38f4d114b"
+            },
+            {
+              "name": "industries",
+              "item": [
+                {
+                  "name": "FastDOL Industries Index",
+                  "id": "d5c67cac-6c5d-41d6-afd6-f67aafe8728b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/stats/industries",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "stats",
+                        "industries"
+                      ]
+                    },
+                    "description": "3-digit NAICS subsectors that have any employer on file, with volumes.\nPowers the /industries landing page."
+                  },
+                  "response": [
+                    {
+                      "id": "be7cd05f-e6c1-443c-967d-83a2ad9470f4",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/stats/industries",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "stats",
+                            "industries"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:54.000Z",
+                      "updatedAt": "2026-07-28T01:36:54.000Z",
+                      "uid": "35240-be7cd05f-e6c1-443c-967d-83a2ad9470f4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:54.000Z",
+                  "updatedAt": "2026-07-28T01:36:54.000Z",
+                  "uid": "35240-d5c67cac-6c5d-41d6-afd6-f67aafe8728b"
+                }
+              ],
+              "id": "aaf42091-2957-4359-9844-b3b8f76d248f",
+              "createdAt": "2026-07-28T01:36:54.000Z",
+              "updatedAt": "2026-07-28T01:36:54.000Z",
+              "uid": "35240-aaf42091-2957-4359-9844-b3b8f76d248f"
+            },
+            {
+              "name": "nursing-home",
+              "item": [
+                {
+                  "name": "{ccn}",
+                  "item": [
+                    {
+                      "name": "FastDOL Nursing Home Detail",
+                      "id": "25302d0b-4359-47c6-be33-fe937ff0c2fb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/stats/nursing-home/:ccn",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "stats",
+                            "nursing-home",
+                            ":ccn"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b02e40b7-3c76-4913-86d7-ebdcd4c38ab5",
+                              "key": "ccn",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Detailed view for a single nursing home facility.\n\nReturns the facility's full CMS payload (ratings, deficiencies,\npenalties, ownership) plus a pointer to the matching employer_id so\nthe frontend can link to the federal-enforcement profile."
+                      },
+                      "response": [
+                        {
+                          "id": "ba53e210-54dc-425b-9026-fd14b22c561c",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stats/nursing-home/:ccn",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stats",
+                                "nursing-home",
+                                ":ccn"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ccn"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:54.000Z",
+                          "updatedAt": "2026-07-28T01:36:54.000Z",
+                          "uid": "35240-ba53e210-54dc-425b-9026-fd14b22c561c"
+                        },
+                        {
+                          "id": "9e8a0d13-fc72-4a96-b88e-eb1daace4135",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stats/nursing-home/:ccn",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stats",
+                                "nursing-home",
+                                ":ccn"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ccn"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:54.000Z",
+                          "updatedAt": "2026-07-28T01:36:54.000Z",
+                          "uid": "35240-9e8a0d13-fc72-4a96-b88e-eb1daace4135"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:54.000Z",
+                      "updatedAt": "2026-07-28T01:36:54.000Z",
+                      "uid": "35240-25302d0b-4359-47c6-be33-fe937ff0c2fb"
+                    }
+                  ],
+                  "id": "e1d27fdf-5dbc-4714-ab47-2199369a43b2",
+                  "createdAt": "2026-07-28T01:36:54.000Z",
+                  "updatedAt": "2026-07-28T01:36:54.000Z",
+                  "uid": "35240-e1d27fdf-5dbc-4714-ab47-2199369a43b2"
+                }
+              ],
+              "id": "a812ad71-0a42-401b-bd0e-05fac51cafd7",
+              "createdAt": "2026-07-28T01:36:54.000Z",
+              "updatedAt": "2026-07-28T01:36:54.000Z",
+              "uid": "35240-a812ad71-0a42-401b-bd0e-05fac51cafd7"
+            },
+            {
+              "name": "nursing-homes",
+              "item": [
+                {
+                  "name": "{state_code}",
+                  "item": [
+                    {
+                      "name": "FastDOL Nursing Homes by State",
+                      "id": "3e6154be-c3e6-4f2d-90d0-259b884c9d2b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/stats/nursing-homes/:state_code",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "stats",
+                            "nursing-homes",
+                            ":state_code"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3d8e8af0-3262-4f4c-9ce2-aba8b22eb74a",
+                              "key": "state_code",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "State-level nursing home aggregates + top/bottom facilities."
+                      },
+                      "response": [
+                        {
+                          "id": "d028a9ea-fa31-4e01-8df4-f5cfcb238a68",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stats/nursing-homes/:state_code",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stats",
+                                "nursing-homes",
+                                ":state_code"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "state_code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:54.000Z",
+                          "updatedAt": "2026-07-28T01:36:54.000Z",
+                          "uid": "35240-d028a9ea-fa31-4e01-8df4-f5cfcb238a68"
+                        },
+                        {
+                          "id": "a5aa2bb0-32d9-4f6a-8641-1357cd92f3be",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stats/nursing-homes/:state_code",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stats",
+                                "nursing-homes",
+                                ":state_code"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "state_code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:54.000Z",
+                          "updatedAt": "2026-07-28T01:36:54.000Z",
+                          "uid": "35240-a5aa2bb0-32d9-4f6a-8641-1357cd92f3be"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:54.000Z",
+                      "updatedAt": "2026-07-28T01:36:54.000Z",
+                      "uid": "35240-3e6154be-c3e6-4f2d-90d0-259b884c9d2b"
+                    }
+                  ],
+                  "id": "109ce86d-8ca6-4138-88ac-dd91179d795b",
+                  "createdAt": "2026-07-28T01:36:54.000Z",
+                  "updatedAt": "2026-07-28T01:36:54.000Z",
+                  "uid": "35240-109ce86d-8ca6-4138-88ac-dd91179d795b"
+                },
+                {
+                  "name": "FastDOL Nursing Homes Index",
+                  "id": "8b38f13e-07ac-457a-ae93-5dda96e6747b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/stats/nursing-homes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "stats",
+                        "nursing-homes"
+                      ]
+                    },
+                    "description": "Per-state counts of nursing homes for the /nursing-homes index page.\n\nReturns an empty state list (rather than 500) when the CMS columns\nhaven't yet been projected into the employer_profile_latest\nmaterialized view \u2014 this happens between the migration apply and\nthe first nightly sync."
+                  },
+                  "response": [
+                    {
+                      "id": "ad562e69-fa83-4cac-b867-e9b8882aa129",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/stats/nursing-homes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "stats",
+                            "nursing-homes"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:54.000Z",
+                      "updatedAt": "2026-07-28T01:36:54.000Z",
+                      "uid": "35240-ad562e69-fa83-4cac-b867-e9b8882aa129"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:54.000Z",
+                  "updatedAt": "2026-07-28T01:36:54.000Z",
+                  "uid": "35240-8b38f13e-07ac-457a-ae93-5dda96e6747b"
+                }
+              ],
+              "id": "d40bed89-d6e1-416f-a71e-9a72bc10123b",
+              "createdAt": "2026-07-28T01:36:54.000Z",
+              "updatedAt": "2026-07-28T01:36:54.000Z",
+              "uid": "35240-d40bed89-d6e1-416f-a71e-9a72bc10123b"
+            },
+            {
+              "name": "states",
+              "item": [
+                {
+                  "name": "FastDOL States Index",
+                  "id": "80f8be2f-a1d5-4683-813b-729c9641d879",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/stats/states",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "stats",
+                        "states"
+                      ]
+                    },
+                    "description": "List of all supported state codes + employer counts for the /states page."
+                  },
+                  "response": [
+                    {
+                      "id": "cbdf109b-1769-4e2f-b44d-8db53d4b6559",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/stats/states",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "stats",
+                            "states"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:54.000Z",
+                      "updatedAt": "2026-07-28T01:36:54.000Z",
+                      "uid": "35240-cbdf109b-1769-4e2f-b44d-8db53d4b6559"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:54.000Z",
+                  "updatedAt": "2026-07-28T01:36:54.000Z",
+                  "uid": "35240-80f8be2f-a1d5-4683-813b-729c9641d879"
+                }
+              ],
+              "id": "d495ca5e-28fd-4286-a66a-71635dc92e40",
+              "createdAt": "2026-07-28T01:36:54.000Z",
+              "updatedAt": "2026-07-28T01:36:54.000Z",
+              "uid": "35240-d495ca5e-28fd-4286-a66a-71635dc92e40"
+            }
+          ],
+          "id": "31cfe5b4-c165-4429-a910-8ab50e7e40b0",
+          "createdAt": "2026-07-28T01:36:54.000Z",
+          "updatedAt": "2026-07-28T01:36:54.000Z",
+          "uid": "35240-31cfe5b4-c165-4429-a910-8ab50e7e40b0"
+        }
+      ],
+      "id": "e615c61c-7b85-49bc-883c-75db6b4869fa",
+      "createdAt": "2026-07-28T01:36:54.000Z",
+      "updatedAt": "2026-07-28T01:36:54.000Z",
+      "uid": "35240-e615c61c-7b85-49bc-883c-75db6b4869fa"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}

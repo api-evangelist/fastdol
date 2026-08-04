@@ -1,0 +1,982 @@
+{
+  "info": {
+    "_postman_id": "af551ea1-7567-49e3-b9a1-036a443de98a",
+    "name": "FastDOL Auth API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:39.000Z",
+    "updatedAt": "2026-07-28T01:36:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-af551ea1-7567-49e3-b9a1-036a443de98a"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "signup",
+          "item": [
+            {
+              "name": "FastDOL Signup",
+              "id": "8a1f081d-a9c8-4ad0-a82c-bcc54721f51c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"company_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/signup",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "signup"
+                  ]
+                },
+                "description": "Create account with email + password. Sends verification email."
+              },
+              "response": [
+                {
+                  "id": "64c2afe2-12a1-49cf-a312-1b5117ebf389",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"company_name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/signup",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "signup"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-64c2afe2-12a1-49cf-a312-1b5117ebf389"
+                },
+                {
+                  "id": "334a60be-f0a4-429f-905d-c3979e643158",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"company_name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/signup",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "signup"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-334a60be-f0a4-429f-905d-c3979e643158"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:39.000Z",
+              "updatedAt": "2026-07-28T01:36:39.000Z",
+              "uid": "35240-8a1f081d-a9c8-4ad0-a82c-bcc54721f51c"
+            }
+          ],
+          "id": "c705463a-ec44-4fc9-ad4d-003c7de1f899",
+          "createdAt": "2026-07-28T01:36:39.000Z",
+          "updatedAt": "2026-07-28T01:36:39.000Z",
+          "uid": "35240-c705463a-ec44-4fc9-ad4d-003c7de1f899"
+        },
+        {
+          "name": "verify",
+          "item": [
+            {
+              "name": "FastDOL Verify Email",
+              "id": "804bf629-3d32-4210-9951-b4b41ac287a6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/verify",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "verify"
+                  ]
+                },
+                "description": "Verify email address.\n\nAccepts the token in the JSON body (POST) rather than the URL\n(GET) so it doesn't leak via:\n  * server access logs (nginx, application-level request logs)\n  * exception tracebacks that include request URLs\n  * Referer headers when the verify page links anywhere\n  * browser history shared from a kiosk / shared screen\nThe Next.js verify page reads the token from the URL once,\nimmediately replaceState's it out of the address bar, then POSTs\nthe value here.\n\nBehavior change (was: auto-issued an API key + set the\naccess_token cookie on the first POST): now the endpoint only\nflips customers.email_verified to TRUE. The user must explicitly\nlog in afterwards and create their first API key from the\n/account dashboard. This closes the email-link-prefetch attack\nwhere a corporate gateway, AV scanner, or IT admin reading a\nforwarded message could auto-claim the account."
+              },
+              "response": [
+                {
+                  "id": "5b8b9987-3f30-4eb4-89e7-ba71950d1073",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/verify",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "verify"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-5b8b9987-3f30-4eb4-89e7-ba71950d1073"
+                },
+                {
+                  "id": "53fdbd91-4f39-49bf-938b-1bc0c4339d93",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/verify",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "verify"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-53fdbd91-4f39-49bf-938b-1bc0c4339d93"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:39.000Z",
+              "updatedAt": "2026-07-28T01:36:39.000Z",
+              "uid": "35240-804bf629-3d32-4210-9951-b4b41ac287a6"
+            }
+          ],
+          "id": "30579fed-7414-4d05-9888-e46d9f8c5f63",
+          "createdAt": "2026-07-28T01:36:39.000Z",
+          "updatedAt": "2026-07-28T01:36:39.000Z",
+          "uid": "35240-30579fed-7414-4d05-9888-e46d9f8c5f63"
+        },
+        {
+          "name": "login",
+          "item": [
+            {
+              "name": "FastDOL Login",
+              "id": "63c13ca5-8873-4082-98ac-1d7d799a3c9e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                },
+                "description": "Login with email + password. Returns JWT as HttpOnly cookie."
+              },
+              "response": [
+                {
+                  "id": "b85597a0-5e5b-4914-98da-c066b1817f1c",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-b85597a0-5e5b-4914-98da-c066b1817f1c"
+                },
+                {
+                  "id": "e1ed1d41-a4bb-4d57-8e4c-f3cbea0e638f",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-e1ed1d41-a4bb-4d57-8e4c-f3cbea0e638f"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:39.000Z",
+              "updatedAt": "2026-07-28T01:36:39.000Z",
+              "uid": "35240-63c13ca5-8873-4082-98ac-1d7d799a3c9e"
+            }
+          ],
+          "id": "bf21b4c4-d5b7-43de-bf2c-50960021f02b",
+          "createdAt": "2026-07-28T01:36:39.000Z",
+          "updatedAt": "2026-07-28T01:36:39.000Z",
+          "uid": "35240-bf21b4c4-d5b7-43de-bf2c-50960021f02b"
+        },
+        {
+          "name": "logout",
+          "item": [
+            {
+              "name": "FastDOL Logout",
+              "id": "576b7dcb-e931-4929-af45-055e966bb792",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout"
+                  ]
+                },
+                "description": "End the current session. Records the JWT's jti in revoked_tokens so\nthe token cannot be reused even if the cookie was copied elsewhere\n(DevTools, proxy log, shared machine) before the browser cleared it.\n\nBest-effort: a request without a valid JWT still returns 200 so the\nfrontend can always clear its local state, and a DB failure during\nrevocation still clears the cookie (logging server-side) \u2014 we never\nwant logout to fail in a way that leaves the user logged in."
+              },
+              "response": [
+                {
+                  "id": "57f4b5bb-ead7-492a-9134-e6da058a71da",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/logout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "logout"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-57f4b5bb-ead7-492a-9134-e6da058a71da"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:39.000Z",
+              "updatedAt": "2026-07-28T01:36:39.000Z",
+              "uid": "35240-576b7dcb-e931-4929-af45-055e966bb792"
+            }
+          ],
+          "id": "c3037698-0306-4d37-a2a7-bc0d1cbc6709",
+          "createdAt": "2026-07-28T01:36:39.000Z",
+          "updatedAt": "2026-07-28T01:36:39.000Z",
+          "uid": "35240-c3037698-0306-4d37-a2a7-bc0d1cbc6709"
+        },
+        {
+          "name": "me",
+          "item": [
+            {
+              "name": "FastDOL GET Me",
+              "id": "c2f35fa1-5dc6-4778-a8ab-697f8c9319e3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "me"
+                  ]
+                },
+                "description": "Return the authenticated customer's public identity.\n\nUsed by the frontend header + account pages to show the logged-in\nemail without trusting client-side pathname heuristics. 401s when\nthe access_token cookie is missing/expired/invalid so the frontend\ncan reliably fall back to logged-out rendering."
+              },
+              "response": [
+                {
+                  "id": "97f910d7-01f6-4163-afdb-151404995949",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-97f910d7-01f6-4163-afdb-151404995949"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:39.000Z",
+              "updatedAt": "2026-07-28T01:36:39.000Z",
+              "uid": "35240-c2f35fa1-5dc6-4778-a8ab-697f8c9319e3"
+            }
+          ],
+          "id": "ef18e607-a57a-4c1e-a6b1-b066b9af9acd",
+          "createdAt": "2026-07-28T01:36:39.000Z",
+          "updatedAt": "2026-07-28T01:36:39.000Z",
+          "uid": "35240-ef18e607-a57a-4c1e-a6b1-b066b9af9acd"
+        },
+        {
+          "name": "forgot-password",
+          "item": [
+            {
+              "name": "FastDOL Forgot Password",
+              "id": "5ef37b78-0099-4cdb-9166-760b42ce6cd3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/forgot-password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "forgot-password"
+                  ]
+                },
+                "description": "Request password reset. Always returns 202 (don't leak if email exists).\n\nAll real work runs in a background task so request-thread timing\ncan't distinguish the \"email exists\" path (DB write + Resend\ncall: tens to hundreds of ms) from \"email unknown\" (immediate\nreturn) from \"rate-limited\" (immediate return). Closes the\ntiming-enumeration vector flagged in the re-audit."
+              },
+              "response": [
+                {
+                  "id": "26d905bc-4f22-4675-bcc9-9e6864054f3b",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/forgot-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "forgot-password"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-26d905bc-4f22-4675-bcc9-9e6864054f3b"
+                },
+                {
+                  "id": "f6ed0346-3528-4bbe-af27-5dc9bfbafc71",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/forgot-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "forgot-password"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-f6ed0346-3528-4bbe-af27-5dc9bfbafc71"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:39.000Z",
+              "updatedAt": "2026-07-28T01:36:39.000Z",
+              "uid": "35240-5ef37b78-0099-4cdb-9166-760b42ce6cd3"
+            }
+          ],
+          "id": "8724b15a-c28e-4700-84dc-ed6bf2314957",
+          "createdAt": "2026-07-28T01:36:39.000Z",
+          "updatedAt": "2026-07-28T01:36:39.000Z",
+          "uid": "35240-8724b15a-c28e-4700-84dc-ed6bf2314957"
+        },
+        {
+          "name": "reset-password",
+          "item": [
+            {
+              "name": "FastDOL Reset Password",
+              "id": "63537fef-6f5d-4784-93cb-41493f5b522b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"new_password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/reset-password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "reset-password"
+                  ]
+                },
+                "description": "Reset password using token from email."
+              },
+              "response": [
+                {
+                  "id": "5014e974-2d17-461a-b7f1-18a54cb2347d",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": \"<string>\",\n  \"new_password\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/reset-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "reset-password"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-5014e974-2d17-461a-b7f1-18a54cb2347d"
+                },
+                {
+                  "id": "da69832e-fe49-4b3b-9bb2-85a6ff6a3c15",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": \"<string>\",\n  \"new_password\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/reset-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "reset-password"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:36:39.000Z",
+                  "updatedAt": "2026-07-28T01:36:39.000Z",
+                  "uid": "35240-da69832e-fe49-4b3b-9bb2-85a6ff6a3c15"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:39.000Z",
+              "updatedAt": "2026-07-28T01:36:39.000Z",
+              "uid": "35240-63537fef-6f5d-4784-93cb-41493f5b522b"
+            }
+          ],
+          "id": "8f00e115-37c2-4d60-bdad-dc9d6a6f337f",
+          "createdAt": "2026-07-28T01:36:39.000Z",
+          "updatedAt": "2026-07-28T01:36:39.000Z",
+          "uid": "35240-8f00e115-37c2-4d60-bdad-dc9d6a6f337f"
+        }
+      ],
+      "id": "3b27f912-fabd-4ee1-8fbb-44ace106a41c",
+      "createdAt": "2026-07-28T01:36:39.000Z",
+      "updatedAt": "2026-07-28T01:36:39.000Z",
+      "uid": "35240-3b27f912-fabd-4ee1-8fbb-44ace106a41c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}

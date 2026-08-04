@@ -1,0 +1,270 @@
+{
+  "info": {
+    "_postman_id": "1e08e8fc-fba2-40a4-815e-04823f3693c3",
+    "name": "FastDOL Auth Usage API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:54.000Z",
+    "updatedAt": "2026-07-28T01:36:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1e08e8fc-fba2-40a4-815e-04823f3693c3"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "usage",
+          "item": [
+            {
+              "name": "lookup",
+              "item": [
+                {
+                  "name": "FastDOL Log Lookup",
+                  "id": "cf66269a-e4c6-4168-8b0f-9fa96d33a55f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/usage/lookup",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "usage",
+                        "lookup"
+                      ]
+                    },
+                    "description": "Increment lookups_used. Soft cap \u2014 return 200 with `over_quota`\nflag rather than 429, so the page render that triggered this isn't\ninterrupted. The UI uses the flag to render an upgrade banner."
+                  },
+                  "response": [
+                    {
+                      "id": "cbda385b-f2c8-4d23-9808-10ac836cb1f1",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/usage/lookup",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "usage",
+                            "lookup"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:55.000Z",
+                      "updatedAt": "2026-07-28T01:36:55.000Z",
+                      "uid": "35240-cbda385b-f2c8-4d23-9808-10ac836cb1f1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:55.000Z",
+                  "updatedAt": "2026-07-28T01:36:55.000Z",
+                  "uid": "35240-cf66269a-e4c6-4168-8b0f-9fa96d33a55f"
+                }
+              ],
+              "id": "570e899c-49ab-447c-a235-81742cc3d901",
+              "createdAt": "2026-07-28T01:36:55.000Z",
+              "updatedAt": "2026-07-28T01:36:55.000Z",
+              "uid": "35240-570e899c-49ab-447c-a235-81742cc3d901"
+            },
+            {
+              "name": "pdf-report-claim",
+              "item": [
+                {
+                  "name": "FastDOL Claim PDF Report",
+                  "id": "0dcb17b9-e57c-4961-acb6-ca6b909841c1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/usage/pdf-report-claim",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "usage",
+                        "pdf-report-claim"
+                      ]
+                    },
+                    "description": "Hard-cap claim for one PDF report. Returns 429 if the customer is\nat quota. Caller (the report page) refuses to render on 429 and\nshows an upgrade prompt instead.\n\nAtomic check-and-increment via SELECT ... FOR UPDATE inside a\ntransaction. If the limit is 0 (Free tier), the customer never gets\npast the comparison \u2014 no slot is consumed and the upgrade response\nis consistent."
+                  },
+                  "response": [
+                    {
+                      "id": "662d1197-0aca-483b-ba68-c05f423313dc",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/usage/pdf-report-claim",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "usage",
+                            "pdf-report-claim"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:55.000Z",
+                      "updatedAt": "2026-07-28T01:36:55.000Z",
+                      "uid": "35240-662d1197-0aca-483b-ba68-c05f423313dc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:55.000Z",
+                  "updatedAt": "2026-07-28T01:36:55.000Z",
+                  "uid": "35240-0dcb17b9-e57c-4961-acb6-ca6b909841c1"
+                }
+              ],
+              "id": "3d191ed0-74ce-4393-b976-2494d2b7cbc3",
+              "createdAt": "2026-07-28T01:36:55.000Z",
+              "updatedAt": "2026-07-28T01:36:55.000Z",
+              "uid": "35240-3d191ed0-74ce-4393-b976-2494d2b7cbc3"
+            },
+            {
+              "name": "FastDOL GET Usage",
+              "id": "be6a9f35-63c9-4c16-93a4-a1004ed80d9d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usage"
+                  ]
+                },
+                "description": "Return all three usage counters + their limits for the dashboard.\n\nRead-only convenience endpoint so the account page doesn't have to\njoin across customers + api_keys + the live api_usage row count."
+              },
+              "response": [
+                {
+                  "id": "8701249d-e58f-4a75-8e4a-3e64fc2dd36d",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/usage",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "usage"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:55.000Z",
+                  "updatedAt": "2026-07-28T01:36:55.000Z",
+                  "uid": "35240-8701249d-e58f-4a75-8e4a-3e64fc2dd36d"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:55.000Z",
+              "updatedAt": "2026-07-28T01:36:55.000Z",
+              "uid": "35240-be6a9f35-63c9-4c16-93a4-a1004ed80d9d"
+            }
+          ],
+          "id": "26033d42-254a-4ac3-8576-1c6ee528f392",
+          "createdAt": "2026-07-28T01:36:55.000Z",
+          "updatedAt": "2026-07-28T01:36:55.000Z",
+          "uid": "35240-26033d42-254a-4ac3-8576-1c6ee528f392"
+        }
+      ],
+      "id": "ec5e2bce-4ffd-4dbc-a50f-6472327dd150",
+      "createdAt": "2026-07-28T01:36:55.000Z",
+      "updatedAt": "2026-07-28T01:36:55.000Z",
+      "uid": "35240-ec5e2bce-4ffd-4dbc-a50f-6472327dd150"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}

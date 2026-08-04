@@ -1,0 +1,503 @@
+{
+  "info": {
+    "_postman_id": "2f1ee72e-7082-49e3-917f-8e732ea31c71",
+    "name": "FastDOL Auth Export API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:44.000Z",
+    "updatedAt": "2026-07-28T01:36:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2f1ee72e-7082-49e3-917f-8e732ea31c71"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "export",
+          "item": [
+            {
+              "name": "{job_id}",
+              "item": [
+                {
+                  "name": "download",
+                  "item": [
+                    {
+                      "name": "FastDOL Download Export",
+                      "id": "f7f250ff-a61b-4825-af30-39e19eae6906",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/export/:job_id/download",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "export",
+                            ":job_id",
+                            "download"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b9690b54-878d-4df6-a1b7-148526395501",
+                              "key": "job_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Stream the generated export file. 404 if not finished or expired."
+                      },
+                      "response": [
+                        {
+                          "id": "d3cee1c6-e393-4481-8e3b-c24779f26ac2",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/export/:job_id/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "export",
+                                ":job_id",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:44.000Z",
+                          "updatedAt": "2026-07-28T01:36:44.000Z",
+                          "uid": "35240-d3cee1c6-e393-4481-8e3b-c24779f26ac2"
+                        },
+                        {
+                          "id": "80a28057-3504-4e25-a8a3-7e70704aae2a",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/export/:job_id/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "export",
+                                ":job_id",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:44.000Z",
+                          "updatedAt": "2026-07-28T01:36:44.000Z",
+                          "uid": "35240-80a28057-3504-4e25-a8a3-7e70704aae2a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:44.000Z",
+                      "updatedAt": "2026-07-28T01:36:44.000Z",
+                      "uid": "35240-f7f250ff-a61b-4825-af30-39e19eae6906"
+                    }
+                  ],
+                  "id": "c6609982-0b8d-413e-8125-2777ba59febd",
+                  "createdAt": "2026-07-28T01:36:44.000Z",
+                  "updatedAt": "2026-07-28T01:36:44.000Z",
+                  "uid": "35240-c6609982-0b8d-413e-8125-2777ba59febd"
+                },
+                {
+                  "name": "FastDOL GET Export",
+                  "id": "8bec86d9-b308-4495-a353-87c9c7fc105f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/export/:job_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "export",
+                        ":job_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "83b18784-74c7-431c-927f-6a5b02d98cfa",
+                          "key": "job_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Poll an export job. Returns status and \u2014 once finished \u2014 a\ndownload URL valid until the job expires (24h after creation)."
+                  },
+                  "response": [
+                    {
+                      "id": "5ac4751f-427f-4577-97ce-8b81add7b250",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/export/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "export",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:44.000Z",
+                      "updatedAt": "2026-07-28T01:36:44.000Z",
+                      "uid": "35240-5ac4751f-427f-4577-97ce-8b81add7b250"
+                    },
+                    {
+                      "id": "8df1f63c-bc8e-4527-a9c2-03faa374ffae",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/export/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "export",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:36:44.000Z",
+                      "updatedAt": "2026-07-28T01:36:44.000Z",
+                      "uid": "35240-8df1f63c-bc8e-4527-a9c2-03faa374ffae"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:44.000Z",
+                  "updatedAt": "2026-07-28T01:36:44.000Z",
+                  "uid": "35240-8bec86d9-b308-4495-a353-87c9c7fc105f"
+                }
+              ],
+              "id": "85b28eb3-3c17-465f-86e4-d229c47c1a8b",
+              "createdAt": "2026-07-28T01:36:44.000Z",
+              "updatedAt": "2026-07-28T01:36:44.000Z",
+              "uid": "35240-85b28eb3-3c17-465f-86e4-d229c47c1a8b"
+            },
+            {
+              "name": "FastDOL Create Export",
+              "id": "d154b3fa-15cd-416f-ba42-4d6134b20dd5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"format\": \"csv\",\n  \"filters\": {\n    \"name\": \"<string>\",\n    \"ein\": \"<string>\",\n    \"state\": \"<string>\",\n    \"states\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"zip\": \"<string>\",\n    \"naics\": \"<string>\",\n    \"naics_codes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"parent_only\": false,\n    \"parent_name\": \"<string>\",\n    \"has_fatalities\": false,\n    \"svep\": false,\n    \"min_inspections\": \"<integer>\",\n    \"min_violations\": \"<integer>\",\n    \"min_penalties\": \"<number>\",\n    \"min_fatalities\": \"<integer>\",\n    \"min_whd_cases\": \"<integer>\",\n    \"min_whd_backwages\": \"<number>\"\n  },\n  \"max_rows\": 50000,\n  \"sort_by\": \"<string>\",\n  \"sort_dir\": \"desc\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/export",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "export"
+                  ]
+                },
+                "description": "Start a bulk export job. Returns 202 with a job_id to poll.\n\nAt least one filter field must be set \u2014 unfiltered exports would\nscan the entire employer table and are refused."
+              },
+              "response": [
+                {
+                  "id": "ac8559e6-9be6-41f4-b536-558231fac842",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"format\": \"csv\",\n  \"filters\": {\n    \"name\": \"<string>\",\n    \"ein\": \"<string>\",\n    \"state\": \"<string>\",\n    \"states\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"zip\": \"<string>\",\n    \"naics\": \"<string>\",\n    \"naics_codes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"parent_only\": false,\n    \"parent_name\": \"<string>\",\n    \"has_fatalities\": false,\n    \"svep\": false,\n    \"min_inspections\": \"<integer>\",\n    \"min_violations\": \"<integer>\",\n    \"min_penalties\": \"<number>\",\n    \"min_fatalities\": \"<integer>\",\n    \"min_whd_cases\": \"<integer>\",\n    \"min_whd_backwages\": \"<number>\"\n  },\n  \"max_rows\": 50000,\n  \"sort_by\": \"<string>\",\n  \"sort_dir\": \"desc\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/export",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "export"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:44.000Z",
+                  "updatedAt": "2026-07-28T01:36:44.000Z",
+                  "uid": "35240-ac8559e6-9be6-41f4-b536-558231fac842"
+                },
+                {
+                  "id": "203ed816-88e7-47a5-91b3-12a7fd1f311f",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"format\": \"csv\",\n  \"filters\": {\n    \"name\": \"<string>\",\n    \"ein\": \"<string>\",\n    \"state\": \"<string>\",\n    \"states\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"zip\": \"<string>\",\n    \"naics\": \"<string>\",\n    \"naics_codes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"parent_only\": false,\n    \"parent_name\": \"<string>\",\n    \"has_fatalities\": false,\n    \"svep\": false,\n    \"min_inspections\": \"<integer>\",\n    \"min_violations\": \"<integer>\",\n    \"min_penalties\": \"<number>\",\n    \"min_fatalities\": \"<integer>\",\n    \"min_whd_cases\": \"<integer>\",\n    \"min_whd_backwages\": \"<number>\"\n  },\n  \"max_rows\": 50000,\n  \"sort_by\": \"<string>\",\n  \"sort_dir\": \"desc\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/export",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "export"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:36:44.000Z",
+                  "updatedAt": "2026-07-28T01:36:44.000Z",
+                  "uid": "35240-203ed816-88e7-47a5-91b3-12a7fd1f311f"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:44.000Z",
+              "updatedAt": "2026-07-28T01:36:44.000Z",
+              "uid": "35240-d154b3fa-15cd-416f-ba42-4d6134b20dd5"
+            }
+          ],
+          "id": "9be176b1-2121-43db-b7e0-44a662dc2244",
+          "createdAt": "2026-07-28T01:36:44.000Z",
+          "updatedAt": "2026-07-28T01:36:44.000Z",
+          "uid": "35240-9be176b1-2121-43db-b7e0-44a662dc2244"
+        }
+      ],
+      "id": "46263ab2-62cf-4dbd-9579-ec99359afc3f",
+      "createdAt": "2026-07-28T01:36:44.000Z",
+      "updatedAt": "2026-07-28T01:36:44.000Z",
+      "uid": "35240-46263ab2-62cf-4dbd-9579-ec99359afc3f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}

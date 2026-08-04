@@ -1,0 +1,2703 @@
+{
+  "info": {
+    "_postman_id": "0e07be8d-21fa-492d-b94d-6b1e93e0dd3a",
+    "name": "FastDOL Auth Employers API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:42.000Z",
+    "updatedAt": "2026-07-28T01:36:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0e07be8d-21fa-492d-b94d-6b1e93e0dd3a"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employers",
+          "item": [
+            {
+              "name": "parent",
+              "item": [
+                {
+                  "name": "FastDOL GET Parent Company",
+                  "id": "6ecfa97c-3ec8-4c30-a256-9b5c0eff3e30",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employers/parent?name=<string>&state=<string>&limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employers",
+                        "parent"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Parent company name (e.g., 'Amazon', 'Walmart')",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter locations by state",
+                          "key": "state",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    },
+                    "description": "Parent company risk rollup \u2014 aggregate risk across all locations.\n\nReturns company-wide statistics (total inspections, violations, penalties,\nrisk distribution) plus a paginated list of individual locations sorted\nby risk score (worst first).\n\nPremium feature for enterprise customers evaluating national employers."
+                  },
+                  "response": [
+                    {
+                      "id": "3bfb62f4-3026-4fec-8c32-fead8ecb0dc9",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/parent?name=<string>&state=<string>&limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            "parent"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Parent company name (e.g., 'Amazon', 'Walmart')",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter locations by state",
+                              "key": "state",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-3bfb62f4-3026-4fec-8c32-fead8ecb0dc9"
+                    },
+                    {
+                      "id": "666e243e-a343-493b-866e-f2263ac05f32",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/parent?name=<string>&state=<string>&limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            "parent"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Parent company name (e.g., 'Amazon', 'Walmart')",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter locations by state",
+                              "key": "state",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-666e243e-a343-493b-866e-f2263ac05f32"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-6ecfa97c-3ec8-4c30-a256-9b5c0eff3e30"
+                }
+              ],
+              "id": "8d506313-bf1f-4050-ab04-3c75e4e1b36b",
+              "createdAt": "2026-07-28T01:36:43.000Z",
+              "updatedAt": "2026-07-28T01:36:43.000Z",
+              "uid": "35240-8d506313-bf1f-4050-ab04-3c75e4e1b36b"
+            },
+            {
+              "name": "ein",
+              "item": [
+                {
+                  "name": "{ein}",
+                  "item": [
+                    {
+                      "name": "FastDOL GET Employer by EIN",
+                      "id": "5522ea2b-f101-455e-8ab4-9164667c8904",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/ein/:ein?state=<string>&limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            "ein",
+                            ":ein"
+                          ],
+                          "query": [
+                            {
+                              "description": "State code filter",
+                              "key": "state",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "8ca764a7-82ff-40f4-ac82-8cffb6cade48",
+                              "key": "ein",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Lookup employers by FEIN (Federal Employer Identification Number).\n\nReturns all locations matching the given EIN. Insurance professionals\nidentify employers by FEIN \u2014 this is the primary lookup for underwriting\nintegrations.\n\nEIN format: 9 digits (e.g., '943067788' or '94-3067788')."
+                      },
+                      "response": [
+                        {
+                          "id": "0d2b5691-2d44-48ab-9d7e-b7454b4ef3ef",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/ein/:ein?state=<string>&limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                "ein",
+                                ":ein"
+                              ],
+                              "query": [
+                                {
+                                  "description": "State code filter",
+                                  "key": "state",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ein"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-0d2b5691-2d44-48ab-9d7e-b7454b4ef3ef"
+                        },
+                        {
+                          "id": "4aac6a42-e817-4d9e-8ca1-db8868497b2f",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/ein/:ein?state=<string>&limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                "ein",
+                                ":ein"
+                              ],
+                              "query": [
+                                {
+                                  "description": "State code filter",
+                                  "key": "state",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ein"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-4aac6a42-e817-4d9e-8ca1-db8868497b2f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-5522ea2b-f101-455e-8ab4-9164667c8904"
+                    }
+                  ],
+                  "id": "14a4199e-1e69-48d4-8472-ff48820c2f6a",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-14a4199e-1e69-48d4-8472-ff48820c2f6a"
+                }
+              ],
+              "id": "cdeef52c-f22e-4302-8861-86f06915547b",
+              "createdAt": "2026-07-28T01:36:43.000Z",
+              "updatedAt": "2026-07-28T01:36:43.000Z",
+              "uid": "35240-cdeef52c-f22e-4302-8861-86f06915547b"
+            },
+            {
+              "name": "{employer_id}",
+              "item": [
+                {
+                  "name": "inspections",
+                  "item": [
+                    {
+                      "name": "FastDOL GET Inspections",
+                      "id": "f878738f-4317-4fea-8125-9c2c6e754759",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id/inspections?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id",
+                            "inspections"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "fb25001e-9bc5-4e95-890f-3f37756506a2",
+                              "key": "employer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get inspection history with violation detail for an employer.\n\nMetered: one lookup per call. Previously unmetered, which made it trivial\nfor a free-tier key to scrape the entire product by combining the sitemap\nendpoint (employer IDs) with this one (full inspection history per id)."
+                      },
+                      "response": [
+                        {
+                          "id": "f389865e-ea0b-4dd2-8cc4-fb64e4c6f574",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/inspections?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "inspections"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-f389865e-ea0b-4dd2-8cc4-fb64e4c6f574"
+                        },
+                        {
+                          "id": "c22c6916-ebdf-40af-b934-54d9e886c18c",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/inspections?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "inspections"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-c22c6916-ebdf-40af-b934-54d9e886c18c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-f878738f-4317-4fea-8125-9c2c6e754759"
+                    }
+                  ],
+                  "id": "53b1440e-102a-4e6d-9a99-fbe6db449339",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-53b1440e-102a-4e6d-9a99-fbe6db449339"
+                },
+                {
+                  "name": "severe-injuries",
+                  "item": [
+                    {
+                      "name": "FastDOL GET Severe Injuries",
+                      "id": "bf06d041-aafa-434c-bc84-abcac941fecb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id/severe-injuries?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id",
+                            "severe-injuries"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "74afd0e9-267a-4ae7-ab7a-b5e87f9bee16",
+                              "key": "employer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Per-event OSHA Severe Injury Reports (29 CFR 1904.39) for an employer.\n\nEach row is an injury the employer self-reported within 24 hours\n-- in-patient hospitalization, amputation, or loss of an eye.\nDistinct from /employers/{id}/inspections (inspection-triggered):\nSIR is injury-triggered, so the same event may or may not have a\nrelated inspection (see inspection_activity_nr -- often NULL).\n\nMetered: one lookup per call, same as inspections / SEC enforcement.\nNewest event first."
+                      },
+                      "response": [
+                        {
+                          "id": "e318bae7-8191-48fe-a9e0-aeaad7f10955",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/severe-injuries?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "severe-injuries"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-e318bae7-8191-48fe-a9e0-aeaad7f10955"
+                        },
+                        {
+                          "id": "25a96bab-9c3f-4b8e-9d57-2d521c5e1cc4",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/severe-injuries?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "severe-injuries"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-25a96bab-9c3f-4b8e-9d57-2d521c5e1cc4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-bf06d041-aafa-434c-bc84-abcac941fecb"
+                    }
+                  ],
+                  "id": "a32687c8-0340-4b82-91ae-e233f8e2b963",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-a32687c8-0340-4b82-91ae-e233f8e2b963"
+                },
+                {
+                  "name": "whd-cases",
+                  "item": [
+                    {
+                      "name": "FastDOL GET WHD Cases",
+                      "id": "7286cffb-c3c5-4e48-90b1-c1707f1f03e1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id/whd-cases?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id",
+                            "whd-cases"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "940dd3ee-0318-4ddb-88e4-1ea23406400c",
+                              "key": "employer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Per-case WHD (Wage & Hour Division) enforcement records for an\nemployer.\n\nEach row is one closed case carrying backwages assessed\n(`bw_amt`) and the count of underpaid employees\n(`ee_violtd_cnt`). Covers FLSA, FMLA, MSPA, H-1B/H-2A/H-2B, CCPA,\nand any other DOL WHD-administered statute.\n\nMetered: one lookup per call, same pattern as the other detail\nendpoints. Most-recent case first."
+                      },
+                      "response": [
+                        {
+                          "id": "56e4cdb4-fde1-4c1e-bd4f-3a5dae0d584c",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/whd-cases?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "whd-cases"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-56e4cdb4-fde1-4c1e-bd4f-3a5dae0d584c"
+                        },
+                        {
+                          "id": "c8a08aa3-3b59-4c2f-8a35-15f3a30068f3",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/whd-cases?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "whd-cases"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-c8a08aa3-3b59-4c2f-8a35-15f3a30068f3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-7286cffb-c3c5-4e48-90b1-c1707f1f03e1"
+                    }
+                  ],
+                  "id": "54db4400-22d3-4fbb-9afc-fe5511b1c437",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-54db4400-22d3-4fbb-9afc-fe5511b1c437"
+                },
+                {
+                  "name": "osha-accidents",
+                  "item": [
+                    {
+                      "name": "FastDOL GET OSHA Accidents",
+                      "id": "cf2958cf-db8a-4037-9d8a-45044f1ca1a1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id/osha-accidents?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id",
+                            "osha-accidents"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "21a576f6-8d9b-44ef-8cc7-548abeb948fc",
+                              "key": "employer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Per-event OSHA accident records (inspection-triggered).\n\nEach row is an accident/fatality/catastrophe OSHA documented while\ninvestigating an inspection at this employer. Distinct from\n/employers/{id}/severe-injuries (SIR is injury-triggered and\nself-reported under 29 CFR 1904.39); accidents only surface through\nan OSHA-opened inspection.\n\nThe narrative `abstract_text` is truncated at 4000 chars upstream\n(silver/osha_accident_detail) to keep row size bounded.\n\nMetered: one lookup per call, same as inspections / SIR.\nNewest event first."
+                      },
+                      "response": [
+                        {
+                          "id": "cde6832d-8076-4a98-a1bd-8d1ee2b2a512",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/osha-accidents?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "osha-accidents"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-cde6832d-8076-4a98-a1bd-8d1ee2b2a512"
+                        },
+                        {
+                          "id": "db810ebc-ef19-44a7-ac8f-106dc226ce83",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/osha-accidents?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "osha-accidents"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-db810ebc-ef19-44a7-ac8f-106dc226ce83"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-cf2958cf-db8a-4037-9d8a-45044f1ca1a1"
+                    }
+                  ],
+                  "id": "8023afbf-7d96-4b00-b173-b4634214e544",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-8023afbf-7d96-4b00-b173-b4634214e544"
+                },
+                {
+                  "name": "sec-enforcement",
+                  "item": [
+                    {
+                      "name": "FastDOL GET SEC Enforcement",
+                      "id": "a48bb53f-a202-44c6-a3a0-3e31d299dba1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id/sec-enforcement?limit=50&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id",
+                            "sec-enforcement"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "50"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "66421bb0-2e65-4bf9-94e6-9864b004b96f",
+                              "key": "employer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get SEC enforcement actions filed against an employer's parent\ncompany.\n\nJoined via employer_profile.parent_name \u2192 sec_enforcement_detail\n.parent_name. Returns empty results for non-public-parent employers\n(~99% of employers \u2014 most aren't SEC registrants).\n\nMetered: one lookup per call. Same justification as get_inspections\n\u2014 un-metered would let a free-tier key scrape the entire SEC\nenforcement-history dataset for free by walking the sitemap."
+                      },
+                      "response": [
+                        {
+                          "id": "264e5bcf-2cfa-40c3-a241-15f5c651929b",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/sec-enforcement?limit=50&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "sec-enforcement"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "50"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-264e5bcf-2cfa-40c3-a241-15f5c651929b"
+                        },
+                        {
+                          "id": "824c2e2d-983c-4e1f-8106-bca848cb78d9",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/sec-enforcement?limit=50&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "sec-enforcement"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "50"
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-824c2e2d-983c-4e1f-8106-bca848cb78d9"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-a48bb53f-a202-44c6-a3a0-3e31d299dba1"
+                    }
+                  ],
+                  "id": "378c0a94-b186-4ef8-8335-dbbe3eb24cff",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-378c0a94-b186-4ef8-8335-dbbe3eb24cff"
+                },
+                {
+                  "name": "peers",
+                  "item": [
+                    {
+                      "name": "FastDOL GET Peers",
+                      "id": "581ea895-ad56-4239-92a1-058aa4fb21c5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id/peers?limit=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id",
+                            "peers"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "bb37a1f4-7233-4a7b-919f-f498cd0b41e5",
+                              "key": "employer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Peer establishments \u2014 same NAICS+state cohort, plus same-parent\nsiblings.\n\nPowers the \"Other employers in this industry\" and \"Other\nestablishments under this parent\" sections of the profile page.\nThese sections double as internal-link targets that pass authority\nto long-tail leaf URLs (otherwise SEO dead-ends since most thin\nprofiles have no inbound links).\n\nReturns up to `limit` rows per cohort, ordered by\nagency_violation_count DESC so the most-active peers surface first\n\u2014 better signal for the human reader and stronger anchor-text\ndiversity in the per-page link set.\n\nMetered same as get_inspections. The endpoint is heavy enough\n(two indexed lookups + N projections) that an unmetered version\nwould invite scraping."
+                      },
+                      "response": [
+                        {
+                          "id": "9f836454-8664-4351-9ad2-2caf8341633b",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/peers?limit=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "peers"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-9f836454-8664-4351-9ad2-2caf8341633b"
+                        },
+                        {
+                          "id": "9c728467-84ab-4df7-93cd-d001a2a0da01",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/peers?limit=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "peers"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-9c728467-84ab-4df7-93cd-d001a2a0da01"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-581ea895-ad56-4239-92a1-058aa4fb21c5"
+                    }
+                  ],
+                  "id": "e994cdc7-4e06-4659-9b1e-1b2aa34d0433",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-e994cdc7-4e06-4659-9b1e-1b2aa34d0433"
+                },
+                {
+                  "name": "risk-history",
+                  "item": [
+                    {
+                      "name": "FastDOL GET Risk History",
+                      "id": "79a06357-cd65-4e8a-b074-ae34789df8cd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id/risk-history?limit=90",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id",
+                            "risk-history"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "90"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b6adcb45-cb8f-41d3-9068-383bf77cc64a",
+                              "key": "employer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Risk tier history for an employer over time. Shows nightly snapshots."
+                      },
+                      "response": [
+                        {
+                          "id": "06e2753b-11c8-4125-9f10-fe13dc931995",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/risk-history?limit=90",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "risk-history"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "90"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-06e2753b-11c8-4125-9f10-fe13dc931995"
+                        },
+                        {
+                          "id": "a3111ed2-fdde-4454-98f7-2898de3004c2",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/risk-history?limit=90",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "risk-history"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "90"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-a3111ed2-fdde-4454-98f7-2898de3004c2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-79a06357-cd65-4e8a-b074-ae34789df8cd"
+                    }
+                  ],
+                  "id": "3af00bfb-55fc-49e1-875c-618671e1b780",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-3af00bfb-55fc-49e1-875c-618671e1b780"
+                },
+                {
+                  "name": "feedback",
+                  "item": [
+                    {
+                      "name": "FastDOL Submit Feedback",
+                      "id": "d2dbe15f-5a5f-43e8-809e-4f30394fc978",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"contact_email\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id/feedback",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id",
+                            "feedback"
+                          ],
+                          "variable": [
+                            {
+                              "id": "67cb3f1b-d99d-4ccd-b559-bb97c6bad42c",
+                              "key": "employer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Submit feedback about an employer match. Not metered."
+                      },
+                      "response": [
+                        {
+                          "id": "2db14bcd-ab9a-42ef-acba-acaff09efda3",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"contact_email\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/feedback",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "feedback"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-2db14bcd-ab9a-42ef-acba-acaff09efda3"
+                        },
+                        {
+                          "id": "19baf3d5-74c2-45f6-95b6-e2695887e504",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "X-Api-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"contact_email\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employers/:employer_id/feedback",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employers",
+                                ":employer_id",
+                                "feedback"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:36:43.000Z",
+                          "updatedAt": "2026-07-28T01:36:43.000Z",
+                          "uid": "35240-19baf3d5-74c2-45f6-95b6-e2695887e504"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-d2dbe15f-5a5f-43e8-809e-4f30394fc978"
+                    }
+                  ],
+                  "id": "be7650fb-1296-4cb0-88da-e0f478b31911",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-be7650fb-1296-4cb0-88da-e0f478b31911"
+                },
+                {
+                  "name": "FastDOL GET Employer",
+                  "id": "742a4cbe-33c1-437a-99a8-75159e87dcdd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employers/:employer_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employers",
+                        ":employer_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "dda956d8-2e16-4cb1-8643-9183302b9624",
+                          "key": "employer_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Direct lookup by employer_id UUID."
+                  },
+                  "response": [
+                    {
+                      "id": "2ee66eba-c3f2-407f-a4c9-0da4ac6906eb",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-2ee66eba-c3f2-407f-a4c9-0da4ac6906eb"
+                    },
+                    {
+                      "id": "fbc6d3f6-3045-49fe-919b-95abad346dd8",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/:employer_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            ":employer_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-fbc6d3f6-3045-49fe-919b-95abad346dd8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-742a4cbe-33c1-437a-99a8-75159e87dcdd"
+                }
+              ],
+              "id": "c4dab1f7-10e7-4228-b0ce-e34d77f260a6",
+              "createdAt": "2026-07-28T01:36:43.000Z",
+              "updatedAt": "2026-07-28T01:36:43.000Z",
+              "uid": "35240-c4dab1f7-10e7-4228-b0ce-e34d77f260a6"
+            },
+            {
+              "name": "batch",
+              "item": [
+                {
+                  "name": "FastDOL Batch Lookup",
+                  "id": "61943d68-ebcd-4333-9c71-2327ae502d4a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"lookups\": [\n    {\n      \"name\": \"<string>\",\n      \"ein\": \"<string>\",\n      \"employer_id\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"ein\": \"<string>\",\n      \"employer_id\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employers/batch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employers",
+                        "batch"
+                      ]
+                    },
+                    "description": "Batch employer lookup \u2014 designed for spreadsheet-style bulk searches.\n\nEach item can include name, ein, employer_id, plus optional location\nfilters (state, zip, city) to narrow to a specific site.\n\nUp to 100 items processed synchronously. 101-500 returns a job_id\nfor async polling (coming soon). Max 500 items per request.\n\nTypical usage: underwriter uploads a spreadsheet with company name +\naddress for each policy they're quoting."
+                  },
+                  "response": [
+                    {
+                      "id": "4896429f-4776-4506-bfab-e8da9357d156",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"lookups\": [\n    {\n      \"name\": \"<string>\",\n      \"ein\": \"<string>\",\n      \"employer_id\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"ein\": \"<string>\",\n      \"employer_id\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/batch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            "batch"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-4896429f-4776-4506-bfab-e8da9357d156"
+                    },
+                    {
+                      "id": "c8df16d5-5ab4-44a6-9db2-a64ce6f15b0c",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"lookups\": [\n    {\n      \"name\": \"<string>\",\n      \"ein\": \"<string>\",\n      \"employer_id\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"ein\": \"<string>\",\n      \"employer_id\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/batch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            "batch"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-c8df16d5-5ab4-44a6-9db2-a64ce6f15b0c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-61943d68-ebcd-4333-9c71-2327ae502d4a"
+                }
+              ],
+              "id": "7c87a001-c8e3-4908-bdbc-3ba52052646e",
+              "createdAt": "2026-07-28T01:36:43.000Z",
+              "updatedAt": "2026-07-28T01:36:43.000Z",
+              "uid": "35240-7c87a001-c8e3-4908-bdbc-3ba52052646e"
+            },
+            {
+              "name": "upload-csv",
+              "item": [
+                {
+                  "name": "FastDOL Upload CSV",
+                  "id": "712e6069-9166-4a65-9f40-5b3edee47057",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) CSV file with employer names and optional location fields",
+                          "key": "file",
+                          "type": "file",
+                          "value": null
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employers/upload-csv",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employers",
+                        "upload-csv"
+                      ]
+                    },
+                    "description": "Upload a CSV of employers, get back a CSV with risk profiles.\n\nExpected CSV columns (flexible \u2014 matches by header name):\n    Required: name OR company_name OR employer_name\n    Optional: state, zip, city, ein\n\nExtra columns in the input are preserved in the output.\nOutput adds: employer_id, match_confidence, risk_tier, risk_score,\nosha_inspections, osha_violations, osha_total_penalties,\nlocation_count, trend_signal"
+                  },
+                  "response": [
+                    {
+                      "id": "01affe4a-a312-4cff-a560-72670af4716a",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) CSV file with employer names and optional location fields",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/upload-csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            "upload-csv"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-01affe4a-a312-4cff-a560-72670af4716a"
+                    },
+                    {
+                      "id": "03876e2f-9630-41e3-8814-a157d7d04f43",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) CSV file with employer names and optional location fields",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employers/upload-csv",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employers",
+                            "upload-csv"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:36:43.000Z",
+                      "updatedAt": "2026-07-28T01:36:43.000Z",
+                      "uid": "35240-03876e2f-9630-41e3-8814-a157d7d04f43"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-712e6069-9166-4a65-9f40-5b3edee47057"
+                }
+              ],
+              "id": "b9fc0271-a0de-454c-9b4c-bcaf59ed737c",
+              "createdAt": "2026-07-28T01:36:43.000Z",
+              "updatedAt": "2026-07-28T01:36:43.000Z",
+              "uid": "35240-b9fc0271-a0de-454c-9b4c-bcaf59ed737c"
+            },
+            {
+              "name": "FastDOL Search Employers",
+              "id": "928145ec-dda7-411c-9fe6-e392908b4a09",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-Api-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/employers?name=<string>&ein=<string>&state=<string>&zip=<string>&naics=<string>&parent_only=false&parent_name=<string>&has_fatalities=false&svep=false&sort_by=<string>&sort_dir=<string>&limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "employers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Fuzzy employer name search",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Exact EIN match",
+                      "key": "ein",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "State code filter (e.g., CA)",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "5-digit zip code filter",
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "4-digit NAICS prefix filter",
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Only return employers with a parent_name (known parent companies)",
+                      "key": "parent_only",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter to locations under a specific parent company (exact match)",
+                      "key": "parent_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter to locations with fatality investigations",
+                      "key": "has_fatalities",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filter to locations on the Severe Violator Enforcement Program",
+                      "key": "svep",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Sort results by: risk_score (default), violations, penalties, inspections, fatalities",
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort direction: desc (default) or asc",
+                      "key": "sort_dir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "Search employers by name, EIN, zip, state, or NAICS.\n\nReturns a flat list of employer locations sorted by risk score (worst first).\nEach result includes `related_locations_count` showing how many locations\nshare the same normalized employer name \u2014 useful for national chains."
+              },
+              "response": [
+                {
+                  "id": "ccbe2792-2e23-44bf-aa06-2e447fd2fe1a",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employers?name=<string>&ein=<string>&state=<string>&zip=<string>&naics=<string>&parent_only=false&parent_name=<string>&has_fatalities=false&svep=false&sort_by=<string>&sort_dir=<string>&limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Fuzzy employer name search",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Exact EIN match",
+                          "key": "ein",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "State code filter (e.g., CA)",
+                          "key": "state",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "5-digit zip code filter",
+                          "key": "zip",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "4-digit NAICS prefix filter",
+                          "key": "naics",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Only return employers with a parent_name (known parent companies)",
+                          "key": "parent_only",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Filter to locations under a specific parent company (exact match)",
+                          "key": "parent_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to locations with fatality investigations",
+                          "key": "has_fatalities",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Filter to locations on the Severe Violator Enforcement Program",
+                          "key": "svep",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Sort results by: risk_score (default), violations, penalties, inspections, fatalities",
+                          "key": "sort_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort direction: desc (default) or asc",
+                          "key": "sort_dir",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-ccbe2792-2e23-44bf-aa06-2e447fd2fe1a"
+                },
+                {
+                  "id": "03f5cf48-6af4-483e-809c-a45f1a05941b",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employers?name=<string>&ein=<string>&state=<string>&zip=<string>&naics=<string>&parent_only=false&parent_name=<string>&has_fatalities=false&svep=false&sort_by=<string>&sort_dir=<string>&limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Fuzzy employer name search",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Exact EIN match",
+                          "key": "ein",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "State code filter (e.g., CA)",
+                          "key": "state",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "5-digit zip code filter",
+                          "key": "zip",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "4-digit NAICS prefix filter",
+                          "key": "naics",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Only return employers with a parent_name (known parent companies)",
+                          "key": "parent_only",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Filter to locations under a specific parent company (exact match)",
+                          "key": "parent_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter to locations with fatality investigations",
+                          "key": "has_fatalities",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Filter to locations on the Severe Violator Enforcement Program",
+                          "key": "svep",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Sort results by: risk_score (default), violations, penalties, inspections, fatalities",
+                          "key": "sort_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort direction: desc (default) or asc",
+                          "key": "sort_dir",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:36:43.000Z",
+                  "updatedAt": "2026-07-28T01:36:43.000Z",
+                  "uid": "35240-03f5cf48-6af4-483e-809c-a45f1a05941b"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:43.000Z",
+              "updatedAt": "2026-07-28T01:36:43.000Z",
+              "uid": "35240-928145ec-dda7-411c-9fe6-e392908b4a09"
+            }
+          ],
+          "id": "ad997ba4-4998-4f56-8bcc-e390ea1e8aff",
+          "createdAt": "2026-07-28T01:36:43.000Z",
+          "updatedAt": "2026-07-28T01:36:43.000Z",
+          "uid": "35240-ad997ba4-4998-4f56-8bcc-e390ea1e8aff"
+        }
+      ],
+      "id": "c6582920-549f-4096-806d-e688c9a9af15",
+      "createdAt": "2026-07-28T01:36:43.000Z",
+      "updatedAt": "2026-07-28T01:36:43.000Z",
+      "uid": "35240-c6582920-549f-4096-806d-e688c9a9af15"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}

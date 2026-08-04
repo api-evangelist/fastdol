@@ -1,0 +1,215 @@
+{
+  "info": {
+    "_postman_id": "43ac5e4e-e143-45c3-b3f8-fa362b48f0b2",
+    "name": "FastDOL Auth Sitemap API",
+    "description": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies \u2014 OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:53.000Z",
+    "updatedAt": "2026-07-28T01:36:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-43ac5e4e-e143-45c3-b3f8-fa362b48f0b2"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "sitemap",
+          "item": [
+            {
+              "name": "employers",
+              "item": [
+                {
+                  "name": "FastDOL Sitemap Employers",
+                  "id": "1c9fb97e-a11a-4027-a24c-314ca7008f9b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Api-Key",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sitemap/employers?limit=50000&offset=0&indexable_only=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sitemap",
+                        "employers"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "50000"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "When true, return only employers with at least one enforcement signal across any aggregated source. Used by the Next.js sitemap generator so Google isn't asked to crawl thin templated profiles that the page itself noindex's anyway.",
+                          "key": "indexable_only",
+                          "value": "false"
+                        }
+                      ]
+                    },
+                    "description": "Return employer IDs for sitemap generation with pagination. Not metered.\n\nRequires the dedicated ``sitemap:read`` scope \u2014 intentionally NOT in the\nfree-tier default scopes. The only legitimate caller is the Next.js\nserver generating sitemap shards for SEO; that route uses DEMO_API_KEY\nwhose scopes must include 'sitemap:read'. Free customer keys cannot\nenumerate the entire dataset via this endpoint.\n\nPagination: use offset/limit to page through all employers.\nReturns total_count so the caller knows how many pages to request \u2014\nthe count reflects the indexable_only filter when set."
+                  },
+                  "response": [
+                    {
+                      "id": "1fb3de71-ee77-43b8-9dc5-f714420c6dfb",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/sitemap/employers?limit=50000&offset=0&indexable_only=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "sitemap",
+                            "employers"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "50000"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "When true, return only employers with at least one enforcement signal across any aggregated source. Used by the Next.js sitemap generator so Google isn't asked to crawl thin templated profiles that the page itself noindex's anyway.",
+                              "key": "indexable_only",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:36:53.000Z",
+                      "updatedAt": "2026-07-28T01:36:53.000Z",
+                      "uid": "35240-1fb3de71-ee77-43b8-9dc5-f714420c6dfb"
+                    },
+                    {
+                      "id": "74df6ffb-b7b9-457a-bdb6-9ba4099f8ed7",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "X-Api-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/sitemap/employers?limit=50000&offset=0&indexable_only=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "sitemap",
+                            "employers"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "50000"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "When true, return only employers with at least one enforcement signal across any aggregated source. Used by the Next.js sitemap generator so Google isn't asked to crawl thin templated profiles that the page itself noindex's anyway.",
+                              "key": "indexable_only",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:36:53.000Z",
+                      "updatedAt": "2026-07-28T01:36:53.000Z",
+                      "uid": "35240-74df6ffb-b7b9-457a-bdb6-9ba4099f8ed7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:36:53.000Z",
+                  "updatedAt": "2026-07-28T01:36:53.000Z",
+                  "uid": "35240-1c9fb97e-a11a-4027-a24c-314ca7008f9b"
+                }
+              ],
+              "id": "41f585c5-9302-43af-8b2b-7b3a01620dfd",
+              "createdAt": "2026-07-28T01:36:53.000Z",
+              "updatedAt": "2026-07-28T01:36:53.000Z",
+              "uid": "35240-41f585c5-9302-43af-8b2b-7b3a01620dfd"
+            }
+          ],
+          "id": "e004430a-3696-4e2e-97cf-b7e8002f3bc8",
+          "createdAt": "2026-07-28T01:36:53.000Z",
+          "updatedAt": "2026-07-28T01:36:53.000Z",
+          "uid": "35240-e004430a-3696-4e2e-97cf-b7e8002f3bc8"
+        }
+      ],
+      "id": "a7a62564-de1a-41ef-b3ca-37d5a2988b26",
+      "createdAt": "2026-07-28T01:36:53.000Z",
+      "updatedAt": "2026-07-28T01:36:53.000Z",
+      "uid": "35240-a7a62564-de1a-41ef-b3ca-37d5a2988b26"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fastdol.com"
+    }
+  ]
+}
