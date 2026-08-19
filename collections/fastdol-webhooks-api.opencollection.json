@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Webhooks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL Stripe Webhook Tombstone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/webhooks/stripe"
+          },
+          "docs": "No-op accept for Stripe webhook deliveries post-redesign.\n\nReturns 200 immediately so Stripe's retry loop doesn't keep\nre-queuing events. We don't read the body, don't verify the\nsignature, don't log anything sensitive.\n\nPer-IP throttle keeps a non-Stripe attacker from using this\nunauthenticated endpoint as cheap bandwidth — legitimate Stripe\ndeliveries come from many edge IPs and won't hit the cap."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

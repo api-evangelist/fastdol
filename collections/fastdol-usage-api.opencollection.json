@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Usage API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL Log Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/v1/usage/lookup"
+          },
+          "docs": "Increment lookups_used. Soft cap — return 200 with `over_quota`\nflag rather than 429, so the page render that triggered this isn't\ninterrupted. The UI uses the flag to render an upgrade banner."
+        },
+        {
+          "info": {
+            "name": "FastDOL Claim PDF Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/v1/usage/pdf-report-claim"
+          },
+          "docs": "Hard-cap claim for one PDF report. Returns 429 if the customer is\nat quota. Caller (the report page) refuses to render on 429 and\nshows an upgrade prompt instead.\n\nAtomic check-and-increment via SELECT ... FOR UPDATE inside a\ntransaction. If the limit is 0 (Free tier), the customer never gets\npast the comparison — no slot is consumed and the upgrade response\nis consistent."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/usage"
+          },
+          "docs": "Return all three usage counters + their limits for the dashboard.\n\nRead-only convenience endpoint so the account page doesn't have to\njoin across customers + api_keys + the live api_usage row count."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

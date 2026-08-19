@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Export API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL Create Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/v1/export",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start a bulk export job. Returns 202 with a job_id to poll.\n\nAt least one filter field must be set — unfiltered exports would\nscan the entire employer table and are refused."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/export/:job_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "job_id",
+                "value": "job_2c5d7a93b1f0",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Poll an export job. Returns status and — once finished — a\ndownload URL valid until the job expires (24h after creation)."
+        },
+        {
+          "info": {
+            "name": "FastDOL Download Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/export/:job_id/download",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "job_id",
+                "value": "job_2c5d7a93b1f0",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stream the generated export file. 404 if not finished or expired."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Inspections API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inspections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL GET Violations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/inspections/:activity_nr/violations",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "activity_nr",
+                "value": "316254783",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get violation detail for a specific inspection.\n\nMetered: one lookup per call. See get_inspections for rationale."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,250 @@
+{
+  "item": [
+    {
+      "id": "a63f0e96-701b-4dce-8177-79f6075c6043",
+      "name": "Health",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "98f36f5b-21d9-4a6c-aa16-da5aef132fd8",
+          "name": "FastDOL Health",
+          "request": {
+            "name": "FastDOL Health",
+            "description": {
+              "content": "Public health endpoint — returns ok/unhealthy only.\n\nUsed by UptimeRobot and status-page builders. Intentionally minimal\nto avoid leaking internal operational detail. Only DB + data-loaded\nchecks trigger 503 — pipeline freshness is not customer-facing and\nis exposed on /v1/health/detail for admin monitoring.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a5bc92f-2e85-4cf1-8876-3801a00d342f",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c0a92fd-2847-4c8f-b208-e5da35bcafea",
+          "name": "FastDOL Health",
+          "request": {
+            "name": "FastDOL Health",
+            "description": {
+              "content": "Public health endpoint — returns ok/unhealthy only.\n\nUsed by UptimeRobot and status-page builders. Intentionally minimal\nto avoid leaking internal operational detail. Only DB + data-loaded\nchecks trigger 503 — pipeline freshness is not customer-facing and\nis exposed on /v1/health/detail for admin monitoring.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b60b74d8-4ab8-460a-afc3-e7d5c4b2314c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3040a358-f60e-4beb-a49c-beca2afaa0d0",
+          "name": "FastDOL Health Detail",
+          "request": {
+            "name": "FastDOL Health Detail",
+            "description": {
+              "content": "Admin-only detailed health — requires admin JWT.\n\nFull diagnostics: DB, pipeline recency, pipeline status, profile\ncount, data age, failing checks. Behind auth so customers can't see\ninternal operational state or fingerprint pipeline schedules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "health",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "130c74ee-309c-41c6-8e43-a9b7bfca321d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "health",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fastdol.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "92938727-7f58-41db-8173-6bbd3f0ffd34",
+    "name": "FastDOL Auth Health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+      "type": "text/plain"
+    }
+  }
+}

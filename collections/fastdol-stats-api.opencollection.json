@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Stats API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL State Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/stats/state/:code",
+            "params": [
+              {
+                "name": "code",
+                "value": "CA",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "State-level aggregates + top employers + top industries.\n\nPowers the /state/[slug] SEO landing pages. Returns:\n  - `state`: 2-letter code and full name\n  - `totals`: inspections, violations, penalties, fatalities, WHD backwages,\n    employer count in one pass\n  - `top_by_violations`: top 50 employers ordered by osha_violations\n  - `top_by_penalties`: top 50 by osha_total_penalties\n  - `top_by_fatalities`: top 20 by osha_fatalities (only non-zero)\n  - `top_naics`: top 10 industries by violation v"
+        },
+        {
+          "info": {
+            "name": "FastDOL Industry Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/stats/industry/:naics",
+            "params": [
+              {
+                "name": "naics",
+                "value": "2362",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Industry aggregates + top employers + state breakdown.\n\nAccepts 2-, 3-, or 4-digit NAICS prefixes. Matches against the 6-digit\nnaics_code on employer_profile_latest via LIKE '{prefix}%'. 3-digit is\nthe sweet spot for SEO — broad enough to have volume, specific enough\nto rank (\"Motor Vehicle Manufacturing OSHA Violations\")."
+        },
+        {
+          "info": {
+            "name": "FastDOL Industries Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/stats/industries"
+          },
+          "docs": "3-digit NAICS subsectors that have any employer on file, with volumes.\nPowers the /industries landing page."
+        },
+        {
+          "info": {
+            "name": "FastDOL Nursing Home Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/stats/nursing-home/:ccn",
+            "params": [
+              {
+                "name": "ccn",
+                "value": "055123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Detailed view for a single nursing home facility.\n\nReturns the facility's full CMS payload (ratings, deficiencies,\npenalties, ownership) plus a pointer to the matching employer_id so\nthe frontend can link to the federal-enforcement profile."
+        },
+        {
+          "info": {
+            "name": "FastDOL Nursing Homes by State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/stats/nursing-homes/:state_code",
+            "params": [
+              {
+                "name": "state_code",
+                "value": "CA",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "State-level nursing home aggregates + top/bottom facilities."
+        },
+        {
+          "info": {
+            "name": "FastDOL Nursing Homes Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/stats/nursing-homes"
+          },
+          "docs": "Per-state counts of nursing homes for the /nursing-homes index page.\n\nReturns an empty state list (rather than 500) when the CMS columns\nhaven't yet been projected into the employer_profile_latest\nmaterialized view — this happens between the migration apply and\nthe first nightly sync."
+        },
+        {
+          "info": {
+            "name": "FastDOL States Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/stats/states"
+          },
+          "docs": "List of all supported state codes + employer counts for the /states page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

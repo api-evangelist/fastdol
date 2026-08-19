@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL Signup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/auth/signup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create account with email + password. Sends verification email."
+        },
+        {
+          "info": {
+            "name": "FastDOL Verify Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/auth/verify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify email address.\n\nAccepts the token in the JSON body (POST) rather than the URL\n(GET) so it doesn't leak via:\n  * server access logs (nginx, application-level request logs)\n  * exception tracebacks that include request URLs\n  * Referer headers when the verify page links anywhere\n  * browser history shared from a kiosk / shared screen\nThe Next.js verify page reads the token from the URL once,\nimmediately replaceState's it out of the address bar, then POSTs\nthe value here.\n\nBehavior change (w"
+        },
+        {
+          "info": {
+            "name": "FastDOL Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login with email + password. Returns JWT as HttpOnly cookie."
+        },
+        {
+          "info": {
+            "name": "FastDOL Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/auth/logout"
+          },
+          "docs": "End the current session. Records the JWT's jti in revoked_tokens so\nthe token cannot be reused even if the cookie was copied elsewhere\n(DevTools, proxy log, shared machine) before the browser cleared it.\n\nBest-effort: a request without a valid JWT still returns 200 so the\nfrontend can always clear its local state, and a DB failure during\nrevocation still clears the cookie (logging server-side) — we never\nwant logout to fail in a way that leaves the user logged in."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Me",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/auth/me"
+          },
+          "docs": "Return the authenticated customer's public identity.\n\nUsed by the frontend header + account pages to show the logged-in\nemail without trusting client-side pathname heuristics. 401s when\nthe access_token cookie is missing/expired/invalid so the frontend\ncan reliably fall back to logged-out rendering."
+        },
+        {
+          "info": {
+            "name": "FastDOL Forgot Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/auth/forgot-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request password reset. Always returns 202 (don't leak if email exists).\n\nAll real work runs in a background task so request-thread timing\ncan't distinguish the \"email exists\" path (DB write + Resend\ncall: tens to hundreds of ms) from \"email unknown\" (immediate\nreturn) from \"rate-limited\" (immediate return). Closes the\ntiming-enumeration vector flagged in the re-audit."
+        },
+        {
+          "info": {
+            "name": "FastDOL Reset Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/auth/reset-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reset password using token from email."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

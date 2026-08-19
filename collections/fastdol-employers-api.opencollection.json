@@ -1,0 +1,516 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Employers API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL Search Employers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Acme Construction Inc",
+                "type": "query",
+                "description": "Fuzzy employer name search"
+              },
+              {
+                "name": "ein",
+                "value": "12-3456789",
+                "type": "query",
+                "description": "Exact EIN match"
+              },
+              {
+                "name": "state",
+                "value": "CA",
+                "type": "query",
+                "description": "State code filter (e.g., CA)"
+              },
+              {
+                "name": "zip",
+                "value": "94105",
+                "type": "query",
+                "description": "5-digit zip code filter"
+              },
+              {
+                "name": "naics",
+                "value": "2362",
+                "type": "query",
+                "description": "4-digit NAICS prefix filter"
+              },
+              {
+                "name": "parent_only",
+                "value": "false",
+                "type": "query",
+                "description": "Only return employers with a parent_name (known parent companies)"
+              },
+              {
+                "name": "parent_name",
+                "value": "walmart-inc",
+                "type": "query",
+                "description": "Filter to locations under a specific parent company (exact match)"
+              },
+              {
+                "name": "has_fatalities",
+                "value": "false",
+                "type": "query",
+                "description": "Filter to locations with fatality investigations"
+              },
+              {
+                "name": "svep",
+                "value": "false",
+                "type": "query",
+                "description": "Filter to locations on the Severe Violator Enforcement Program"
+              },
+              {
+                "name": "sort_by",
+                "value": "string",
+                "type": "query",
+                "description": "Sort results by: risk_score (default), violations, penalties, inspections, fatalities"
+              },
+              {
+                "name": "sort_dir",
+                "value": "string",
+                "type": "query",
+                "description": "Sort direction: desc (default) or asc"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search employers by name, EIN, zip, state, or NAICS.\n\nReturns a flat list of employer locations sorted by risk score (worst first).\nEach result includes `related_locations_count` showing how many locations\nshare the same normalized employer name — useful for national chains."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Parent Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/parent",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Acme Construction Inc",
+                "type": "query",
+                "description": "Parent company name (e.g., 'Amazon', 'Walmart')"
+              },
+              {
+                "name": "state",
+                "value": "CA",
+                "type": "query",
+                "description": "Filter locations by state"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Parent company risk rollup — aggregate risk across all locations.\n\nReturns company-wide statistics (total inspections, violations, penalties,\nrisk distribution) plus a paginated list of individual locations sorted\nby risk score (worst first).\n\nPremium feature for enterprise customers evaluating national employers."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Employer by EIN",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/ein/:ein",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "ein",
+                "value": "12-3456789",
+                "type": "path"
+              },
+              {
+                "name": "state",
+                "value": "CA",
+                "type": "query",
+                "description": "State code filter"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lookup employers by FEIN (Federal Employer Identification Number).\n\nReturns all locations matching the given EIN. Insurance professionals\nidentify employers by FEIN — this is the primary lookup for underwriting\nintegrations.\n\nEIN format: 9 digits (e.g., '943067788' or '94-3067788')."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Employer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Direct lookup by employer_id UUID."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Inspections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id/inspections",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get inspection history with violation detail for an employer.\n\nMetered: one lookup per call. Previously unmetered, which made it trivial\nfor a free-tier key to scrape the entire product by combining the sitemap\nendpoint (employer IDs) with this one (full inspection history per id)."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Severe Injuries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id/severe-injuries",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Per-event OSHA Severe Injury Reports (29 CFR 1904.39) for an employer.\n\nEach row is an injury the employer self-reported within 24 hours\n-- in-patient hospitalization, amputation, or loss of an eye.\nDistinct from /employers/{id}/inspections (inspection-triggered):\nSIR is injury-triggered, so the same event may or may not have a\nrelated inspection (see inspection_activity_nr -- often NULL).\n\nMetered: one lookup per call, same as inspections / SEC enforcement.\nNewest event first."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET WHD Cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id/whd-cases",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Per-case WHD (Wage & Hour Division) enforcement records for an\nemployer.\n\nEach row is one closed case carrying backwages assessed\n(`bw_amt`) and the count of underpaid employees\n(`ee_violtd_cnt`). Covers FLSA, FMLA, MSPA, H-1B/H-2A/H-2B, CCPA,\nand any other DOL WHD-administered statute.\n\nMetered: one lookup per call, same pattern as the other detail\nendpoints. Most-recent case first."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET OSHA Accidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id/osha-accidents",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Per-event OSHA accident records (inspection-triggered).\n\nEach row is an accident/fatality/catastrophe OSHA documented while\ninvestigating an inspection at this employer. Distinct from\n/employers/{id}/severe-injuries (SIR is injury-triggered and\nself-reported under 29 CFR 1904.39); accidents only surface through\nan OSHA-opened inspection.\n\nThe narrative `abstract_text` is truncated at 4000 chars upstream\n(silver/osha_accident_detail) to keep row size bounded.\n\nMetered: one lookup per call, same a"
+        },
+        {
+          "info": {
+            "name": "FastDOL GET SEC Enforcement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id/sec-enforcement",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get SEC enforcement actions filed against an employer's parent\ncompany.\n\nJoined via employer_profile.parent_name → sec_enforcement_detail\n.parent_name. Returns empty results for non-public-parent employers\n(~99% of employers — most aren't SEC registrants).\n\nMetered: one lookup per call. Same justification as get_inspections\n— un-metered would let a free-tier key scrape the entire SEC\nenforcement-history dataset for free by walking the sitemap."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id/peers",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Peer establishments — same NAICS+state cohort, plus same-parent\nsiblings.\n\nPowers the \"Other employers in this industry\" and \"Other\nestablishments under this parent\" sections of the profile page.\nThese sections double as internal-link targets that pass authority\nto long-tail leaf URLs (otherwise SEO dead-ends since most thin\nprofiles have no inbound links).\n\nReturns up to `limit` rows per cohort, ordered by\nagency_violation_count DESC so the most-active peers surface first\n— better signal for th"
+        },
+        {
+          "info": {
+            "name": "FastDOL Batch Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/v1/employers/batch",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch employer lookup — designed for spreadsheet-style bulk searches.\n\nEach item can include name, ein, employer_id, plus optional location\nfilters (state, zip, city) to narrow to a specific site.\n\nUp to 100 items processed synchronously. 101-500 returns a job_id\nfor async polling (coming soon). Max 500 items per request.\n\nTypical usage: underwriter uploads a spreadsheet with company name +\naddress for each policy they're quoting."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Risk History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id/risk-history",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Risk tier history for an employer over time. Shows nightly snapshots."
+        },
+        {
+          "info": {
+            "name": "FastDOL Submit Feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/v1/employers/:employer_id/feedback",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "employer_id",
+                "value": "emp_8a3b9c2d1e4f",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit feedback about an employer match. Not metered."
+        },
+        {
+          "info": {
+            "name": "FastDOL Upload CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/v1/employers/upload-csv",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Upload a CSV of employers, get back a CSV with risk profiles.\n\nExpected CSV columns (flexible — matches by header name):\n    Required: name OR company_name OR employer_name\n    Optional: state, zip, city, ein\n\nExtra columns in the input are preserved in the output.\nOutput adds: employer_id, match_confidence, risk_tier, risk_score,\nosha_inspections, osha_violations, osha_total_penalties,\nlocation_count, trend_signal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

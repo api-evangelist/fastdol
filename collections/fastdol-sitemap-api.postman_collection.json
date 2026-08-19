@@ -1,0 +1,204 @@
+{
+  "item": [
+    {
+      "id": "35e3456b-cae0-4624-9372-5431a333c852",
+      "name": "Sitemap",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3eaa16a-de09-4f9f-9419-88ccfe702763",
+          "name": "FastDOL Sitemap Employers",
+          "request": {
+            "name": "FastDOL Sitemap Employers",
+            "description": {
+              "content": "Return employer IDs for sitemap generation with pagination. Not metered.\n\nRequires the dedicated ``sitemap:read`` scope — intentionally NOT in the\nfree-tier default scopes. The only legitimate caller is the Next.js\nserver generating sitemap shards for SEO; that route uses DEMO_API_KEY\nwhose scopes must include 'sitemap:read'. Free customer keys cannot\nenumerate the entire dataset via this endpoint.\n\nPagination: use offset/limit to page through all employers.\nReturns total_count so the caller knows how many pages to request —\nthe count reflects the indexable_only filter when set.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sitemap",
+                "employers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50000"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "indexable_only",
+                  "value": "false",
+                  "description": "When true, return only employers with at least one enforcement signal across any aggregated source. Used by the Next.js sitemap generator so Google isn't asked to crawl thin templated profiles that the page itself noindex's anyway."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "X-Api-Key",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fab9de25-feaf-4e3d-8e0f-eb997cf47396",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sitemap",
+                    "employers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "indexable_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "X-Api-Key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31b0549e-c527-4775-9bc7-dc0d2303b0b2",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sitemap",
+                    "employers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "indexable_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "X-Api-Key",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fastdol.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4c3dba59-3b02-48df-9f75-4639453e15d8",
+    "name": "FastDOL Auth Sitemap API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.\n\nContact Support:\n Name: FastDOL Support\n Email: ben@fastdol.com",
+      "type": "text/plain"
+    }
+  }
+}

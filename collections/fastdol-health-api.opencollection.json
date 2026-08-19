@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Health API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/health"
+          },
+          "docs": "Public health endpoint — returns ok/unhealthy only.\n\nUsed by UptimeRobot and status-page builders. Intentionally minimal\nto avoid leaking internal operational detail. Only DB + data-loaded\nchecks trigger 503 — pipeline freshness is not customer-facing and\nis exposed on /v1/health/detail for admin monitoring."
+        },
+        {
+          "info": {
+            "name": "FastDOL Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.fastdol.com/v1/health"
+          },
+          "docs": "Public health endpoint — returns ok/unhealthy only.\n\nUsed by UptimeRobot and status-page builders. Intentionally minimal\nto avoid leaking internal operational detail. Only DB + data-loaded\nchecks trigger 503 — pipeline freshness is not customer-facing and\nis exposed on /v1/health/detail for admin monitoring."
+        },
+        {
+          "info": {
+            "name": "FastDOL Health Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/health/detail"
+          },
+          "docs": "Admin-only detailed health — requires admin JWT.\n\nFull diagnostics: DB, pipeline recency, pipeline status, profile\ncount, data age, failing checks. Behind auth so customers can't see\ninternal operational state or fingerprint pipeline schedules."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

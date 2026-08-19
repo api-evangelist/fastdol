@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Industries API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Industries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL List NAICS Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/industries/naics-codes",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ]
+          },
+          "docs": "List all 4-digit NAICS codes with employer counts."
+        },
+        {
+          "info": {
+            "name": "FastDOL GET Industry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/v1/industries/:naics4",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "value": "string"
+              }
+            ],
+            "params": [
+              {
+                "name": "naics4",
+                "value": "2362",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Industry-level risk benchmarks for a 4-digit NAICS code."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

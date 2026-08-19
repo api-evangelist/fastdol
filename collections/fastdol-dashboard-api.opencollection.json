@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FastDOL Auth Dashboard API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "FastDOL GET Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/dashboard/plan"
+          },
+          "docs": "Return current plan info including pending cancellation status."
+        },
+        {
+          "info": {
+            "name": "FastDOL List Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fastdol.com/dashboard/keys"
+          },
+          "docs": "List all API keys for the current customer."
+        },
+        {
+          "info": {
+            "name": "FastDOL Create Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/dashboard/keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a new API key. Raw key shown ONCE in response."
+        },
+        {
+          "info": {
+            "name": "FastDOL Rotate Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fastdol.com/dashboard/keys/:key_id/rotate",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "key_5f8c3a2d1e4b",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rotate a key. Old key works for 48h, new key is immediately active."
+        },
+        {
+          "info": {
+            "name": "FastDOL Revoke Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fastdol.com/dashboard/keys/:key_id",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "key_5f8c3a2d1e4b",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Immediately revoke an API key."
+        },
+        {
+          "info": {
+            "name": "FastDOL Delete Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fastdol.com/dashboard/account",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete the authenticated customer's account and all associated data.\n\nImplements GDPR Article 17 (\"right to erasure\") and CCPA equivalents.\nRequires password re-authentication to prevent XSS / CSRF / session-theft\nescalating into full account wipe, plus an explicit \"DELETE\" confirmation\nstring to defeat accidental or malicious one-click destruction.\n\nCascades (via existing FKs in migrations/001_init + 002_add_constraints):\n  - api_keys, email_verifications, password_reset_tokens, subscriptions,\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
