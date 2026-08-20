@@ -37,6 +37,8 @@ apis:
   humanURL: https://fastdol.com/docs
   baseURL: https://api.fastdol.com
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -357,6 +359,8 @@ apis:
   humanURL: https://fastdol.com/docs
   baseURL: https://api.fastdol.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
