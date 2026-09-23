@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   title: FastDOL Auth API
   version: '1.0'
@@ -68,7 +68,41 @@ paths:
   /auth/verify:
     post:
       summary: FastDOL Verify Email
-      description: "Verify email address.\n\nAccepts the token in the JSON body (POST) rather than the URL\n(GET) so it doesn't leak via:\n  * server access logs (nginx, application-level request logs)\n  * exception tracebacks that include request URLs\n  * Referer headers when the verify page links anywhere\n  * browser history shared from a kiosk / shared screen\nThe Next.js verify page reads the token from the URL once,\nimmediately replaceState's it out of the address bar, then POSTs\nthe value here.\n\nBehavior change (was: auto-issued an API key + set the\naccess_token cookie on the first POST): now the endpoint only\nflips customers.email_verified to TRUE. The user must explicitly\nlog in afterwards and create their first API key from the\n/account dashboard. This closes the email-link-prefetch attack\nwhere a corporate gateway, AV scanner, or IT admin reading a\nforwarded message could auto-claim the account."
+      description: 'Verify email address.
+
+
+        Accepts the token in the JSON body (POST) rather than the URL
+
+        (GET) so it doesn''t leak via:
+
+        * server access logs (nginx, application-level request logs)
+
+        * exception tracebacks that include request URLs
+
+        * Referer headers when the verify page links anywhere
+
+        * browser history shared from a kiosk / shared screen
+
+        The Next.js verify page reads the token from the URL once,
+
+        immediately replaceState''s it out of the address bar, then POSTs
+
+        the value here.
+
+
+        Behavior change (was: auto-issued an API key + set the
+
+        access_token cookie on the first POST): now the endpoint only
+
+        flips customers.email_verified to TRUE. The user must explicitly
+
+        log in afterwards and create their first API key from the
+
+        /account dashboard. This closes the email-link-prefetch attack
+
+        where a corporate gateway, AV scanner, or IT admin reading a
+
+        forwarded message could auto-claim the account.'
       operationId: verify_email_auth_verify_post
       requestBody:
         content:
@@ -340,6 +374,17 @@ paths:
       - Auth
 components:
   schemas:
+    ForgotPasswordRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+          example: analyst@example.com
+      type: object
+      required:
+      - email
+      title: ForgotPasswordRequest
     ValidationError:
       properties:
         loc:
@@ -363,17 +408,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ForgotPasswordRequest:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-          example: analyst@example.com
-      type: object
-      required:
-      - email
-      title: ForgotPasswordRequest
     ResetPasswordRequest:
       properties:
         token:
@@ -399,6 +433,15 @@ components:
       required:
       - token
       title: VerifyEmailRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     SignupRequest:
       properties:
         email:
@@ -420,15 +463,6 @@ components:
       - email
       - password
       title: SignupRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     LoginRequest:
       properties:
         email:

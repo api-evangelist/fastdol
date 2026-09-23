@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: FastDOL Auth Employers API
+  title: FastDOL Employers API
   version: '1.0'
   description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
   contact:
@@ -1206,7 +1206,23 @@ paths:
   /v1/employers/upload-csv:
     post:
       summary: FastDOL Upload CSV
-      description: "Upload a CSV of employers, get back a CSV with risk profiles.\n\nExpected CSV columns (flexible — matches by header name):\n    Required: name OR company_name OR employer_name\n    Optional: state, zip, city, ein\n\nExtra columns in the input are preserved in the output.\nOutput adds: employer_id, match_confidence, risk_tier, risk_score,\nosha_inspections, osha_violations, osha_total_penalties,\nlocation_count, trend_signal"
+      description: 'Upload a CSV of employers, get back a CSV with risk profiles.
+
+
+        Expected CSV columns (flexible — matches by header name):
+
+        Required: name OR company_name OR employer_name
+
+        Optional: state, zip, city, ein
+
+
+        Extra columns in the input are preserved in the output.
+
+        Output adds: employer_id, match_confidence, risk_tier, risk_score,
+
+        osha_inspections, osha_violations, osha_total_penalties,
+
+        location_count, trend_signal'
       operationId: upload_csv_v1_employers_upload_csv_post
       parameters:
       - name: X-Api-Key
@@ -1281,6 +1297,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     BatchLookupItem:
       properties:
         name:
@@ -1315,6 +1340,17 @@ components:
           title: City
       type: object
       title: BatchLookupItem
+    BatchLookupRequest:
+      properties:
+        lookups:
+          items:
+            $ref: '#/components/schemas/BatchLookupItem'
+          type: array
+          title: Lookups
+      type: object
+      required:
+      - lookups
+      title: BatchLookupRequest
     Body_upload_csv_v1_employers_upload_csv_post:
       properties:
         file:
@@ -1347,23 +1383,3 @@ components:
       required:
       - type
       title: FeedbackRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    BatchLookupRequest:
-      properties:
-        lookups:
-          items:
-            $ref: '#/components/schemas/BatchLookupItem'
-          type: array
-          title: Lookups
-      type: object
-      required:
-      - lookups
-      title: BatchLookupRequest

@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: FastDOL Auth Stats API
+  title: FastDOL Stats API
   version: '1.0'
   description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
   contact:
@@ -17,7 +17,28 @@ paths:
   /v1/stats/state/{code}:
     get:
       summary: FastDOL State Stats
-      description: "State-level aggregates + top employers + top industries.\n\nPowers the /state/[slug] SEO landing pages. Returns:\n  - `state`: 2-letter code and full name\n  - `totals`: inspections, violations, penalties, fatalities, WHD backwages,\n    employer count in one pass\n  - `top_by_violations`: top 50 employers ordered by osha_violations\n  - `top_by_penalties`: top 50 by osha_total_penalties\n  - `top_by_fatalities`: top 20 by osha_fatalities (only non-zero)\n  - `top_naics`: top 10 industries by violation volume in this state\n  - `top_contractors`: top 10 federal contractors by 5yr obligations (only\n    populated once USAspending has landed; empty list otherwise)"
+      description: 'State-level aggregates + top employers + top industries.
+
+
+        Powers the /state/[slug] SEO landing pages. Returns:
+
+        - `state`: 2-letter code and full name
+
+        - `totals`: inspections, violations, penalties, fatalities, WHD backwages,
+
+        employer count in one pass
+
+        - `top_by_violations`: top 50 employers ordered by osha_violations
+
+        - `top_by_penalties`: top 50 by osha_total_penalties
+
+        - `top_by_fatalities`: top 20 by osha_fatalities (only non-zero)
+
+        - `top_naics`: top 10 industries by violation volume in this state
+
+        - `top_contractors`: top 10 federal contractors by 5yr obligations (only
+
+        populated once USAspending has landed; empty list otherwise)'
       operationId: state_stats_v1_stats_state__code__get
       parameters:
       - name: code

@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: FastDOL Auth Export API
+  title: FastDOL Export API
   version: '1.0'
   description: FastDOL aggregates federal workplace enforcement records on 2.3M US employers across 16 federal agencies — OSHA, WHD, MSHA, EPA ECHO, NLRB, FMCSA, OFLC, BLS SOII, SAM.gov, CMS, USAspending, CPSC, NHTSA, SEC, and the UVA Corporate Prosecution Registry. Query inspections, violations, penalties, wage theft cases, severe injury reports, recalls, and federal contract awards via a single, normalized JSON API.
   contact:
@@ -211,6 +211,37 @@ paths:
       - Export
 components:
   schemas:
+    ExportRequest:
+      properties:
+        format:
+          type: string
+          pattern: ^(csv|json)$
+          title: Format
+          default: csv
+          example: string
+        filters:
+          $ref: '#/components/schemas/ExportFilters'
+        max_rows:
+          type: integer
+          maximum: 100000.0
+          minimum: 1.0
+          title: Max Rows
+          default: 50000
+          example: 1
+        sort_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sort By
+          description: 'One of: contracts_value, employer_id, fatalities, inspections, penalties, risk_score, violations, whd_backwages, whd_cases'
+        sort_dir:
+          type: string
+          pattern: ^(asc|desc)$
+          title: Sort Dir
+          default: desc
+          example: string
+      type: object
+      title: ExportRequest
     ValidationError:
       properties:
         loc:
@@ -359,34 +390,3 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ExportRequest:
-      properties:
-        format:
-          type: string
-          pattern: ^(csv|json)$
-          title: Format
-          default: csv
-          example: string
-        filters:
-          $ref: '#/components/schemas/ExportFilters'
-        max_rows:
-          type: integer
-          maximum: 100000.0
-          minimum: 1.0
-          title: Max Rows
-          default: 50000
-          example: 1
-        sort_by:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sort By
-          description: 'One of: contracts_value, employer_id, fatalities, inspections, penalties, risk_score, violations, whd_backwages, whd_cases'
-        sort_dir:
-          type: string
-          pattern: ^(asc|desc)$
-          title: Sort Dir
-          default: desc
-          example: string
-      type: object
-      title: ExportRequest
