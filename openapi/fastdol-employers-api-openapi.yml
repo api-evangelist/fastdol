@@ -1274,38 +1274,6 @@ paths:
       - Employers
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-          example: string
-        type:
-          type: string
-          title: Error Type
-          example: string
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     BatchLookupItem:
       properties:
         name:
@@ -1340,17 +1308,29 @@ components:
           title: City
       type: object
       title: BatchLookupItem
-    BatchLookupRequest:
+    ValidationError:
       properties:
-        lookups:
+        loc:
           items:
-            $ref: '#/components/schemas/BatchLookupItem'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Lookups
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
       type: object
       required:
-      - lookups
-      title: BatchLookupRequest
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Body_upload_csv_v1_employers_upload_csv_post:
       properties:
         file:
@@ -1383,3 +1363,23 @@ components:
       required:
       - type
       title: FeedbackRequest
+    BatchLookupRequest:
+      properties:
+        lookups:
+          items:
+            $ref: '#/components/schemas/BatchLookupItem'
+          type: array
+          title: Lookups
+      type: object
+      required:
+      - lookups
+      title: BatchLookupRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

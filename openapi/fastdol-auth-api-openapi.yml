@@ -374,6 +374,27 @@ paths:
       - Auth
 components:
   schemas:
+    SignupRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+          example: analyst@example.com
+        password:
+          type: string
+          title: Password
+          example: CorrectHorseBatteryStaple1!
+        company_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Company Name
+      type: object
+      required:
+      - email
+      - password
+      title: SignupRequest
     ForgotPasswordRequest:
       properties:
         email:
@@ -408,21 +429,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ResetPasswordRequest:
-      properties:
-        token:
-          type: string
-          title: Token
-          example: tok_9d2e1c4b7a6f3e5d
-        new_password:
-          type: string
-          title: New Password
-          example: CorrectHorseBatteryStaple1!
-      type: object
-      required:
-      - token
-      - new_password
-      title: ResetPasswordRequest
     VerifyEmailRequest:
       properties:
         token:
@@ -433,36 +439,6 @@ components:
       required:
       - token
       title: VerifyEmailRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    SignupRequest:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-          example: analyst@example.com
-        password:
-          type: string
-          title: Password
-          example: CorrectHorseBatteryStaple1!
-        company_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Company Name
-      type: object
-      required:
-      - email
-      - password
-      title: SignupRequest
     LoginRequest:
       properties:
         email:
@@ -479,3 +455,27 @@ components:
       - email
       - password
       title: LoginRequest
+    ResetPasswordRequest:
+      properties:
+        token:
+          type: string
+          title: Token
+          example: tok_9d2e1c4b7a6f3e5d
+        new_password:
+          type: string
+          title: New Password
+          example: CorrectHorseBatteryStaple1!
+      type: object
+      required:
+      - token
+      - new_password
+      title: ResetPasswordRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

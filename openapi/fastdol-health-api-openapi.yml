@@ -56,7 +56,7 @@ paths:
         checks trigger 503 — pipeline freshness is not customer-facing and
 
         is exposed on /v1/health/detail for admin monitoring.'
-      operationId: health_v1_health_head
+      operationId: headV1Health
       responses:
         '200':
           description: Successful Response
@@ -73,6 +73,8 @@ paths:
         dispatcher: FALLBACK
       tags:
       - Health
+      x-operation-id-source: normalized
+      x-operation-id-original: health_v1_health_head
   /v1/health/detail:
     get:
       summary: FastDOL Health Detail

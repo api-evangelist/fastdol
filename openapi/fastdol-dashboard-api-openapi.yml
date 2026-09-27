@@ -283,22 +283,6 @@ paths:
       - Dashboard
 components:
   schemas:
-    CreateKeyRequest:
-      properties:
-        label:
-          type: string
-          title: Label
-          default: default
-          example: string
-        scopes:
-          items:
-            type: string
-          type: array
-          title: Scopes
-          default:
-          - employer:read
-      type: object
-      title: CreateKeyRequest
     ValidationError:
       properties:
         loc:
@@ -322,6 +306,22 @@ components:
       - msg
       - type
       title: ValidationError
+    CreateKeyRequest:
+      properties:
+        label:
+          type: string
+          title: Label
+          default: default
+          example: string
+        scopes:
+          items:
+            type: string
+          type: array
+          title: Scopes
+          default:
+          - employer:read
+      type: object
+      title: CreateKeyRequest
     HTTPValidationError:
       properties:
         detail:
