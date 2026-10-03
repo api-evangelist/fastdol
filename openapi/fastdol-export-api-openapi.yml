@@ -211,69 +211,6 @@ paths:
       - Export
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-          example: string
-        type:
-          type: string
-          title: Error Type
-          example: string
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ExportRequest:
-      properties:
-        format:
-          type: string
-          pattern: ^(csv|json)$
-          title: Format
-          default: csv
-          example: string
-        filters:
-          $ref: '#/components/schemas/ExportFilters'
-        max_rows:
-          type: integer
-          maximum: 100000.0
-          minimum: 1.0
-          title: Max Rows
-          default: 50000
-          example: 1
-        sort_by:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sort By
-          description: 'One of: contracts_value, employer_id, fatalities, inspections, penalties, risk_score, violations, whd_backwages, whd_cases'
-        sort_dir:
-          type: string
-          pattern: ^(asc|desc)$
-          title: Sort Dir
-          default: desc
-          example: string
-      type: object
-      title: ExportRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ExportFilters:
       properties:
         name:
@@ -390,3 +327,66 @@ components:
         (e.g. "top 50K employers by fatality rate with OSHA penalties >
 
         $100K in construction NAICS").'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ExportRequest:
+      properties:
+        format:
+          type: string
+          pattern: ^(csv|json)$
+          title: Format
+          default: csv
+          example: string
+        filters:
+          $ref: '#/components/schemas/ExportFilters'
+        max_rows:
+          type: integer
+          maximum: 100000.0
+          minimum: 1.0
+          title: Max Rows
+          default: 50000
+          example: 1
+        sort_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sort By
+          description: 'One of: contracts_value, employer_id, fatalities, inspections, penalties, risk_score, violations, whd_backwages, whd_cases'
+        sort_dir:
+          type: string
+          pattern: ^(asc|desc)$
+          title: Sort Dir
+          default: desc
+          example: string
+      type: object
+      title: ExportRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

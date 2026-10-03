@@ -1274,6 +1274,60 @@ paths:
       - Employers
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+          example: string
+        type:
+          type: string
+          title: Error Type
+          example: string
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    FeedbackRequest:
+      properties:
+        type:
+          type: string
+          title: Type
+          example: string
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        contact_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Contact Email
+      type: object
+      required:
+      - type
+      title: FeedbackRequest
+    BatchLookupRequest:
+      properties:
+        lookups:
+          items:
+            $ref: '#/components/schemas/BatchLookupItem'
+          type: array
+          title: Lookups
+      type: object
+      required:
+      - lookups
+      title: BatchLookupRequest
     BatchLookupItem:
       properties:
         name:
@@ -1308,29 +1362,6 @@ components:
           title: City
       type: object
       title: BatchLookupItem
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-          example: string
-        type:
-          type: string
-          title: Error Type
-          example: string
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     Body_upload_csv_v1_employers_upload_csv_post:
       properties:
         file:
@@ -1343,37 +1374,6 @@ components:
       required:
       - file
       title: Body_upload_csv_v1_employers_upload_csv_post
-    FeedbackRequest:
-      properties:
-        type:
-          type: string
-          title: Type
-          example: string
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        contact_email:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Contact Email
-      type: object
-      required:
-      - type
-      title: FeedbackRequest
-    BatchLookupRequest:
-      properties:
-        lookups:
-          items:
-            $ref: '#/components/schemas/BatchLookupItem'
-          type: array
-          title: Lookups
-      type: object
-      required:
-      - lookups
-      title: BatchLookupRequest
     HTTPValidationError:
       properties:
         detail:

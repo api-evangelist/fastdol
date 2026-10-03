@@ -283,6 +283,21 @@ paths:
       - Dashboard
 components:
   schemas:
+    DeleteAccountRequest:
+      properties:
+        password:
+          type: string
+          title: Password
+          example: CorrectHorseBatteryStaple1!
+        confirm:
+          type: string
+          title: Confirm
+          example: string
+      type: object
+      required:
+      - password
+      - confirm
+      title: DeleteAccountRequest
     ValidationError:
       properties:
         loc:
@@ -331,18 +346,3 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    DeleteAccountRequest:
-      properties:
-        password:
-          type: string
-          title: Password
-          example: CorrectHorseBatteryStaple1!
-        confirm:
-          type: string
-          title: Confirm
-          example: string
-      type: object
-      required:
-      - password
-      - confirm
-      title: DeleteAccountRequest

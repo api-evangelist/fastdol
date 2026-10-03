@@ -374,7 +374,7 @@ paths:
       - Auth
 components:
   schemas:
-    SignupRequest:
+    LoginRequest:
       properties:
         email:
           type: string
@@ -385,16 +385,11 @@ components:
           type: string
           title: Password
           example: CorrectHorseBatteryStaple1!
-        company_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Company Name
       type: object
       required:
       - email
       - password
-      title: SignupRequest
+      title: LoginRequest
     ForgotPasswordRequest:
       properties:
         email:
@@ -406,6 +401,21 @@ components:
       required:
       - email
       title: ForgotPasswordRequest
+    ResetPasswordRequest:
+      properties:
+        token:
+          type: string
+          title: Token
+          example: tok_9d2e1c4b7a6f3e5d
+        new_password:
+          type: string
+          title: New Password
+          example: CorrectHorseBatteryStaple1!
+      type: object
+      required:
+      - token
+      - new_password
+      title: ResetPasswordRequest
     ValidationError:
       properties:
         loc:
@@ -429,17 +439,7 @@ components:
       - msg
       - type
       title: ValidationError
-    VerifyEmailRequest:
-      properties:
-        token:
-          type: string
-          title: Token
-          example: tok_9d2e1c4b7a6f3e5d
-      type: object
-      required:
-      - token
-      title: VerifyEmailRequest
-    LoginRequest:
+    SignupRequest:
       properties:
         email:
           type: string
@@ -450,26 +450,26 @@ components:
           type: string
           title: Password
           example: CorrectHorseBatteryStaple1!
+        company_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Company Name
       type: object
       required:
       - email
       - password
-      title: LoginRequest
-    ResetPasswordRequest:
+      title: SignupRequest
+    VerifyEmailRequest:
       properties:
         token:
           type: string
           title: Token
           example: tok_9d2e1c4b7a6f3e5d
-        new_password:
-          type: string
-          title: New Password
-          example: CorrectHorseBatteryStaple1!
       type: object
       required:
       - token
-      - new_password
-      title: ResetPasswordRequest
+      title: VerifyEmailRequest
     HTTPValidationError:
       properties:
         detail:
