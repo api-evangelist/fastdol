@@ -283,6 +283,31 @@ paths:
       - Dashboard
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CreateKeyRequest:
+      properties:
+        label:
+          type: string
+          title: Label
+          default: default
+          example: string
+        scopes:
+          items:
+            type: string
+          type: array
+          title: Scopes
+          default:
+          - employer:read
+      type: object
+      title: CreateKeyRequest
     DeleteAccountRequest:
       properties:
         password:
@@ -321,28 +346,3 @@ components:
       - msg
       - type
       title: ValidationError
-    CreateKeyRequest:
-      properties:
-        label:
-          type: string
-          title: Label
-          default: default
-          example: string
-        scopes:
-          items:
-            type: string
-          type: array
-          title: Scopes
-          default:
-          - employer:read
-      type: object
-      title: CreateKeyRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
