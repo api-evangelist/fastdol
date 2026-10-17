@@ -283,15 +283,21 @@ paths:
       - Dashboard
 components:
   schemas:
-    HTTPValidationError:
+    DeleteAccountRequest:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        password:
+          type: string
+          title: Password
+          example: CorrectHorseBatteryStaple1!
+        confirm:
+          type: string
+          title: Confirm
+          example: string
       type: object
-      title: HTTPValidationError
+      required:
+      - password
+      - confirm
+      title: DeleteAccountRequest
     CreateKeyRequest:
       properties:
         label:
@@ -308,21 +314,15 @@ components:
           - employer:read
       type: object
       title: CreateKeyRequest
-    DeleteAccountRequest:
+    HTTPValidationError:
       properties:
-        password:
-          type: string
-          title: Password
-          example: CorrectHorseBatteryStaple1!
-        confirm:
-          type: string
-          title: Confirm
-          example: string
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - password
-      - confirm
-      title: DeleteAccountRequest
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:

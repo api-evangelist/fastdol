@@ -408,21 +408,6 @@ components:
       required:
       - email
       title: ForgotPasswordRequest
-    ResetPasswordRequest:
-      properties:
-        token:
-          type: string
-          title: Token
-          example: tok_9d2e1c4b7a6f3e5d
-        new_password:
-          type: string
-          title: New Password
-          example: CorrectHorseBatteryStaple1!
-      type: object
-      required:
-      - token
-      - new_password
-      title: ResetPasswordRequest
     HTTPValidationError:
       properties:
         detail:
@@ -479,3 +464,18 @@ components:
       - email
       - password
       title: LoginRequest
+    ResetPasswordRequest:
+      properties:
+        token:
+          type: string
+          title: Token
+          example: tok_9d2e1c4b7a6f3e5d
+        new_password:
+          type: string
+          title: New Password
+          example: CorrectHorseBatteryStaple1!
+      type: object
+      required:
+      - token
+      - new_password
+      title: ResetPasswordRequest
